@@ -37,6 +37,7 @@ target/
 .project
 
 # NetBeans specific
+4Bank/nbproject/
 4Bank/nbproject/private/
 build/
 nbbuild/

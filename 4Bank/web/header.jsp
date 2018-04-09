@@ -10,7 +10,7 @@
     <div class="col-lg-3">
         <img src="resources/4bank.png" class="img-fluid" alt="logo">
     </div>
-    <div class="col-lg-4">s
+    <div class="col-lg-4">
         <h2 
             style="color: graytext; margin-top: 1em">Your bank and everyday the more people's one
         </h2>

@@ -16,8 +16,8 @@
         </h2>
     </div>
 </div>
-<div class="container">
-  <nav class="navbar navbar-expand-md navbar-light bg-light justify-content-center">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-center">
       <ul class="navbar-nav">
           <li class="nav-item">
               <a class="nav-link" href="#">Accounts</a>
@@ -39,4 +39,3 @@
           </li>
       </ul>
   </nav>
-</div>

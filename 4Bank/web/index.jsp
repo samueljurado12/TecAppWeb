@@ -12,6 +12,6 @@
         <title>4Bank</title>
     </head>
     <body>
-        <h1>TODO Index pages</h1>
+        <p>This is the index</p>
     </body>
 </html>

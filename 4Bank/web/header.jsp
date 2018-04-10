@@ -23,7 +23,7 @@
               <a class="nav-link" href="#">Accounts</a>
           </li>
           <li class="nav-item active">
-              <a class="nav-link" href="#">Transfer</a>
+              <a class="nav-link" href="transfer.jsp">Transfer</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="#">User Management</a>

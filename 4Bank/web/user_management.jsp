@@ -17,7 +17,7 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
-        <h1>User Management:</h1>
+        <h1>User Management</h1>
         <br/>
         <div class="container "> 
             <div class="row  d-flex justify-content-center">
@@ -38,7 +38,11 @@
                                     <i class="glyphicon glyphicon-earphone"></i>+00447700123456
                                     <br />
                                     <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
-
                             </div>
-                            </body>
-                            </html>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

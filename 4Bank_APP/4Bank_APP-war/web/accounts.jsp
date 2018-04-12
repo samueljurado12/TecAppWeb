@@ -14,27 +14,20 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
-        <h1>Accounts</h1>
+        <h1>        Accounts</h1>
         <br/>
         <div class="container align-items-center">
-            <div class="row">
-                <div class="col-md-5">
-                    <h3>Current Account</h3>
+             <div class="form-group row">
+                <label  for ="selectAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
+                <%--Insert for loop to insert account numbers--%>
+                <div class="col-sm-5">
+                <select class="form-control">
+                    <option>GB29 NWBK 6016 1331 9268 19</option>
+                    <option>GB29 NWBK 6016 1331 3214 25</option>
+                    <option>GB29 NWBK 6016 1331 4920 12</option>
+                </select>
                 </div>
-            </div>
-            <div class="row">
-                <div class="well well-sm">
-                    <div class="radio">
-                        <label><input type="radio" name="optradio">GB29 NWBK 6016 1331 9268 19</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio" checked>GB29 NWBK 6016 1331 3214 25</label>
-                    </div>
-                    <div class="radio">
-                        <label><input type="radio" name="optradio">GB29 NWBK 6016 1331 4920 12</label>
-                    </div>
-                </div>            
-            </div>
+                </div>
         </div>
         <div class="container">
             <table class="table table-hover">

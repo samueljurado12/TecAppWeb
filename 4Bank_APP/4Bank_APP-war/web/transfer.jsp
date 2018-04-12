@@ -14,21 +14,22 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
         <h1>Transfer</h1>
         <br/>
         <div class="container align-items-center">
             <form action="transfer.servlet" method="post">
-                <label class="form-check-label"><h4>1.Select account:</h4></label>
+                <div class="form-group row">
+                <label  for ="selectAccount" class="form-check-label col-sm-3 col-form-label"><h4>1.Select account:</h4></label>
                 <%--Insert for loop to insert account numbers--%>
-                <div class="form-group">
-                    <input class="form-check-input" 
-                           type="radio" 
-                           value="<%--Account number--%>"
-                           id="accountX"
-                           name="accountNumber">
-                    <label><input type="radio" name="accountX"> ACCOUNT #</label>
+                <div class="col-sm-5">
+                <select class="form-control">
+                    <option>GB29 NWBK 6016 1331 9268 19</option>
+                    <option>GB29 NWBK 6016 1331 3214 25</option>
+                    <option>GB29 NWBK 6016 1331 4920 12</option>
+                </select>
                 </div>
-
+                </div>
                 <div class="form-group row">
                     <label for="receiverAccount" 
                            class="form-check-label col-sm-3 col-form-label">
@@ -69,7 +70,7 @@
                         <textarea rows="4" id="remarks" class="form-control"></textarea>
                     </div>
                 </div>
-                
+
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-danger">Reset</button>
 

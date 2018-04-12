@@ -37,8 +37,6 @@ target/
 .project
 
 # NetBeans specific
-4Bank/nbproject/
-4Bank/nbproject/private/
 build/
 nbbuild/
 dist/
@@ -56,4 +54,6 @@ release.properties
 pom.xml.releaseBackup
 pom.xml.tag
 
-/nbproject/private/
+/4Bank_APP/nbproject/
+/4Bank_APP/4Bank_APP-war/nbproject/
+/4Bank_APP/4Bank_APP-ejb/nbproject/

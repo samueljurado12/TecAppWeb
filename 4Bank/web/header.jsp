@@ -20,16 +20,16 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-center">
       <ul class="navbar-nav">
           <li class="nav-item">
-              <a class="nav-link" href="#">Accounts</a>
+              <a class="nav-link" href="accounts.jsp">Accounts</a>
           </li>
           <li class="nav-item active">
               <a class="nav-link" href="transfer.jsp">Transfer</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="#">User Management</a>
+              <a class="nav-link" href="user_management.jsp">User Management</a>
           </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">Contact Us</a>
+              <a class="nav-link" href="contact_us.jsp">Contact Us</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" href="#">Help</a>

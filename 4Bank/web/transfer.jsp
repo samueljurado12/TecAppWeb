@@ -11,9 +11,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>4Bank - Transfer</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
     <body>
         <%@include file="header.jsp" %>
+        <h1>Transfer</h1>
+        <br/>
         <div class="container align-items-center">
             <form action="transfer.servlet" method="post">
                 <label class="form-check-label"><h4>1.Select account:</h4></label>
@@ -24,9 +29,7 @@
                            value="<%--Account number--%>"
                            id="accountX"
                            name="accountNumber">
-                    <label class="form-check-label" for="accountX">
-                        ACCOUNT #<%--Account number--%>
-                    </label>
+                    <label><input type="radio" name="accountX"> ACCOUNT #</label>
                 </div>
 
                 <div class="form-group row">

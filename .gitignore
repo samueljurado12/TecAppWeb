@@ -56,3 +56,4 @@ release.properties
 pom.xml.releaseBackup
 pom.xml.tag
 
+/nbproject/private/

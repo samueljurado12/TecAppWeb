@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : header
     Created on : 09-abr-2018, 10:55:56
     Author     : sjuradoq
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <div class='row'>
     <div class="col-lg-3">
-        <img src="resources/4bank.png" class="img-fluid" alt="logo">
+        <a href="/TecAppWeb/index.jsp"> <img  src="resources/4bank.png" class="img-fluid" alt="logo"></a>
     </div>
     <div class="col-lg-4">
         <h2 

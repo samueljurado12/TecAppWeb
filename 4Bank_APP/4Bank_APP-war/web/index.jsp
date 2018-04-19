@@ -32,14 +32,14 @@
         <div class="col-md-4">
            <p>Sign in</p>
            <hr/>
-           <form method="post" action="login.jsp">
+           <form method="post" action="login">
             <div class="form-group">
               <label for="username">Username:</label>
-                <input type="username" class="form-control" id="username">
+                <input type="username" class="form-control" name="username">
               </div>
               <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
+                <input type="password" class="form-control" name="pwd">
               </div>
               <hr/>
               <div>

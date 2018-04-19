@@ -93,8 +93,6 @@ public class Users implements Serializable {
     private String phoneNumber;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
     private List<Account> accountList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUSERS")
-    private List<Movements> movementsList;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "users")
     private Employee employee;
 
@@ -196,15 +194,6 @@ public class Users implements Serializable {
 
     public void setAccountList(List<Account> accountList) {
         this.accountList = accountList;
-    }
-
-    @XmlTransient
-    public List<Movements> getMovementsList() {
-        return movementsList;
-    }
-
-    public void setMovementsList(List<Movements> movementsList) {
-        this.movementsList = movementsList;
     }
 
     public Employee getEmployee() {

@@ -64,9 +64,6 @@ public class Movements implements Serializable {
         , @JoinColumn(name = "idACCOUNT", referencedColumnName = "idACCOUNT")})
     @ManyToOne(optional = false)
     private Account account;
-    @JoinColumn(name = "idUSERS", referencedColumnName = "idUSERS")
-    @ManyToOne(optional = false)
-    private Users idUSERS;
 
     public Movements() {
     }
@@ -128,14 +125,6 @@ public class Movements implements Serializable {
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public Users getIdUSERS() {
-        return idUSERS;
-    }
-
-    public void setIdUSERS(Users idUSERS) {
-        this.idUSERS = idUSERS;
     }
 
     @Override

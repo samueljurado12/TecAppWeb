@@ -19,7 +19,6 @@ import javax.validation.constraints.NotNull;
 public class AccountPK implements Serializable {
 
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idACCOUNT")
     private int idACCOUNT;
     @Basic(optional = false)

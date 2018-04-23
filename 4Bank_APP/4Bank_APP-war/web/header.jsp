@@ -16,6 +16,7 @@
         <h2 
             style="color: graytext; margin-top: 1em">Your bank and everyday the more people's one
         </h2>
+     <button type = "button" class="btn btn-primary" type="submit" data-toggle="modal" data-target="ejemplo">Logout</button>
     </div>
 </div>
 

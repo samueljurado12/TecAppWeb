@@ -3,17 +3,20 @@
     Created on : 09-abr-2018, 10:55:56
     Author     : sjuradoq
 --%>
-
+<%
+    String activePage = (String)request.getAttribute("activePage");
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div class='row'>
     <div class="col-lg-3">
-        <a href="/TecAppWeb/index.jsp"> <img  src="resources/4bank.png" class="img-fluid" alt="logo"></a>
+        <a href="index.jsp"> <img  src="resources/4bank.png" class="img-fluid" alt="logo"></a>
     </div>
     <div class="col-lg-4">
         <h2 
             style="color: graytext; margin-top: 1em">Your bank and everyday the more people's one
         </h2>
+     <button type = "button" class="btn btn-primary" type="submit" data-toggle="modal" data-target="ejemplo">Logout</button>
     </div>
 </div>
 
@@ -22,7 +25,7 @@
           <li class="nav-item">
               <a class="nav-link" href="accounts.jsp">Accounts</a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
               <a class="nav-link" href="transfer.jsp">Transfer</a>
           </li>
           <li class="nav-item">

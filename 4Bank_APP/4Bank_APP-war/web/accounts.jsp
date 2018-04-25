@@ -4,6 +4,7 @@
     Author     : Roberto
 --%>
 
+<%@page import="java.util.Map"%>
 <%@page import="persistence.Movements"%>
 <%@page import="persistence.Account"%>
 <%@page import="java.util.List"%>
@@ -17,7 +18,8 @@
     if (selectedAccount == null) {
         selectedAccount = accountsList.get(0);
     }
-       List<Movements> movementsList = selectedAccount.getMovementsList();
+    List<Movements> movementsList = selectedAccount.getMovementsList();
+    Map<Integer, String> receptors = (Map)session.getAttribute("receptors");
 %>
 <html>
     <head>
@@ -61,39 +63,15 @@
                         for(Movements movement : movementsList){
                     %>
                     <tr>
-                        <td><%  %></td>
-                        <td>-349.99</td>
-                        <td>649.87</td>
-                        <td>20 Oct, 8:56 AM (2013)</td>
+                        <td><%= receptors.get(movement.getIdUSERSreceptor()) %></td>
+                        <td><%= movement.getAmount() %>€</td>
+                        <td><%= movement.getNewBalance()%>€</td>
+                        <td><%= movement.getDate()%></td>
                     </tr>
                     <%
                         }
                     %>
 
-                    <tr>
-                        <td>Apple Store</td>
-                        <td>-349.99</td>
-                        <td>649.87</td>
-                        <td>20 Oct, 8:56 AM (2013)</td>
-                    </tr>
-                    <tr>
-                        <td>British Cut</td>
-                        <td>-34.99</td>
-                        <td>632.87</td>
-                        <td>19 Oct, 8:36 PM (2013)</td>
-                    </tr>
-                    <tr>
-                        <td>100 Little Rides</td>
-                        <td>-4.56</td>
-                        <td>1039.43</td>
-                        <td>17 Oct, 3:43 PM (2013)</td>
-                    </tr>
-                    <tr>
-                        <td>Paypal</td>
-                        <td>239.43</td>
-                        <td>1239.43</td>
-                        <td>14 Oct, 6:01 PM (2013)</td>
-                    </tr>
                 </tbody>
             </table>
         </div>

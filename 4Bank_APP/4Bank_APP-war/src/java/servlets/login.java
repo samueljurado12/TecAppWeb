@@ -8,6 +8,8 @@ package servlets;
 import ejb.UsersFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,15 +47,17 @@ public class login extends HttpServlet {
         Users user = usersFacade.queryUserByUsername(request.getParameter("username"));
         if (user != null && user.getPasssword().hashCode() == request.getParameter("pwd").hashCode()) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            
-            for(Account acc : user.getAccountList()){
-                for(Movements mov : acc.getMovementsList()){
-                    
+            Map<Integer, String> receptors = new HashMap<>();
+            Users receptor = null;
+            for (Account acc : user.getAccountList()) {
+                for (Movements mov : acc.getMovementsList()) {
+                    receptor = usersFacade.queryUserById(mov.getIdUSERSreceptor());
+                    receptors.put(receptor.getIdUSERS(), receptor.getName() + " " + receptor.getSurname());
                 }
             }
-            
+            session.setAttribute("user", user);
             session.setAttribute("selectedAccount", null);
+            session.setAttribute("receptors", receptors);
             response.sendRedirect("accounts.jsp");
         } else {
             response.sendRedirect("index.jsp");

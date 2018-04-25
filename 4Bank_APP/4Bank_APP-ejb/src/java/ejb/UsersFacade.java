@@ -41,4 +41,14 @@ public class UsersFacade extends AbstractFacade<Users> {
         }
     }
     
+    public Users queryUserById(int id){
+        Query q = this.em.createNamedQuery("Users.findByIdUSERS");
+        q.setParameter("idUSERS", id);
+        try{
+            return (Users) q.getSingleResult();
+        } catch(NoResultException e){
+            return null;
+        }
+    }
+    
 }

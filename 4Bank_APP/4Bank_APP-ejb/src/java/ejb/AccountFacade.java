@@ -7,7 +7,9 @@ package ejb;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import persistence.Account;
 
 /**
@@ -27,6 +29,16 @@ public class AccountFacade extends AbstractFacade<Account> {
 
     public AccountFacade() {
         super(Account.class);
+    }
+    
+    public Account queryAccountById(int id){
+        Query q = this.em.createNamedQuery("Account.findByIdACCOUNT");
+        q.setParameter("idACCOUNT", id);
+        try{
+            return (Account)q.getSingleResult();
+        } catch(NoResultException e){
+            return null;
+        }
     }
     
 }

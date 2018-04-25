@@ -6,6 +6,7 @@
 package persistence;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,6 +40,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Movements.findByAmount", query = "SELECT m FROM Movements m WHERE m.amount = :amount")
     , @NamedQuery(name = "Movements.findByNewBalance", query = "SELECT m FROM Movements m WHERE m.newBalance = :newBalance")})
 public class Movements implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "date")
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -150,6 +159,14 @@ public class Movements implements Serializable {
     @Override
     public String toString() {
         return "persistence.Movements[ idMOVEMENTS=" + idMOVEMENTS + " ]";
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
     
 }

@@ -4,6 +4,7 @@
     Author     : Roberto
 --%>
 
+<%@page import="persistence.Movements"%>
 <%@page import="persistence.Account"%>
 <%@page import="java.util.List"%>
 <%@page import="persistence.Users"%>
@@ -12,6 +13,11 @@
 <%
     Users userActive = (Users) session.getAttribute("user");
     List<Account> accountsList = userActive.getAccountList();
+    Account selectedAccount = (Account)session.getAttribute("selectedAccount");
+    if (selectedAccount == null) {
+        selectedAccount = accountsList.get(0);
+    }
+       List<Movements> movementsList = selectedAccount.getMovementsList();
 %>
 <html>
     <head>
@@ -29,7 +35,7 @@
                 <%--Insert for loop to insert account numbers--%>
                 <div class="col-sm-5">
                     <select class="form-control">
-                        <%                        
+                        <%
                             for (Account account : accountsList) {
                         %>
                         <option><%=account.getAccountPK().getIdACCOUNT()%></option>
@@ -51,6 +57,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <%
+                        for(Movements movement : movementsList){
+                    %>
+                    <tr>
+                        <td><%  %></td>
+                        <td>-349.99</td>
+                        <td>649.87</td>
+                        <td>20 Oct, 8:56 AM (2013)</td>
+                    </tr>
+                    <%
+                        }
+                    %>
+
                     <tr>
                         <td>Apple Store</td>
                         <td>-349.99</td>

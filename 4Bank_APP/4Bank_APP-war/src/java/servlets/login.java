@@ -16,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import persistence.Account;
+import persistence.Movements;
 import persistence.Users;
 
 /**
@@ -27,7 +29,6 @@ public class login extends HttpServlet {
 
     @EJB
     private UsersFacade usersFacade;
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,18 +42,22 @@ public class login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        Users user = usersFacade.queryUserByUsername(request.getParameter("username"));
+        if (user != null && user.getPasssword().hashCode() == request.getParameter("pwd").hashCode()) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
             
-            Users user = usersFacade.queryUserByUsername(request.getParameter("username"));
-            if(user != null && user.getPasssword().hashCode() == request.getParameter("pwd").hashCode()){
-                HttpSession session = request.getSession();
-                session.setAttribute("user", user);
-                RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/accounts.jsp");
-                rd.forward(request, response);
-            }else{
-                response.sendRedirect("index.jsp");
+            for(Account acc : user.getAccountList()){
+                for(Movements mov : acc.getMovementsList()){
+                    
+                }
             }
-        }   
+            
+            session.setAttribute("selectedAccount", null);
+            response.sendRedirect("accounts.jsp");
+        } else {
+            response.sendRedirect("index.jsp");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

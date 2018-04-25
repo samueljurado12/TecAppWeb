@@ -39,7 +39,6 @@ public class UsersFacade extends AbstractFacade<Users> {
         } catch(NoResultException e){
             return null;
         }
-        //return null;
     }
     
 }

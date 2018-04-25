@@ -3,9 +3,6 @@
     Created on : 09-abr-2018, 10:55:56
     Author     : sjuradoq
 --%>
-<%
-    String activePage = (String)request.getAttribute("activePage");
-%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <div class='row'>

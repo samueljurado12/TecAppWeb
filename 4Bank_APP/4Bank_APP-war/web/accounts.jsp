@@ -4,8 +4,15 @@
     Author     : Roberto
 --%>
 
+<%@page import="persistence.Account"%>
+<%@page import="java.util.List"%>
+<%@page import="persistence.Users"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    Users userActive = (Users) session.getAttribute("user");
+    List<Account> accountsList = userActive.getAccountList();
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,17 +24,21 @@
         <h1>        Accounts</h1>
         <br/>
         <div class="container align-items-center">
-             <div class="form-group row">
+            <div class="form-group row">
                 <label  for ="selectAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
                 <%--Insert for loop to insert account numbers--%>
                 <div class="col-sm-5">
-                <select class="form-control">
-                    <option>GB29 NWBK 6016 1331 9268 19</option>
-                    <option>GB29 NWBK 6016 1331 3214 25</option>
-                    <option>GB29 NWBK 6016 1331 4920 12</option>
-                </select>
+                    <select class="form-control">
+                        <%                        
+                            for (Account account : accountsList) {
+                        %>
+                        <option><%=account.getAccountPK().getIdACCOUNT()%></option>
+                        <%
+                            }
+                        %>
+                    </select>
                 </div>
-                </div>
+            </div>
         </div>
         <div class="container">
             <table class="table table-hover">

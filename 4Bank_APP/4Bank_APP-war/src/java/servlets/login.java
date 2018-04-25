@@ -45,10 +45,8 @@ public class login extends HttpServlet {
             
             Users user = usersFacade.queryUserByUsername(request.getParameter("username"));
             if(user != null && user.getPasssword().hashCode() == request.getParameter("pwd").hashCode()){
-                request.setAttribute("activePage", "accounts");
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                session.setAttribute("userAccounts", user.getAccountList());
                 RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/accounts.jsp");
                 rd.forward(request, response);
             }else{

@@ -24,8 +24,8 @@ import persistence.Movements;
  *
  * @author sjuradoq
  */
-@WebServlet(name = "Transfer", urlPatterns = {"/Transfer"})
-public class Transfer extends HttpServlet {
+@WebServlet(name = "MakeTransferServlet", urlPatterns = {"/MakeTransferServlet"})
+public class MakeTransferServlet extends HttpServlet {
 
     @EJB private MovementsFacade movementsFacade;
 
@@ -60,9 +60,15 @@ public class Transfer extends HttpServlet {
         } else {
            float newBalance = senderAccount.getBalance()+amount;
            senderAccount.setBalance(newBalance);
-           LocalDateTime date = LocalDateTime.now();
-           movementsFacade.createMovement(senderAccount.getUsers().getIdUSERS(), senderAccountNumber, 
-                   receiverAccountNumber, remarks, amount, newBalance, date);
+           Date date = new Date();
+           Movements newMovement = new Movements();
+           newMovement.setAccount(senderAccount);
+           newMovement.setAmount(amount);
+           newMovement.setConcept(remarks);
+           newMovement.setDate(date);
+           newMovement.setIdUSERSreceptor(receiverAccountNumber);
+           movementsFacade.createMovement(newMovement);
+           
         }
 
     }

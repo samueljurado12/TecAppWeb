@@ -31,22 +31,8 @@ public class MovementsFacade extends AbstractFacade<Movements> {
         super(Movements.class);
     }
     
-    public void createMovement(int userID, int senderAccountID, int receiverID, 
-            String concept, float amount, float newBalance, LocalDateTime date){
-        Query q = this.em.createNativeQuery("INSERT INTO MOVEMENTS (idUSERS, idACCOUNT, "
-                + "idUSERS_receptor, concept, amount, new_balance, date) VALUES "
-                + "( :idUSERS, :idACCOUNT, :idUSERS_receptor, :concept, :amount, :new_balance, :date);");
-        q.setParameter("idUSERS", userID);
-        q.setParameter("idACCOUNT", senderAccountID);
-        q.setParameter("idUSERS_receptor", receiverID);
-        q.setParameter("concept", concept);
-        q.setParameter("amount", amount);
-        q.setParameter("new_balance", newBalance);
-        q.setParameter("date", date);
-
-        
-        
-        q.executeUpdate();
+    public void createMovement(Movements mov){
+        em.persist(mov);
     }
     
 }

@@ -41,5 +41,4 @@
             <button class="btn btn-secondary" type="submit"><i class="fa fa-sign-out"></i> Logout</button>
         </form>
     </ul>
-   
 </nav>

@@ -5,9 +5,11 @@
  */
 package ejb;
 
+import java.time.LocalDateTime;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import persistence.Movements;
 
 /**
@@ -27,6 +29,10 @@ public class MovementsFacade extends AbstractFacade<Movements> {
 
     public MovementsFacade() {
         super(Movements.class);
+    }
+    
+    public void createMovement(Movements mov){
+        em.persist(mov);
     }
     
 }

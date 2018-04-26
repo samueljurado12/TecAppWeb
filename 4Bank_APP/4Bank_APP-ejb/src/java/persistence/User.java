@@ -29,27 +29,27 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author sjuradoq
  */
 @Entity
-@Table(name = "USERS")
+@Table(name = "USER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findByIdUSERS", query = "SELECT u FROM Users u WHERE u.idUSERS = :idUSERS")
-    , @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username")
-    , @NamedQuery(name = "Users.findByPasssword", query = "SELECT u FROM Users u WHERE u.passsword = :passsword")
-    , @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name")
-    , @NamedQuery(name = "Users.findBySurname", query = "SELECT u FROM Users u WHERE u.surname = :surname")
-    , @NamedQuery(name = "Users.findByAddress", query = "SELECT u FROM Users u WHERE u.address = :address")
-    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
-    , @NamedQuery(name = "Users.findByNif", query = "SELECT u FROM Users u WHERE u.nif = :nif")
-    , @NamedQuery(name = "Users.findByPhoneNumber", query = "SELECT u FROM Users u WHERE u.phoneNumber = :phoneNumber")})
-public class Users implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findByIdUSER", query = "SELECT u FROM User u WHERE u.idUSER = :idUSER")
+    , @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
+    , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")
+    , @NamedQuery(name = "User.findByName", query = "SELECT u FROM User u WHERE u.name = :name")
+    , @NamedQuery(name = "User.findBySurname", query = "SELECT u FROM User u WHERE u.surname = :surname")
+    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
+    , @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address")
+    , @NamedQuery(name = "User.findByNif", query = "SELECT u FROM User u WHERE u.nif = :nif")
+    , @NamedQuery(name = "User.findByPhoneNumber", query = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idUSERS")
-    private Integer idUSERS;
+    @Column(name = "idUSER")
+    private Integer idUSER;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -58,8 +58,8 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "passsword")
-    private String passsword;
+    @Column(name = "password")
+    private String password;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -70,11 +70,6 @@ public class Users implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "surname")
     private String surname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 70)
-    @Column(name = "address")
-    private String address;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
@@ -84,43 +79,47 @@ public class Users implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
+    @Column(name = "address")
+    private String address;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "NIF")
     private String nif;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "phone_number")
-    private String phoneNumber;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "users")
+    private int phoneNumber;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUSER")
     private List<Account> accountList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "users")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Employee employee;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(Integer idUSERS) {
-        this.idUSERS = idUSERS;
+    public User(Integer idUSER) {
+        this.idUSER = idUSER;
     }
 
-    public Users(Integer idUSERS, String username, String passsword, String name, String surname, String address, String email, String nif, String phoneNumber) {
-        this.idUSERS = idUSERS;
+    public User(Integer idUSER, String username, String password, String name, String surname, String email, String address, String nif, int phoneNumber) {
+        this.idUSER = idUSER;
         this.username = username;
-        this.passsword = passsword;
+        this.password = password;
         this.name = name;
         this.surname = surname;
-        this.address = address;
         this.email = email;
+        this.address = address;
         this.nif = nif;
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getIdUSERS() {
-        return idUSERS;
+    public Integer getIdUSER() {
+        return idUSER;
     }
 
-    public void setIdUSERS(Integer idUSERS) {
-        this.idUSERS = idUSERS;
+    public void setIdUSER(Integer idUSER) {
+        this.idUSER = idUSER;
     }
 
     public String getUsername() {
@@ -131,12 +130,12 @@ public class Users implements Serializable {
         this.username = username;
     }
 
-    public String getPasssword() {
-        return passsword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasssword(String passsword) {
-        this.passsword = passsword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -155,20 +154,20 @@ public class Users implements Serializable {
         this.surname = surname;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getNif() {
@@ -179,11 +178,11 @@ public class Users implements Serializable {
         this.nif = nif;
     }
 
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -207,18 +206,18 @@ public class Users implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUSERS != null ? idUSERS.hashCode() : 0);
+        hash += (idUSER != null ? idUSER.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Users)) {
+        if (!(object instanceof User)) {
             return false;
         }
-        Users other = (Users) object;
-        if ((this.idUSERS == null && other.idUSERS != null) || (this.idUSERS != null && !this.idUSERS.equals(other.idUSERS))) {
+        User other = (User) object;
+        if ((this.idUSER == null && other.idUSER != null) || (this.idUSER != null && !this.idUSER.equals(other.idUSER))) {
             return false;
         }
         return true;
@@ -226,7 +225,7 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.Users[ idUSERS=" + idUSERS + " ]";
+        return "persistence.User[ idUSER=" + idUSER + " ]";
     }
     
 }

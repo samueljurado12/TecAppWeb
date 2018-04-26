@@ -7,16 +7,19 @@ package persistence;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -29,71 +32,95 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
-    , @NamedQuery(name = "Account.findByIdACCOUNT", query = "SELECT a FROM Account a WHERE a.accountPK.idACCOUNT = :idACCOUNT")
-    , @NamedQuery(name = "Account.findByIdUSERS", query = "SELECT a FROM Account a WHERE a.accountPK.idUSERS = :idUSERS")
+    , @NamedQuery(name = "Account.findByIdACCOUNT", query = "SELECT a FROM Account a WHERE a.idACCOUNT = :idACCOUNT")
+    , @NamedQuery(name = "Account.findByAccountNumber", query = "SELECT a FROM Account a WHERE a.accountNumber = :accountNumber")
     , @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")})
 public class Account implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected AccountPK accountPK;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "balance")
-    private Float balance;
-    @JoinColumn(name = "idUSERS", referencedColumnName = "idUSERS", insertable = false, updatable = false)
+    private float balance;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "idACCOUNT")
+    private Integer idACCOUNT;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 10)
+    @Column(name = "account_number")
+    private String accountNumber;
+    @JoinColumn(name = "idUSER", referencedColumnName = "idUSER")
     @ManyToOne(optional = false)
-    private Users users;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "account")
-    private List<Movements> movementsList;
+    private User idUSER;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idACCOUNT")
+    private List<Movement> movementList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idACCOUNTreceptor")
+    private List<Movement> movementList1;
 
     public Account() {
     }
 
-    public Account(AccountPK accountPK) {
-        this.accountPK = accountPK;
+    public Account(Integer idACCOUNT) {
+        this.idACCOUNT = idACCOUNT;
     }
 
-    public Account(int idACCOUNT, int idUSERS) {
-        this.accountPK = new AccountPK(idACCOUNT, idUSERS);
-    }
-
-    public AccountPK getAccountPK() {
-        return accountPK;
-    }
-
-    public void setAccountPK(AccountPK accountPK) {
-        this.accountPK = accountPK;
-    }
-
-    public Float getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Float balance) {
+    public Account(Integer idACCOUNT, String accountNumber, Float balance) {
+        this.idACCOUNT = idACCOUNT;
+        this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
-    public Users getUsers() {
-        return users;
+    public Integer getIdACCOUNT() {
+        return idACCOUNT;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setIdACCOUNT(Integer idACCOUNT) {
+        this.idACCOUNT = idACCOUNT;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+
+    public User getIdUSER() {
+        return idUSER;
+    }
+
+    public void setIdUSER(User idUSER) {
+        this.idUSER = idUSER;
     }
 
     @XmlTransient
-    public List<Movements> getMovementsList() {
-        return movementsList;
+    public List<Movement> getMovementList() {
+        return movementList;
     }
 
-    public void setMovementsList(List<Movements> movementsList) {
-        this.movementsList = movementsList;
+    public void setMovementList(List<Movement> movementList) {
+        this.movementList = movementList;
+    }
+
+    @XmlTransient
+    public List<Movement> getMovementList1() {
+        return movementList1;
+    }
+
+    public void setMovementList1(List<Movement> movementList1) {
+        this.movementList1 = movementList1;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (accountPK != null ? accountPK.hashCode() : 0);
+        hash += (idACCOUNT != null ? idACCOUNT.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +131,7 @@ public class Account implements Serializable {
             return false;
         }
         Account other = (Account) object;
-        if ((this.accountPK == null && other.accountPK != null) || (this.accountPK != null && !this.accountPK.equals(other.accountPK))) {
+        if ((this.idACCOUNT == null && other.idACCOUNT != null) || (this.idACCOUNT != null && !this.idACCOUNT.equals(other.idACCOUNT))) {
             return false;
         }
         return true;
@@ -112,7 +139,15 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.Account[ accountPK=" + accountPK + " ]";
+        return "persistence.Account[ idACCOUNT=" + idACCOUNT + " ]";
+    }
+
+    public float getBalance() {
+        return balance;
+    }
+
+    public void setBalance(float balance) {
+        this.balance = balance;
     }
     
 }

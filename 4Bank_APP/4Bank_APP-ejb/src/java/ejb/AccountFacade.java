@@ -11,6 +11,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import persistence.Account;
+import persistence.User;
 
 /**
  *
@@ -30,13 +31,13 @@ public class AccountFacade extends AbstractFacade<Account> {
     public AccountFacade() {
         super(Account.class);
     }
-    
-    public Account queryAccountById(int id){
-        Query q = this.em.createNamedQuery("Account.findByIdACCOUNT");
-        q.setParameter("idACCOUNT", id);
+
+    public Account queryAccountById(int senderAccountNumber) {
+        Query q = this.em.createNamedQuery("findByIdACCOUNT");
+        q.setParameter("idACCOUNT", senderAccountNumber);
         try{
             return (Account)q.getSingleResult();
-        } catch(NoResultException e){
+        } catch (NoResultException e){
             return null;
         }
     }

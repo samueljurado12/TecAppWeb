@@ -5,19 +5,20 @@
  */
 package ejb;
 
-import java.time.LocalDateTime;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import persistence.Movements;
+import persistence.Account;
+import persistence.User;
 
 /**
  *
  * @author sjuradoq
  */
 @Stateless
-public class MovementsFacade extends AbstractFacade<Movements> {
+public class UserFacade extends AbstractFacade<User> {
 
     @PersistenceContext(unitName = "4Bank_APP-ejbPU")
     private EntityManager em;
@@ -27,12 +28,18 @@ public class MovementsFacade extends AbstractFacade<Movements> {
         return em;
     }
 
-    public MovementsFacade() {
-        super(Movements.class);
+    public UserFacade() {
+        super(User.class);
     }
-    
-    public void createMovement(Movements mov){
-        em.persist(mov);
+
+    public User queryUserByUsername(String username) {
+        Query q = this.em.createNamedQuery("findByUsername");
+        q.setParameter("username", username);
+        try{
+            return (User)q.getSingleResult();
+        } catch(NoResultException e){
+            return null;
+        }
     }
     
 }

@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
-    , @NamedQuery(name = "Employee.findByIdUSERS", query = "SELECT e FROM Employee e WHERE e.idUSERS = :idUSERS")
+    , @NamedQuery(name = "Employee.findByIdUSER", query = "SELECT e FROM Employee e WHERE e.idUSER = :idUSER")
     , @NamedQuery(name = "Employee.findByIsEmployee", query = "SELECT e FROM Employee e WHERE e.isEmployee = :isEmployee")})
 public class Employee implements Serializable {
 
@@ -35,34 +35,34 @@ public class Employee implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "idUSERS")
-    private Integer idUSERS;
+    @Column(name = "idUSER")
+    private Integer idUSER;
     @Basic(optional = false)
     @NotNull
     @Column(name = "isEmployee")
     private boolean isEmployee;
-    @JoinColumn(name = "idUSERS", referencedColumnName = "idUSERS", insertable = false, updatable = false)
+    @JoinColumn(name = "idUSER", referencedColumnName = "idUSER", insertable = false, updatable = false)
     @OneToOne(optional = false)
-    private Users users;
+    private User user;
 
     public Employee() {
     }
 
-    public Employee(Integer idUSERS) {
-        this.idUSERS = idUSERS;
+    public Employee(Integer idUSER) {
+        this.idUSER = idUSER;
     }
 
-    public Employee(Integer idUSERS, boolean isEmployee) {
-        this.idUSERS = idUSERS;
+    public Employee(Integer idUSER, boolean isEmployee) {
+        this.idUSER = idUSER;
         this.isEmployee = isEmployee;
     }
 
-    public Integer getIdUSERS() {
-        return idUSERS;
+    public Integer getIdUSER() {
+        return idUSER;
     }
 
-    public void setIdUSERS(Integer idUSERS) {
-        this.idUSERS = idUSERS;
+    public void setIdUSER(Integer idUSER) {
+        this.idUSER = idUSER;
     }
 
     public boolean getIsEmployee() {
@@ -73,18 +73,18 @@ public class Employee implements Serializable {
         this.isEmployee = isEmployee;
     }
 
-    public Users getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Users users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUSERS != null ? idUSERS.hashCode() : 0);
+        hash += (idUSER != null ? idUSER.hashCode() : 0);
         return hash;
     }
 
@@ -95,7 +95,7 @@ public class Employee implements Serializable {
             return false;
         }
         Employee other = (Employee) object;
-        if ((this.idUSERS == null && other.idUSERS != null) || (this.idUSERS != null && !this.idUSERS.equals(other.idUSERS))) {
+        if ((this.idUSER == null && other.idUSER != null) || (this.idUSER != null && !this.idUSER.equals(other.idUSER))) {
             return false;
         }
         return true;
@@ -103,7 +103,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "persistence.Employee[ idUSERS=" + idUSERS + " ]";
+        return "persistence.Employee[ idUSER=" + idUSER + " ]";
     }
     
 }

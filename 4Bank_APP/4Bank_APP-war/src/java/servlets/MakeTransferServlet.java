@@ -6,7 +6,7 @@
 package servlets;
 
 import ejb.AccountFacade;
-import ejb.MovementsFacade;
+import ejb.MovementFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import persistence.Account;
-import persistence.Movements;
+import persistence.Movement;
 
 /**
  *
@@ -27,7 +27,7 @@ import persistence.Movements;
 @WebServlet(name = "MakeTransferServlet", urlPatterns = {"/MakeTransferServlet"})
 public class MakeTransferServlet extends HttpServlet {
 
-    @EJB private MovementsFacade movementsFacade;
+    @EJB private MovementFacade movementsFacade;
 
     @EJB private AccountFacade accountFacade;
     
@@ -61,13 +61,13 @@ public class MakeTransferServlet extends HttpServlet {
            float newBalance = senderAccount.getBalance()+amount;
            senderAccount.setBalance(newBalance);
            Date date = new Date();
-           Movements newMovement = new Movements();
-           newMovement.setAccount(senderAccount);
+           Movement newMovement = new Movement();
+           newMovement.setIdACCOUNT(senderAccount);
            newMovement.setAmount(amount);
            newMovement.setConcept(remarks);
            newMovement.setDate(date);
-           newMovement.setIdUSERSreceptor(receiverAccountNumber);
-           movementsFacade.createMovement(newMovement);
+           newMovement.setIdACCOUNTreceptor(receiverAccount);
+           movementsFacade.create(newMovement);
            
         }
 

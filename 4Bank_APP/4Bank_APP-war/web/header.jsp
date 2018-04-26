@@ -5,34 +5,41 @@
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class='row'>
     <div class="col-lg-3">
-        <a href="index.jsp"> <img  src="resources/4bank.png" class="img-fluid" alt="logo"></a>
+        <a> <img  src="resources/4bank.png" class="img-fluid" alt="logo"></a>
     </div>
     <div class="col-lg-4">
         <h2 
             style="color: graytext; margin-top: 1em">Your bank and everyday the more people's one
         </h2>
-     <button type = "button" class="btn btn-primary" type="submit" data-toggle="modal" data-target="ejemplo">Logout</button>
     </div>
 </div>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark justify-content-center">
-      <ul class="navbar-nav">
-          <li class="nav-item">
-              <a class="nav-link" href="accounts.jsp">Accounts</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="transfer.jsp">Transfer</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="user_management.jsp">User Management</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="contact_us.jsp">Contact Us</a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" href="#">Employee</a>
-          </li>
-      </ul>
-  </nav>
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="accounts.jsp">Accounts</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="transfer.jsp">Transfer</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="user_info.jsp">User Info</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="contact_us.jsp">Contact Us</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">Employee</a>
+        </li>
+        
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <form method="post" action="LogoutServlet">
+            <button class="btn btn-secondary" type="submit"><i class="fa fa-sign-out"></i> Logout</button>
+        </form>
+    </ul>
+   
+</nav>

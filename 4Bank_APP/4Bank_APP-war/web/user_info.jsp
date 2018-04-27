@@ -4,11 +4,11 @@
     Author     : JavierVazquez
 --%>
 
-<%@page import="persistence.Users"%>
+<%@page import="persistence.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    Users userActive = (Users) session.getAttribute("user");
+    User userActive = (User) session.getAttribute("user");
     
 %>
 <html>

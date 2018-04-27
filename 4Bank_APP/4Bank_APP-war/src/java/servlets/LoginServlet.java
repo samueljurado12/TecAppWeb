@@ -29,12 +29,7 @@ import persistence.User;
 public class LoginServlet extends HttpServlet {
 
     @EJB
-    private AccountFacade accountFacade;
-
-    @EJB
     private UserFacade userFacade;
-    
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,7 +59,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("receptors", receptors);
             response.sendRedirect("accounts.jsp");
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("");
         }
     }
 

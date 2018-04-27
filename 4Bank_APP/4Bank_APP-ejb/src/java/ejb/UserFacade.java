@@ -10,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import persistence.Account;
 import persistence.User;
 
 /**
@@ -33,7 +32,7 @@ public class UserFacade extends AbstractFacade<User> {
     }
 
     public User queryUserByUsername(String username) {
-        Query q = this.em.createNamedQuery("findByUsername");
+        Query q = this.em.createNamedQuery("User.findByUsername");
         q.setParameter("username", username);
         try{
             return (User)q.getSingleResult();

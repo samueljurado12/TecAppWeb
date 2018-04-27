@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +21,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -33,26 +34,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
     , @NamedQuery(name = "Account.findByIdACCOUNT", query = "SELECT a FROM Account a WHERE a.idACCOUNT = :idACCOUNT")
-    , @NamedQuery(name = "Account.findByAccountNumber", query = "SELECT a FROM Account a WHERE a.accountNumber = :accountNumber")
     , @NamedQuery(name = "Account.findByBalance", query = "SELECT a FROM Account a WHERE a.balance = :balance")})
 public class Account implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "balance")
-    private float balance;
-
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "idACCOUNT")
     private Integer idACCOUNT;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "account_number")
-    private String accountNumber;
+    @Column(name = "balance")
+    private float balance;
     @JoinColumn(name = "idUSER", referencedColumnName = "idUSER")
     @ManyToOne(optional = false)
     private User idUSER;
@@ -68,9 +62,8 @@ public class Account implements Serializable {
         this.idACCOUNT = idACCOUNT;
     }
 
-    public Account(Integer idACCOUNT, String accountNumber, Float balance) {
+    public Account(Integer idACCOUNT, float balance) {
         this.idACCOUNT = idACCOUNT;
-        this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
@@ -82,14 +75,13 @@ public class Account implements Serializable {
         this.idACCOUNT = idACCOUNT;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
+    public float getBalance() {
+        return balance;
     }
 
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+    public void setBalance(float balance) {
+        this.balance = balance;
     }
-
 
     public User getIdUSER() {
         return idUSER;
@@ -140,14 +132,6 @@ public class Account implements Serializable {
     @Override
     public String toString() {
         return "persistence.Account[ idACCOUNT=" + idACCOUNT + " ]";
-    }
-
-    public float getBalance() {
-        return balance;
-    }
-
-    public void setBalance(float balance) {
-        this.balance = balance;
     }
     
 }

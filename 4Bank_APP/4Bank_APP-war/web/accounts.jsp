@@ -63,8 +63,7 @@
                         for(Movement movement : movementsList){
                     %>
                     <tr>
-                        <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getName())
-                        + " " + receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getSurname()) %></td>
+                        <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER()) %></td>
                         <td><%= movement.getAmount() %>€</td>
                         <td><%= movement.getNewBalance()%>€</td>
                         <td><%= movement.getDate()%></td>

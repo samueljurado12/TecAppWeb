@@ -5,13 +5,12 @@
  */
 package servlets;
 
-import ejb.UsersFacade;
+import ejb.AccountFacade;
+import ejb.UserFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,18 +18,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import persistence.Account;
-import persistence.Movements;
-import persistence.Users;
+import persistence.Movement;
+import persistence.User;
 
 /**
  *
  * @author sjuradoq
  */
-@WebServlet(name = "login", urlPatterns = {"/login"})
-public class login extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
+public class LoginServlet extends HttpServlet {
 
     @EJB
-    private UsersFacade usersFacade;
+    private UserFacade userFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,15 +43,15 @@ public class login extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        Users user = usersFacade.queryUserByUsername(request.getParameter("username"));
-        if (user != null && user.getPasssword().hashCode() == request.getParameter("pwd").hashCode()) {
+        User user = userFacade.queryUserByUsername(request.getParameter("username"));
+        if (user != null && user.getPassword().hashCode() == request.getParameter("pwd").hashCode()) {
             HttpSession session = request.getSession();
             Map<Integer, String> receptors = new HashMap<>();
-            Users receptor = null;
+            User receptor = null;
             for (Account acc : user.getAccountList()) {
-                for (Movements mov : acc.getMovementsList()) {
-                    receptor = usersFacade.queryUserById(mov.getIdUSERSreceptor());
-                    receptors.put(receptor.getIdUSERS(), receptor.getName() + " " + receptor.getSurname());
+                for (Movement mov : acc.getMovementList()) {
+                    receptor = mov.getIdACCOUNTreceptor().getIdUSER();
+                    receptors.put(receptor.getIdUSER(), receptor.getName() + " " + receptor.getSurname());
                 }
             }
             session.setAttribute("user", user);
@@ -60,7 +59,7 @@ public class login extends HttpServlet {
             session.setAttribute("receptors", receptors);
             response.sendRedirect("accounts.jsp");
         } else {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("");
         }
     }
 

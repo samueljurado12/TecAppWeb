@@ -6,11 +6,11 @@
 
 <%@page import="persistence.Account"%>
 <%@page import="java.util.List"%>
-<%@page import="persistence.Users"%>
+<%@page import="persistence.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    Users userActive = (Users) session.getAttribute("user");
+    User userActive = (User) session.getAttribute("user");
     List<Account> accountsList = userActive.getAccountList();
     Account selectedAccount = (Account) session.getAttribute("selectedAccount");
     if (selectedAccount == null) {
@@ -29,7 +29,7 @@
         <h1>Transfer</h1>
         <br/>
         <div class="container align-items-center">
-            <form action="Transfer" method="post">
+            <form action="MakeTransferServlet" method="post">
                 <div class="form-group row">
                     <label  for ="selectAccount" class="form-check-label col-sm-3 col-form-label"><h4>1.Select account:</h4></label>
                     <%--Insert for loop to insert account numbers--%>
@@ -38,7 +38,7 @@
                             <%
                                 for (Account account : accountsList) {
                             %>
-                            <option><%=account.getAccountPK().getIdACCOUNT()%></option>
+                            <option><%=account.getIdACCOUNT()%></option>
                             <%
                                 }
                             %>

@@ -10,14 +10,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import persistence.Users;
+import persistence.User;
 
 /**
  *
  * @author sjuradoq
  */
 @Stateless
-public class UsersFacade extends AbstractFacade<Users> {
+public class UserFacade extends AbstractFacade<User> {
 
     @PersistenceContext(unitName = "4Bank_APP-ejbPU")
     private EntityManager em;
@@ -27,25 +27,15 @@ public class UsersFacade extends AbstractFacade<Users> {
         return em;
     }
 
-    public UsersFacade() {
-        super(Users.class);
+    public UserFacade() {
+        super(User.class);
     }
-    
-    public Users queryUserByUsername(String username){
-        Query q = this.em.createNamedQuery("Users.findByUsername");
+
+    public User queryUserByUsername(String username) {
+        Query q = this.em.createNamedQuery("User.findByUsername");
         q.setParameter("username", username);
         try{
-            return (Users) q.getSingleResult();
-        } catch(NoResultException e){
-            return null;
-        }
-    }
-    
-    public Users queryUserById(int id){
-        Query q = this.em.createNamedQuery("Users.findByIdUSERS");
-        q.setParameter("idUSERS", id);
-        try{
-            return (Users) q.getSingleResult();
+            return (User)q.getSingleResult();
         } catch(NoResultException e){
             return null;
         }

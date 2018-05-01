@@ -5,26 +5,26 @@
 --%>
 
 <%@page import="java.util.Map"%>
-<%@page import="persistence.Movements"%>
+<%@page import="persistence.Movement"%>
 <%@page import="persistence.Account"%>
 <%@page import="java.util.List"%>
-<%@page import="persistence.Users"%>
+<%@page import="persistence.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    Users userActive = (Users) session.getAttribute("user");
+    User userActive = (User) session.getAttribute("user");
     List<Account> accountsList = userActive.getAccountList();
     Account selectedAccount = (Account)session.getAttribute("selectedAccount");
     if (selectedAccount == null) {
         selectedAccount = accountsList.get(0);
     }
-    List<Movements> movementsList = selectedAccount.getMovementsList();
+    List<Movement> movementsList = selectedAccount.getMovementList();
     Map<Integer, String> receptors = (Map)session.getAttribute("receptors");
 %>
 <html>
-    <head>
+    <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>4Bank- Contact Us</title>
+        <title>4Bank- Accounts</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <body>
@@ -40,7 +40,7 @@
                         <%
                             for (Account account : accountsList) {
                         %>
-                        <option><%=account.getAccountPK().getIdACCOUNT()%></option>
+                        <option><%=account.getIdACCOUNT()%></option>
                         <%
                             }
                         %>
@@ -60,10 +60,10 @@
                 </thead>
                 <tbody>
                     <%
-                        for(Movements movement : movementsList){
+                        for(Movement movement : movementsList){
                     %>
                     <tr>
-                        <td><%= receptors.get(movement.getIdUSERSreceptor()) %></td>
+                        <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER()) %></td>
                         <td><%= movement.getAmount() %>€</td>
                         <td><%= movement.getNewBalance()%>€</td>
                         <td><%= movement.getDate()%></td>

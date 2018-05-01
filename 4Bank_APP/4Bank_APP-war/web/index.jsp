@@ -32,7 +32,7 @@
                 <div class="col-md-4">
                     <p>Sign in</p>
                     <hr/>
-                    <form method="post" action="login">
+                        <form method="post" action="LoginServlet">
                         <div class="form-group">
                             <label for="username">Username:</label>
                             <input type="username" class="form-control" name="username">

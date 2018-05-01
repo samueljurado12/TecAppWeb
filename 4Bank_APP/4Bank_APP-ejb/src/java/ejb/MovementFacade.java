@@ -7,17 +7,15 @@ package ejb;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import persistence.Account;
+import persistence.Movement;
 
 /**
  *
  * @author sjuradoq
  */
 @Stateless
-public class AccountFacade extends AbstractFacade<Account> {
+public class MovementFacade extends AbstractFacade<Movement> {
 
     @PersistenceContext(unitName = "4Bank_APP-ejbPU")
     private EntityManager em;
@@ -27,18 +25,8 @@ public class AccountFacade extends AbstractFacade<Account> {
         return em;
     }
 
-    public AccountFacade() {
-        super(Account.class);
-    }
-    
-    public Account queryAccountById(int id){
-        Query q = this.em.createNamedQuery("Account.findByIdACCOUNT");
-        q.setParameter("idACCOUNT", id);
-        try{
-            return (Account)q.getSingleResult();
-        } catch (NoResultException e){
-            return null;
-        }
+    public MovementFacade() {
+        super(Movement.class);
     }
     
 }

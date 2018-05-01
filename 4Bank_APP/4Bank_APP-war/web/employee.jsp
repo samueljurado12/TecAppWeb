@@ -10,7 +10,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-
+    
+    <%
+        List<Users> userList = (List<Users>) request.getAttribute("users");
+    %>
+    
     <body>
         <%@include file="header.jsp" %>
         <div class="container">
@@ -56,11 +60,19 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <%
+                                if (userList != null) {
+                            %>
+
+                            <%
+                                for (Users user : userList) {
+                            %>
                             <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <th scope="row"><%= user.getNif()%></th>
+                                <td><%= user.getUsername()%>
+                                </td>
+                                <td><%= user.getName() + " " + user.getSurname()%></td>
+                                <td><%= user.getEmail()%></td>
                                 <td>
                                     <button type="submit" class="btn btn-warning">
                                         <i class="fa fa-pencil fa-lg"></i>
@@ -70,34 +82,13 @@
                                         </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="fa fa-pencil fa-lg"></i>
-                                    </button>
-                                    <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-times fa-lg"></i>
-                                        </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                                <td>
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="fa fa-pencil fa-lg"></i>
-                                    </button>
-                                    <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-times fa-lg"></i>
-                                        </button>
-                                </td>
-                            </tr>
+                            <%
+                                }
+                            %>
+                            <%
+                                }
+                            %>
+
                         </tbody>
                     </table>
                 </div>

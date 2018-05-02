@@ -5,6 +5,7 @@
  */
 package servlets;
 
+import ejb.AccountFacade;
 import ejb.MovementFacade;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +31,11 @@ import persistence.User;
 public class ListMovement extends HttpServlet {
 
     @EJB
+    private AccountFacade accountFacade;
+
+    @EJB
     private MovementFacade movementFacade;
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,7 +59,7 @@ public class ListMovement extends HttpServlet {
         if (request.getParameter("selectedAccount") == null) {
             selectedAccount = user.getAccountList().get(0);
         } else {
-            // Query account by id and assign to selected account
+            selectedAccount = accountFacade.queryAccountById(Integer.parseInt(request.getParameter("selectedAccount")));
         }
 
         movementList = movementFacade.FindAllMovementsByAccount(selectedAccount);

@@ -30,7 +30,7 @@
         <h1>        Accounts</h1>
         <br/>
         <div class="container align-items-center">
-            <form action="ListMovements" method="post">
+            <form action="ListMovement" method="post">
                 <div class="form-group row">
                     <label  for ="selectedAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
                     <div class="col-sm-5">

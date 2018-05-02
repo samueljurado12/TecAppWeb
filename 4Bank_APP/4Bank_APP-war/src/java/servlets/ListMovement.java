@@ -5,12 +5,12 @@
  */
 package servlets;
 
-import ejb.UserFacade;
+import ejb.MovementFacade;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,13 +23,13 @@ import persistence.User;
 
 /**
  *
- * @author sjuradoq
+ * @author JavierVazquez
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
+@WebServlet(name = "ListMovement", urlPatterns = {"/ListMovement"})
+public class ListMovement extends HttpServlet {
 
     @EJB
-    private UserFacade userFacade;
+    private MovementFacade movementFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,27 +43,19 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        User user = userFacade.queryUserByUsername(request.getParameter("username"));
-        if (user != null && user.getPassword().hashCode() == request.getParameter("pwd").hashCode()) {
-            HttpSession session = request.getSession();
-//            Map<Integer, String> receptors = new HashMap<>();
-//            User receptor = null;
-//            for (Account acc : user.getAccountList()) {
-//                for (Movement mov : acc.getMovementList()) {
-//                    receptor = mov.getIdACCOUNTreceptor().getIdUSER();
-//                    receptors.put(receptor.getIdUSER(), receptor.getName() + " " + receptor.getSurname());
-//                }
-//            }
-            session.setAttribute("user", user);
-            session.setAttribute("selectedAccount", null);
-//            session.setAttribute("receptors", receptors);
-//            response.sendRedirect("accounts.jsp");
-            RequestDispatcher rd = request.getRequestDispatcher("ListMovement");
-            request.setAttribute("user", user);
-            rd.forward(request, response);
-        } else {
-            response.sendRedirect("");
+        User user = (User) request.getAttribute("user");
+        HttpSession session = request.getSession();
+        List <Account> AccountLists = user.getAccountList();
+        List <Movement> MovementLists = new ArrayList();
+        
+        for (Account account : AccountLists){
+//            for ( Movement movement : movementFacade.FindAllMovementsByAccount(account.getIdACCOUNT())){
+              for ( Movement movement : movementFacade.FindAllMovementsByAccount(account)){
+                MovementLists.add(movement);
+            }
         }
+       session.setAttribute("MovementLists", MovementLists);
+       response.sendRedirect("accounts.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

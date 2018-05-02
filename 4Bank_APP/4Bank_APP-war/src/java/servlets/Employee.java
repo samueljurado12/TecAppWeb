@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import ejb.UsersFacade;
+import ejb.UserFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -16,7 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistence.Users;
+import persistence.User;
 
 /**
  *
@@ -26,7 +26,7 @@ import persistence.Users;
 public class Employee extends HttpServlet {
 
     @EJB
-    private UsersFacade usersFacade;
+    private UserFacade userFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,7 +40,7 @@ public class Employee extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String outputPage = "/employee.jsp";
-        List<Users> userList = usersFacade.findAll();
+        List<User> userList = userFacade.findAll();
         
         request.setAttribute("users", userList);
         RequestDispatcher dispatcher = this.getServletContext()

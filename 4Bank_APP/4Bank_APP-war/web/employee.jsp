@@ -1,4 +1,4 @@
-<%@page import="persistence.Users"%>
+<%@page import="persistence.User"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +12,7 @@
     </head>
     
     <%
-        List<Users> userList = (List<Users>) request.getAttribute("users");
+        List<User> userList = (List<User>) request.getAttribute("users");
     %>
     
     <body>
@@ -65,7 +65,7 @@
                             %>
 
                             <%
-                                for (Users user : userList) {
+                                for (User user : userList) {
                             %>
                             <tr>
                                 <th scope="row"><%= user.getNif()%></th>

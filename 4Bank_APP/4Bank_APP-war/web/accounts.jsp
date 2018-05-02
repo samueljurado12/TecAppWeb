@@ -37,9 +37,14 @@
                         <select class="form-control" name="selectedAccount">
                             <%
                                 for (Account account : accountsList) {
+                                    if (selectedAccount.equals(account)) {
+                            %>
+                            <option selected><%=account.getIdACCOUNT()%></option>
+                            <%
+                            } else {
                             %>
                             <option><%=account.getIdACCOUNT()%></option>
-                            <%
+                            <% }
                                 }
                             %>
                         </select>

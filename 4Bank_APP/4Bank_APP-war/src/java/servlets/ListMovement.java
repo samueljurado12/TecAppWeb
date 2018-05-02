@@ -65,6 +65,7 @@ public class ListMovement extends HttpServlet {
 
         session.setAttribute("selectedAccount", selectedAccount);
         session.setAttribute("movementList", movementList);
+        session.setAttribute("receptors", receptors);
         response.sendRedirect("accounts.jsp");
     }
 

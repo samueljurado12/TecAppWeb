@@ -49,8 +49,8 @@ public class ListMovement extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        User user = (User) request.getAttribute("user");
         HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         Account selectedAccount = null;
         List<Movement> movementList = null;
         Map<Integer, String> receptors = new HashMap<>();

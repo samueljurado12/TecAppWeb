@@ -44,7 +44,6 @@
          <%
            }
         %>
-        
     </ul>
     <ul class="navbar-nav ml-auto">
         <form method="post" action="LogoutServlet">

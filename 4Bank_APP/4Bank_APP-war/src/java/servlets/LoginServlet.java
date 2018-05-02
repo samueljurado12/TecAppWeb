@@ -50,6 +50,12 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("selectedAccount", null);
             RequestDispatcher rd = request.getRequestDispatcher("ListMovement");
             request.setAttribute("user", user);
+            if(user.getEmployee()!=null){
+                request.setAttribute("isEmployee", user.getEmployee().getIsEmployee());
+            }else{
+                 request.setAttribute("isEmployee",false);
+            }
+            
             rd.forward(request, response);
         } else {
             response.sendRedirect("");

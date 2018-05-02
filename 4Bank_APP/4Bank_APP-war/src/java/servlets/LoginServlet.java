@@ -46,18 +46,8 @@ public class LoginServlet extends HttpServlet {
         User user = userFacade.queryUserByUsername(request.getParameter("username"));
         if (user != null && user.getPassword().hashCode() == request.getParameter("pwd").hashCode()) {
             HttpSession session = request.getSession();
-//            Map<Integer, String> receptors = new HashMap<>();
-//            User receptor = null;
-//            for (Account acc : user.getAccountList()) {
-//                for (Movement mov : acc.getMovementList()) {
-//                    receptor = mov.getIdACCOUNTreceptor().getIdUSER();
-//                    receptors.put(receptor.getIdUSER(), receptor.getName() + " " + receptor.getSurname());
-//                }
-//            }
             session.setAttribute("user", user);
             session.setAttribute("selectedAccount", null);
-//            session.setAttribute("receptors", receptors);
-//            response.sendRedirect("accounts.jsp");
             RequestDispatcher rd = request.getRequestDispatcher("ListMovement");
             request.setAttribute("user", user);
             rd.forward(request, response);

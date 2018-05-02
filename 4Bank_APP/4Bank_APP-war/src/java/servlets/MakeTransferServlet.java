@@ -63,10 +63,11 @@ public class MakeTransferServlet extends HttpServlet {
            Date date = new Date();
            Movement newMovement = new Movement();
            newMovement.setIdACCOUNT(senderAccount);
-           newMovement.setAmount(amount);
-           newMovement.setConcept(remarks);
-           newMovement.setDate(date);
            newMovement.setIdACCOUNTreceptor(receiverAccount);
+           newMovement.setConcept(remarks);
+           newMovement.setAmount(amount);
+           newMovement.setNewBalance(newBalance);
+           newMovement.setDate(date);
            movementsFacade.create(newMovement);
            
         }

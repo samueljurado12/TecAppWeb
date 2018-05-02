@@ -22,7 +22,7 @@
                 <div class="col-md-6" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
                     <h1>Create user:</h1>
                     </br>
-                    <form action="employee.servlet" method="post">
+                    <form action="CreateUserServlet" method="post">
                         <div class="form-group row">
                             <label for="username" class="form-check-label col-md-3 col-form-label">Name:</label>
                             <input type="username" class="form-control col-md-6" id="username">

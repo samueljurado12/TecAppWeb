@@ -14,12 +14,10 @@
 <%
     User userActive = (User) session.getAttribute("user");
     List<Account> accountsList = userActive.getAccountList();
-    Account selectedAccount = (Account)session.getAttribute("selectedAccount");
-    if (selectedAccount == null) {
-        selectedAccount = accountsList.get(0);
-    }
+    Account selectedAccount = (Account) session.getAttribute("selectedAccount");
+
     List<Movement> movementsList = selectedAccount.getMovementList();
-    Map<Integer, String> receptors = (Map)session.getAttribute("receptors");
+    Map<Integer, String> receptors = (Map) session.getAttribute("receptors");
 %>
 <html>
     <head> 
@@ -32,21 +30,25 @@
         <h1>        Accounts</h1>
         <br/>
         <div class="container align-items-center">
-            <div class="form-group row">
-                <label  for ="selectAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
-                <%--Insert for loop to insert account numbers--%>
-                <div class="col-sm-5">
-                    <select class="form-control">
-                        <%
-                            for (Account account : accountsList) {
-                        %>
-                        <option><%=account.getIdACCOUNT()%></option>
-                        <%
-                            }
-                        %>
-                    </select>
+            <form action="ListMovements" method="post">
+                <div class="form-group row">
+                    <label  for ="selectedAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="selectedAccount">
+                            <%
+                                for (Account account : accountsList) {
+                            %>
+                            <option><%=account.getIdACCOUNT()%></option>
+                            <%
+                                }
+                            %>
+                        </select>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">Refrescar</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="container">
             <table class="table table-hover">
@@ -60,11 +62,11 @@
                 </thead>
                 <tbody>
                     <%
-                        for(Movement movement : movementsList){
+                        for (Movement movement : movementsList) {
                     %>
                     <tr>
-                        <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER()) %></td>
-                        <td><%= movement.getAmount() %>€</td>
+                        <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
+                        <td><%= movement.getAmount()%>€</td>
                         <td><%= movement.getNewBalance()%>€</td>
                         <td><%= movement.getDate()%></td>
                     </tr>

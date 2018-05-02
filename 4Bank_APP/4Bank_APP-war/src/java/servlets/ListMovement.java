@@ -7,9 +7,10 @@ package servlets;
 
 import ejb.MovementFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,17 +46,26 @@ public class ListMovement extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         User user = (User) request.getAttribute("user");
         HttpSession session = request.getSession();
-        List <Account> AccountLists = user.getAccountList();
-        List <Movement> MovementLists = new ArrayList();
-        
-        for (Account account : AccountLists){
-//            for ( Movement movement : movementFacade.FindAllMovementsByAccount(account.getIdACCOUNT())){
-              for ( Movement movement : movementFacade.FindAllMovementsByAccount(account)){
-                MovementLists.add(movement);
-            }
+        Account selectedAccount = null;
+        List<Movement> movementList = null;
+        Map<Integer, String> receptors = new HashMap<>();
+        User otherAccount = null;
+
+        if (request.getParameter("selectedAccount") == null) {
+            selectedAccount = user.getAccountList().get(0);
+        } else {
+            // Query account by id and assign to selected account
         }
-       session.setAttribute("MovementLists", MovementLists);
-       response.sendRedirect("accounts.jsp");
+
+        movementList = movementFacade.FindAllMovementsByAccount(selectedAccount);
+        for (Movement mov : movementList) {
+            otherAccount = getUser(mov, selectedAccount);
+            receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
+        }
+
+        session.setAttribute("selectedAccount", selectedAccount);
+        session.setAttribute("movementList", movementList);
+        response.sendRedirect("accounts.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,5 +106,13 @@ public class ListMovement extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private User getUser(Movement mov, Account selectedAccount) {
+        if(mov.getIdACCOUNT().equals(selectedAccount)){
+            return mov.getIdACCOUNTreceptor().getIdUSER();
+        } else {
+            return mov.getIdACCOUNTreceptor().getIdUSER();
+        }
+    }
 
 }

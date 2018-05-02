@@ -1,2 +1,0 @@
-INSERT INTO USERS
-VALUES(77,'CAMELITO','LMAO', 'BENITO', 'CAMELAS','calle', 'benito@camelas.com', '90j','666666666')

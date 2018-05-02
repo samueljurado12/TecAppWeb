@@ -33,10 +33,9 @@
             <form action="ListMovement" method="post">
                 <div class="form-group row">
                     <label  for ="selectedAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
-                    <div class="col-sm-5">
+                    <div class="col-sm-4">
                         <select class="form-control" name="selectedAccount">
-                            <%
-                                for (Account account : accountsList) {
+                            <%                                for (Account account : accountsList) {
                                     if (selectedAccount.equals(account)) {
                             %>
                             <option selected><%=account.getIdACCOUNT()%></option>
@@ -49,7 +48,10 @@
                             %>
                         </select>
                     </div>
-                    <div>
+                    <div class="col-sm-3">
+                        <h4><%= selectedAccount.getBalance() %>€</h4>
+                    </div>
+                    <div class="col-sm-2">
                         <button class="btn btn-primary" type="submit">Refrescar</button>
                     </div>
                 </div>

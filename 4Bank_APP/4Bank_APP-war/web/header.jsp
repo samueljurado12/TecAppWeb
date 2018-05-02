@@ -24,7 +24,7 @@
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="accounts.jsp">Accounts</a>
+            <a class="nav-link" href="ListMovement">Accounts</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="transfer.jsp">Transfer</a>

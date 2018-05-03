@@ -117,7 +117,7 @@ public class ListMovement extends HttpServlet {
         if (mov.getIdACCOUNT().equals(selectedAccount)) {
             return mov.getIdACCOUNTreceptor().getIdUSER();
         } else {
-            return mov.getIdACCOUNTreceptor().getIdUSER();
+            return mov.getIdACCOUNT().getIdUSER();
         }
     }
 

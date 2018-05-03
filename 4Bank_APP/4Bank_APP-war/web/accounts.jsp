@@ -35,7 +35,7 @@
                     <label  for ="selectedAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
                     <div class="col-sm-4">
                         <select class="form-control" name="selectedAccount">
-                            <%                                for (Account account : accountsList) {
+                            <%  for (Account account : accountsList) {
                                     if (selectedAccount.equals(account)) {
                             %>
                             <option selected><%=account.getIdACCOUNT()%></option>
@@ -82,7 +82,7 @@
                     } else if (movement.getIdACCOUNTreceptor().equals(selectedAccount)) {
                     %>
                     <tr>
-                        <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
+                        <td><%= receptors.get(movement.getIdACCOUNT().getIdUSER().getIdUSER())%></td>
                         <td style="color: green"><%= movement.getAmount()%>€</td>
                         <td><%= movement.getNewBalance()%>€</td>
                         <td><%= movement.getDate()%></td>

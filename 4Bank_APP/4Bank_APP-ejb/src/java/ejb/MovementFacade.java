@@ -33,15 +33,15 @@ public class MovementFacade extends AbstractFacade<Movement> {
         super(Movement.class);
     }
 
-    public List<Movement> queryAllMovementsMadeFromAccount(Account selectedAccount) {
+    public List<Movement> queryAllMovementsMadeFromAccount(Account account) {
         Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNT = :idACCOUNT ORDER BY m.date DESC");
-        q.setParameter("idACCOUNT", selectedAccount);
+        q.setParameter("idACCOUNT", account);
         return q.getResultList();
     }
 
-    public List<Movement> queryAllMovementsMadeToAccount(Account selectedAccount) {
-        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNTreceptor = :idACCOUNT ORDER BY m.date DESC");
-        q.setParameter("idACCOUNT", selectedAccount);
+    public List<Movement> queryAllMovementsMadeToAccount(Account account) {
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNTreceptor = :idACCOUNTreceptor ORDER BY m.date DESC");
+        q.setParameter("idACCOUNTreceptor", account);
         return q.getResultList();
     }
 

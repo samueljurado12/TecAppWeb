@@ -60,8 +60,8 @@ public class ListMovement extends HttpServlet {
             selectedAccount = accountFacade.queryAccountById(Integer.parseInt(request.getParameter("selectedAccount")));
         }
         
-        movementList = movementFacade.queryAllMovementsMadeFromAccount(selectedAccount);
-        movementList.addAll(movementFacade.queryAllMovementsMadeToAccount(selectedAccount));
+        //movementList = movementFacade.queryAllMovementsMadeFromAccount(selectedAccount);
+        movementList = movementFacade.queryAllMovementsMadeToAccount(selectedAccount);
         
         /*
         movementList = selectedAccount.getMovementList();

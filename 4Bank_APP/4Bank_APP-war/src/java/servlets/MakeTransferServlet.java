@@ -75,6 +75,7 @@ public class MakeTransferServlet extends HttpServlet {
             newMovement.setNewBalanceSender(newBalanceSender);
             newMovement.setNewBalanceReceiver(newBalanceReceiver);
             newMovement.setDate(new Date());
+            
             movementsFacade.create(newMovement);
 
         }

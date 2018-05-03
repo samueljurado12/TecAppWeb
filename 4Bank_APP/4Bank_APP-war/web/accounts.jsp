@@ -1,7 +1,7 @@
 <%-- 
-    Document   : contact_us
+    Document   : accounts
     Created on : 11-abr-2018, 12:19:28
-    Author     : Roberto
+    Author     : samueljurado12
 --%>
 
 <%@page import="java.util.Map"%>

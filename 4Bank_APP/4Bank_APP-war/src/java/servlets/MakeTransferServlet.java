@@ -53,19 +53,23 @@ public class MakeTransferServlet extends HttpServlet {
         Account receiverAccount = accountFacade.queryAccountById(receiverAccountNumber);
 
         if (receiverAccount == null) {
-            // Error, account does not exist, back to transfer
-        } else if (senderAccount.getBalance() < 0 && amount < 0) {
-            // Error, you don't have money
+            //TODO Error, account does not exist, back to transfer
+        } else if (senderAccount.getBalance() < 0) {
+            //TODO Error, you don't have money
+        } else if (amount == 0) {
+            //TODO Error, you can't make a transfer without transfering money
+        } else if (receiverAccount.equals(senderAccount)) {
+            //TODO Error, you can't make a transfer to the same account you are sending from
         } else {
             float newBalanceSender = senderAccount.getBalance() - amount;
             float newBalanceReceiver = receiverAccount.getBalance() + amount;
             senderAccount.setBalance(newBalanceSender);
             receiverAccount.setBalance(newBalanceReceiver);
-            
+
             // Save sender and receiver account data in db
             accountFacade.edit(senderAccount);
             accountFacade.edit(receiverAccount);
-            
+
             // Generate new movement and save it into the db
             Movement newMovement = new Movement(0);
             newMovement.setIdACCOUNT(senderAccount);
@@ -75,9 +79,8 @@ public class MakeTransferServlet extends HttpServlet {
             newMovement.setNewBalanceSender(newBalanceSender);
             newMovement.setNewBalanceReceiver(newBalanceReceiver);
             newMovement.setDate(new Date());
-            
-            movementsFacade.create(newMovement);
 
+            movementsFacade.create(newMovement);
         }
         response.sendRedirect("transfer.jsp");
     }

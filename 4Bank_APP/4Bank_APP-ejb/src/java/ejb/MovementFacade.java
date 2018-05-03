@@ -5,12 +5,9 @@
  */
 package ejb;
 
-import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import persistence.Account;
 import persistence.Movement;
 
 /**
@@ -30,15 +27,6 @@ public class MovementFacade extends AbstractFacade<Movement> {
 
     public MovementFacade() {
         super(Movement.class);
-    }
-
-    public List<Movement> FindAllMovementsByAccount(Account idACCOUNT) {
-//      Query q = this.em.createQuery("SELECT m FROM Movement m WHERE (m.idACCOUNT = :idACCOUNT or m.idACCOUNT_receptor= :idACCOUNT) "
-        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE (m.idACCOUNT = :idACCOUNT) "
-                + "OR (m.idACCOUNTreceptor = :idACCOUNTreceptor) ORDER BY m.date");
-        q.setParameter("idACCOUNT", idACCOUNT);
-        q.setParameter("idACCOUNTreceptor", idACCOUNT);
-        return q.getResultList();
     }
 
 }

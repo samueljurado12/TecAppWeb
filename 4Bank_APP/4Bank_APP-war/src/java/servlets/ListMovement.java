@@ -60,7 +60,6 @@ public class ListMovement extends HttpServlet {
             selectedAccount = accountFacade.queryAccountById(Integer.parseInt(request.getParameter("selectedAccount")));
         }
 
-        //movementList = movementFacade.FindAllMovementsByAccount(selectedAccount);
         movementList = selectedAccount.getMovementList();
         movementList.addAll(selectedAccount.getMovementList1());
         movementList.sort((Movement o1, Movement o2) -> o2.getDate().compareTo(o1.getDate()));

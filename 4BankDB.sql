@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS `4BankDB`.`MOVEMENT` (
   `amount` FLOAT NOT NULL,
   `new_balance_sender` FLOAT NOT NULL,
   `new_balance_receiver` FLOAT NOT NULL,
-  `date` DATE NOT NULL,
+  `date` DATETIME NOT NULL,
   PRIMARY KEY (`idMOVEMENT`),
   INDEX `fk_MOVEMENT_1_idx` (`idACCOUNT` ASC),
   INDEX `fk_MOVEMENT_2_idx` (`idACCOUNT_receptor` ASC),

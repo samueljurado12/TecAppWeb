@@ -39,7 +39,7 @@
             if (isEmployee) {
         %>
         <li class="nav-item">
-            <a class="nav-link" href="Employee">Employee</a>
+            <a class="nav-link" href="employee">Employee</a>
         </li>
         <%
             }

@@ -25,11 +25,8 @@ import persistence.User;
 public class EmployeeServlet extends HttpServlet {
 
     @EJB
-<<<<<<< HEAD:4Bank_APP/4Bank_APP-war/src/java/servlets/Employee.java
     private UserFacade userFacade;
-=======
-    private UserFacade usersFacade;
->>>>>>> guisanpea:4Bank_APP/4Bank_APP-war/src/java/servlets/EmployeeServlet.java
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -43,11 +40,8 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String outputPage = "/employee.jsp";
-<<<<<<< HEAD:4Bank_APP/4Bank_APP-war/src/java/servlets/Employee.java
         List<User> userList = userFacade.findAll();
-=======
-        List<User> userList = usersFacade.findAll();
->>>>>>> guisanpea:4Bank_APP/4Bank_APP-war/src/java/servlets/EmployeeServlet.java
+
         
         request.setAttribute("users", userList);
         RequestDispatcher dispatcher = this.getServletContext()

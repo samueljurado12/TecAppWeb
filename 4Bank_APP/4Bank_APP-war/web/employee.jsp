@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>4Bank - employee</title>
+        <title>4Bank - Employee</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
@@ -22,11 +22,8 @@
                 <div class="col-md-6" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
                     <h1>Create user:</h1>
                     </br>
-<<<<<<< HEAD
-                    <form action="CreateUserServlet" method="post">
-=======
+
                     <form action="CreateUser" method="post">
->>>>>>> guisanpea
                         <div class="form-group row">
                             <label for="username" class="form-check-label col-md-3 col-form-label">Name:</label>
                             <input type="text" class="form-control col-md-6" name="username">

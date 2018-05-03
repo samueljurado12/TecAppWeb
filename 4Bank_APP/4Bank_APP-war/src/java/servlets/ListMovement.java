@@ -60,14 +60,9 @@ public class ListMovement extends HttpServlet {
             selectedAccount = accountFacade.queryAccountById(Integer.parseInt(request.getParameter("selectedAccount")));
         }
         
-        //movementList = movementFacade.queryAllMovementsMadeFromAccount(selectedAccount);
-        movementList = movementFacade.queryAllMovementsMadeToAccount(selectedAccount);
-        
-        /*
-        movementList = selectedAccount.getMovementList();
-        movementList.addAll(selectedAccount.getMovementList1());
-        */
-        movementList.sort((Movement o1, Movement o2) -> o2.getDate().compareTo(o1.getDate()));
+        movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
+
+        //movementList.sort((Movement o1, Movement o2) -> o2.getDate().compareTo(o1.getDate()));
         for (Movement mov : movementList) {
             otherAccount = getUser(mov, selectedAccount);
             receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());

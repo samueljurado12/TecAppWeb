@@ -5,7 +5,6 @@
  */
 package ejb;
 
-import java.util.Collection;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,18 +31,18 @@ public class MovementFacade extends AbstractFacade<Movement> {
     public MovementFacade() {
         super(Movement.class);
     }
-
-    public List<Movement> queryAllMovementsMadeFromAccount(Account account) {
-        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNT = :idACCOUNT ORDER BY m.date DESC");
+    
+    public List<Movement> queryAllMovementsFromAndToAccount(Account account) {
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNT = :idACCOUNT "
+                + "OR m.idACCOUNTreceptor = :idACCOUNT ORDER BY m.date DESC");
         q.setParameter("idACCOUNT", account);
         return q.getResultList();
     }
 
     public List<Movement> queryAllMovementsMadeToAccount(Account account) {
-        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNTreceptor = :idACCOUNTreceptor ORDER BY m.date DESC");
-        q.setParameter("idACCOUNTreceptor", account);
+        Query q = this.em.createQuery("SELECT m FROM Movement m");
+        //q.setParameter("idACCOUNTreceptor", account);
         return q.getResultList();
     }
-
-
+    
 }

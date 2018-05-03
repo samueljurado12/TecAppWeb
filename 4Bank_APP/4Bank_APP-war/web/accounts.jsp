@@ -16,7 +16,7 @@
     List<Account> accountsList = userActive.getAccountList();
     Account selectedAccount = (Account) session.getAttribute("selectedAccount");
 
-    List<Movement> movementsList = selectedAccount.getMovementList();
+    List<Movement> movementsList = (List<Movement>)session.getAttribute("movementList");
     Map<Integer, String> receptors = (Map) session.getAttribute("receptors");
 %>
 <html>

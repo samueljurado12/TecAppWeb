@@ -4,6 +4,7 @@
     Author     : samueljurado12
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Map"%>
 <%@page import="persistence.Movement"%>
 <%@page import="persistence.Account"%>
@@ -18,6 +19,8 @@
 
     List<Movement> movementsList = (List<Movement>)session.getAttribute("movementList");
     Map<Integer, String> receptors = (Map) session.getAttribute("receptors");
+    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("EE dd/MM/YY HH:mm");
 %>
 <html>
     <head> 
@@ -76,7 +79,7 @@
                         <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
                         <td style="color: red">-<%= movement.getAmount()%>€</td>
                         <td><%= movement.getNewBalanceSender()%>€</td>
-                        <td><%= movement.getDate()%></td>
+                        <td><%= dateFormat.format(movement.getDate())%></td>
                     </tr>
                     <%
                     } else if (movement.getIdACCOUNTreceptor().equals(selectedAccount)) {
@@ -85,7 +88,7 @@
                         <td><%= receptors.get(movement.getIdACCOUNT().getIdUSER().getIdUSER())%></td>
                         <td style="color: green"><%= movement.getAmount()%>€</td>
                         <td><%= movement.getNewBalanceReceiver()%>€</td>
-                        <td><%= movement.getDate()%></td>
+                        <td><%= dateFormat.format(movement.getDate())%></td>
                     </tr>
                     <%
                             }

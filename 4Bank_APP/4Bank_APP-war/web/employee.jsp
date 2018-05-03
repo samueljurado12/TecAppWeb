@@ -89,10 +89,10 @@
                                         <i class="fa fa-pencil fa-lg"></i>
                                     </button>
                                     </form>
-                                    <form action='RemoveUser?id=<%= user.getIdUSER()%>' method='post'>
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-times fa-lg"></i>
-                                        </button>
+                                    <form action='RemoveUser' method='GET'>
+                                        <button type="submit" class="btn btn-danger"> <i class="fa fa-times fa-lg"/> </button>
+                                        
+                                        <input type="hidden" name="id" value="<%= user.getIdUSER()%>"/>
                                     </form>
                                 </td>
                             </tr>

@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Movement.findByIdMOVEMENT", query = "SELECT m FROM Movement m WHERE m.idMOVEMENT = :idMOVEMENT")
     , @NamedQuery(name = "Movement.findByConcept", query = "SELECT m FROM Movement m WHERE m.concept = :concept")
     , @NamedQuery(name = "Movement.findByAmount", query = "SELECT m FROM Movement m WHERE m.amount = :amount")
-    , @NamedQuery(name = "Movement.findByNewBalance", query = "SELECT m FROM Movement m WHERE m.newBalance = :newBalance")
+    , @NamedQuery(name = "Movement.findByNewBalanceSender", query = "SELECT m FROM Movement m WHERE m.newBalanceSender = :newBalanceSender")
+    , @NamedQuery(name = "Movement.findByNewBalanceReceiver", query = "SELECT m FROM Movement m WHERE m.newBalanceReceiver = :newBalanceReceiver")
     , @NamedQuery(name = "Movement.findByDate", query = "SELECT m FROM Movement m WHERE m.date = :date")})
 public class Movement implements Serializable {
 
@@ -57,8 +58,12 @@ public class Movement implements Serializable {
     private float amount;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "new_balance")
-    private float newBalance;
+    @Column(name = "new_balance_sender")
+    private float newBalanceSender;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "new_balance_receiver")
+    private float newBalanceReceiver;
     @Basic(optional = false)
     @NotNull
     @Column(name = "date")
@@ -78,11 +83,12 @@ public class Movement implements Serializable {
         this.idMOVEMENT = idMOVEMENT;
     }
 
-    public Movement(Integer idMOVEMENT, String concept, float amount, float newBalance, Date date) {
+    public Movement(Integer idMOVEMENT, String concept, float amount, float newBalanceSender, float newBalanceReceiver, Date date) {
         this.idMOVEMENT = idMOVEMENT;
         this.concept = concept;
         this.amount = amount;
-        this.newBalance = newBalance;
+        this.newBalanceSender = newBalanceSender;
+        this.newBalanceReceiver = newBalanceReceiver;
         this.date = date;
     }
 
@@ -110,12 +116,20 @@ public class Movement implements Serializable {
         this.amount = amount;
     }
 
-    public float getNewBalance() {
-        return newBalance;
+    public float getNewBalanceSender() {
+        return newBalanceSender;
     }
 
-    public void setNewBalance(float newBalance) {
-        this.newBalance = newBalance;
+    public void setNewBalanceSender(float newBalanceSender) {
+        this.newBalanceSender = newBalanceSender;
+    }
+
+    public float getNewBalanceReceiver() {
+        return newBalanceReceiver;
+    }
+
+    public void setNewBalanceReceiver(float newBalanceReceiver) {
+        this.newBalanceReceiver = newBalanceReceiver;
     }
 
     public Date getDate() {
@@ -166,5 +180,5 @@ public class Movement implements Serializable {
     public String toString() {
         return "persistence.Movement[ idMOVEMENT=" + idMOVEMENT + " ]";
     }
-
+    
 }

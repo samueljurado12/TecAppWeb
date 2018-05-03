@@ -82,7 +82,7 @@
                         <h4>4.Transfer remarks:</h4>
                     </label>
                     <div class="col-sm-5">
-                        <textarea rows="4" id="remarks" class="form-control"></textarea>
+                        <textarea rows="4" name="remarks" class="form-control"></textarea>
                     </div>
                 </div>
 

@@ -5,9 +5,13 @@
  */
 package ejb;
 
+import java.util.Collection;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import persistence.Account;
 import persistence.Movement;
 
 /**
@@ -28,5 +32,18 @@ public class MovementFacade extends AbstractFacade<Movement> {
     public MovementFacade() {
         super(Movement.class);
     }
+
+    public List<Movement> queryAllMovementsMadeFromAccount(Account selectedAccount) {
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNT = :idACCOUNT ORDER BY m.date DESC");
+        q.setParameter("idACCOUNT", selectedAccount);
+        return q.getResultList();
+    }
+
+    public List<Movement> queryAllMovementsMadeToAccount(Account selectedAccount) {
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNTreceptor = :idACCOUNT ORDER BY m.date DESC");
+        q.setParameter("idACCOUNT", selectedAccount);
+        return q.getResultList();
+    }
+
 
 }

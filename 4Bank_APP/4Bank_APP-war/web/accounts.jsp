@@ -75,7 +75,7 @@
                     <tr>
                         <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
                         <td style="color: red">-<%= movement.getAmount()%>€</td>
-                        <td><%= movement.getNewBalance()%>€</td>
+                        <td><%= movement.getNewBalanceSender()%>€</td>
                         <td><%= movement.getDate()%></td>
                     </tr>
                     <%
@@ -84,7 +84,7 @@
                     <tr>
                         <td><%= receptors.get(movement.getIdACCOUNT().getIdUSER().getIdUSER())%></td>
                         <td style="color: green"><%= movement.getAmount()%>€</td>
-                        <td><%= movement.getNewBalance()%>€</td>
+                        <td><%= movement.getNewBalanceReceiver()%>€</td>
                         <td><%= movement.getDate()%></td>
                     </tr>
                     <%

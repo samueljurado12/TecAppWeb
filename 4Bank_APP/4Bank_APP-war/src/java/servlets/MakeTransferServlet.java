@@ -8,8 +8,6 @@ package servlets;
 import ejb.AccountFacade;
 import ejb.MovementFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.time.LocalDateTime;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -27,10 +25,11 @@ import persistence.Movement;
 @WebServlet(name = "MakeTransferServlet", urlPatterns = {"/MakeTransferServlet"})
 public class MakeTransferServlet extends HttpServlet {
 
-    @EJB private MovementFacade movementsFacade;
+    @EJB
+    private MovementFacade movementsFacade;
 
-    @EJB private AccountFacade accountFacade;
-    
+    @EJB
+    private AccountFacade accountFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,31 +46,39 @@ public class MakeTransferServlet extends HttpServlet {
 
         int senderAccountNumber = Integer.parseInt(request.getParameter("senderAccount"));
         int receiverAccountNumber = Integer.parseInt(request.getParameter("receiverAccount"));
-        float amount = Float.parseFloat(request.getParameter("receiverAccount"));
+        float amount = Float.parseFloat(request.getParameter("amount"));
         String remarks = request.getParameter("remarks");
 
         Account senderAccount = accountFacade.queryAccountById(senderAccountNumber);
         Account receiverAccount = accountFacade.queryAccountById(receiverAccountNumber);
-        
-        if(receiverAccount == null){
+
+        if (receiverAccount == null) {
             // Error, account does not exist, back to transfer
-        } else if(senderAccount.getBalance() < 0 && amount < 0) {
+        } else if (senderAccount.getBalance() < 0 && amount < 0) {
             // Error, you don't have money
         } else {
-           float newBalance = senderAccount.getBalance()+amount;
-           senderAccount.setBalance(newBalance);
-           Date date = new Date();
-           Movement newMovement = new Movement();
-           newMovement.setIdACCOUNT(senderAccount);
-           newMovement.setIdACCOUNTreceptor(receiverAccount);
-           newMovement.setConcept(remarks);
-           newMovement.setAmount(amount);
-           newMovement.setNewBalance(newBalance);
-           newMovement.setDate(date);
-           movementsFacade.create(newMovement);
-           
-        }
+            float newBalanceSender = senderAccount.getBalance() - amount;
+            float newBalanceReceiver = receiverAccount.getBalance() + amount;
+            senderAccount.setBalance(newBalanceSender);
+            receiverAccount.setBalance(newBalanceReceiver);
+            
+            // Save sender and receiver account data in db
+            accountFacade.edit(senderAccount);
+            accountFacade.edit(receiverAccount);
+            
+            // Generate new movement and save it into the db
+            Movement newMovement = new Movement(0);
+            newMovement.setIdACCOUNT(senderAccount);
+            newMovement.setIdACCOUNTreceptor(receiverAccount);
+            newMovement.setConcept(remarks);
+            newMovement.setAmount(amount);
+            newMovement.setNewBalanceSender(newBalanceSender);
+            newMovement.setNewBalanceReceiver(newBalanceReceiver);
+            newMovement.setDate(new Date());
+            movementsFacade.create(newMovement);
 
+        }
+        response.sendRedirect("transfer.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

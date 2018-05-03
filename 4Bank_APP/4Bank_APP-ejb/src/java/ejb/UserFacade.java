@@ -41,4 +41,9 @@ public class UserFacade extends AbstractFacade<User> {
         }
     }
     
+    public void deleteUserByID(int id){
+        User toDelete = this.find(id);
+        remove(toDelete);
+    }
+    
 }

@@ -8,7 +8,6 @@ package servlets;
 import ejb.UserFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,14 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistence.User;
 
 /**
  *
- * @author Guisanpea
+ * @author ubuntie
  */
-@WebServlet(name = "employee", urlPatterns = {"/employee"})
-public class Employee extends HttpServlet {
+@WebServlet(name = "RemoveUser", urlPatterns = {"/RemoveUser"})
+public class DeleteUserServlet extends HttpServlet {
 
     @EJB
     private UserFacade userFacade;
@@ -39,12 +37,13 @@ public class Employee extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String outputPage = "/employee.jsp";
-        List<User> userList = userFacade.findAll();
         
-        request.setAttribute("users", userList);
-        RequestDispatcher dispatcher = this.getServletContext()
-                                .getRequestDispatcher(outputPage);
+        String userParameter = request.getParameter("id");
+        System.out.println(userParameter);
+        int userId = Integer.valueOf(userParameter);
+        userFacade.deleteUserByID(userId);
+        
+        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/employee");
         dispatcher.forward(request, response);
     }
 

@@ -5,10 +5,18 @@
  */
 package ejb;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import javax.validation.Validator;
 import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolation;
+<<<<<<< HEAD
 import javax.validation.ConstraintViolationException;
+=======
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
+>>>>>>> guisanpea
 
 /**
  *
@@ -25,6 +33,7 @@ public abstract class AbstractFacade<T> {
     protected abstract EntityManager getEntityManager();
 
     public void create(T entity) {
+<<<<<<< HEAD
         try {
             getEntityManager().persist(entity);
         } catch (ConstraintViolationException e) {
@@ -32,6 +41,20 @@ public abstract class AbstractFacade<T> {
             for (ConstraintViolation actual : e.getConstraintViolations()) {
                 System.out.println(actual.toString());
             }
+=======
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<T>> constraintViolations = validator.validate(entity);
+        if (constraintViolations.size() > 0) {
+            Iterator<ConstraintViolation<T>> iterator = constraintViolations.iterator();
+            while (iterator.hasNext()) {
+                ConstraintViolation<T> cv = iterator.next();
+                System.err.println(cv.getRootBeanClass().getName() + "." + cv.getPropertyPath() + " " + cv.getMessage());
+            
+            }
+        } else {
+            getEntityManager().persist(entity);
+>>>>>>> guisanpea
         }
     }
 

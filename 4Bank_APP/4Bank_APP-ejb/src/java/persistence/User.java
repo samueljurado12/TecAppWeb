@@ -81,8 +81,8 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "address")
     private String address;
-    @Basic(optional = false)
     @NotNull
+    @Basic(optional = false)
     @Size(min = 1, max = 15)
     @Column(name = "NIF")
     private String nif;

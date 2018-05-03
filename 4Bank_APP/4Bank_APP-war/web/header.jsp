@@ -1,4 +1,4 @@
-    <%@page import="persistence.User"%>
+<%@page import="persistence.User"%>
 <%-- 
     Document   : header
     Created on : 09-abr-2018, 10:55:56
@@ -7,8 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    boolean isEmployee = ((Boolean)session.getAttribute("isEmployee")).booleanValue();
-    %>
+    boolean isEmployee = ((Boolean) session.getAttribute("isEmployee")).booleanValue();
+%>
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <div class='row'>
     <div class="col-lg-3">
@@ -36,13 +36,13 @@
             <a class="nav-link" href="contact_us.jsp">Contact Us</a>
         </li>
         <%
-            if(isEmployee){
-            %>
+            if (isEmployee) {
+        %>
         <li class="nav-item">
-        <a class="nav-link" href="Employee">Employee</a>
+            <a class="nav-link" href="Employee">Employee</a>
         </li>
-         <%
-           }
+        <%
+            }
         %>
     </ul>
     <ul class="navbar-nav ml-auto">

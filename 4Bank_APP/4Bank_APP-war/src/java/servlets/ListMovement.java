@@ -8,7 +8,6 @@ package servlets;
 import ejb.AccountFacade;
 import ejb.MovementFacade;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,6 @@ public class ListMovement extends HttpServlet {
 
     @EJB
     private MovementFacade movementFacade;
-    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,7 +60,10 @@ public class ListMovement extends HttpServlet {
             selectedAccount = accountFacade.queryAccountById(Integer.parseInt(request.getParameter("selectedAccount")));
         }
 
-        movementList = movementFacade.FindAllMovementsByAccount(selectedAccount);
+        //movementList = movementFacade.FindAllMovementsByAccount(selectedAccount);
+        movementList = selectedAccount.getMovementList();
+        movementList.addAll(selectedAccount.getMovementList1());
+        movementList.sort((Movement o1, Movement o2) -> o2.getDate().compareTo(o1.getDate()));
         for (Movement mov : movementList) {
             otherAccount = getUser(mov, selectedAccount);
             receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
@@ -114,7 +115,7 @@ public class ListMovement extends HttpServlet {
     }// </editor-fold>
 
     private User getUser(Movement mov, Account selectedAccount) {
-        if(mov.getIdACCOUNT().equals(selectedAccount)){
+        if (mov.getIdACCOUNT().equals(selectedAccount)) {
             return mov.getIdACCOUNTreceptor().getIdUSER();
         } else {
             return mov.getIdACCOUNTreceptor().getIdUSER();

@@ -49,7 +49,7 @@
                         </select>
                     </div>
                     <div class="col-sm-3">
-                        <h4><%= selectedAccount.getBalance() %>€</h4>
+                        <h4><%= selectedAccount.getBalance()%>€</h4>
                     </div>
                     <div class="col-sm-2">
                         <button class="btn btn-primary" type="submit">Refrescar</button>
@@ -62,7 +62,7 @@
                 <thead>
                     <tr>
                         <th>Entity</th>
-                        <th>Paid</th>
+                        <th>Amount</th>
                         <th>Balance</th>
                         <th>Date</th>
                     </tr>
@@ -70,17 +70,27 @@
                 <tbody>
                     <%
                         for (Movement movement : movementsList) {
+                            if (movement.getIdACCOUNT().equals(selectedAccount)) {
                     %>
                     <tr>
                         <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
-                        <td><%= movement.getAmount()%>€</td>
+                        <td style="color: red">-<%= movement.getAmount()%>€</td>
                         <td><%= movement.getNewBalance()%>€</td>
                         <td><%= movement.getDate()%></td>
                     </tr>
                     <%
+                    } else if (movement.getIdACCOUNTreceptor().equals(selectedAccount)) {
+                    %>
+                    <tr>
+                        <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
+                        <td style="color: green"><%= movement.getAmount()%>€</td>
+                        <td><%= movement.getNewBalance()%>€</td>
+                        <td><%= movement.getDate()%></td>
+                    </tr>
+                    <%
+                            }
                         }
                     %>
-
                 </tbody>
             </table>
         </div>

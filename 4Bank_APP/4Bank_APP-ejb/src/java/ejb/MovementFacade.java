@@ -38,11 +38,5 @@ public class MovementFacade extends AbstractFacade<Movement> {
         q.setParameter("idACCOUNT", account);
         return q.getResultList();
     }
-
-    public List<Movement> queryAllMovementsMadeToAccount(Account account) {
-        Query q = this.em.createQuery("SELECT m FROM Movement m");
-        //q.setParameter("idACCOUNTreceptor", account);
-        return q.getResultList();
-    }
     
 }

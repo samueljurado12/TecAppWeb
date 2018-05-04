@@ -7,7 +7,6 @@ package servlets;
 
 import ejb.UserFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -25,8 +24,10 @@ import persistence.User;
 @WebServlet(name = "CreateUser", urlPatterns = {"/CreateUser"})
 public class CreateUserServlet extends HttpServlet {
 
+
     @EJB
     private UserFacade userFacade;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -44,10 +45,14 @@ public class CreateUserServlet extends HttpServlet {
         String username = request.getParameter("username");
         String usermail = request.getParameter("mail");
         int userphone = Integer.parseInt(request.getParameter("phone"));
-        String userpass = request.getParameter("password");
         String usernif = request.getParameter("nif");
         String address = request.getParameter("adress");
         String surname = request.getParameter("surname");
+        String userpass =request.getParameter("username");
+        
+        //generacion de password
+        userpass = userpass.substring(0,3);
+        userpass =userpass.concat(usernif.substring(0,3));
         
         if(! nifExists(userList, usernif)){
             User newUser = new User();

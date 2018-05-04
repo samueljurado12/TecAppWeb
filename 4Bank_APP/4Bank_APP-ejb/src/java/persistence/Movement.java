@@ -1,4 +1,4 @@
-    /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -26,10 +26,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author sjuradoq
+ * @author RhoLouh
  */
 @Entity
-@Table(name = "MOVEMENT")
+@Table(name = "movement")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Movement.findAll", query = "SELECT m FROM Movement m")
@@ -75,6 +75,9 @@ public class Movement implements Serializable {
     @JoinColumn(name = "idACCOUNT_receptor", referencedColumnName = "idACCOUNT")
     @ManyToOne(optional = false)
     private Account idACCOUNTreceptor;
+    @JoinColumn(name = "idEmployee", referencedColumnName = "idUSER")
+    @ManyToOne
+    private User idEmployee;
 
     public Movement() {
     }
@@ -154,6 +157,14 @@ public class Movement implements Serializable {
 
     public void setIdACCOUNTreceptor(Account idACCOUNTreceptor) {
         this.idACCOUNTreceptor = idACCOUNTreceptor;
+    }
+
+    public User getIdEmployee() {
+        return idEmployee;
+    }
+
+    public void setIdEmployee(User idEmployee) {
+        this.idEmployee = idEmployee;
     }
 
     @Override

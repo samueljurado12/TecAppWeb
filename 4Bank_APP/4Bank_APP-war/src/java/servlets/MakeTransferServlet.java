@@ -44,8 +44,8 @@ public class MakeTransferServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        int senderAccountNumber = Integer.parseInt(request.getParameter("senderAccount"));
-        int receiverAccountNumber = Integer.parseInt(request.getParameter("receiverAccount"));
+        String senderAccountNumber = request.getParameter("senderAccount");
+        String receiverAccountNumber = request.getParameter("receiverAccount");
         float amount = Float.parseFloat(request.getParameter("amount"));
         String remarks = request.getParameter("remarks");
 

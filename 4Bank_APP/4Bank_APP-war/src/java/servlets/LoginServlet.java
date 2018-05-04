@@ -46,6 +46,11 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             session.setAttribute("selectedAccount", null);
             RequestDispatcher rd = request.getRequestDispatcher("ListMovement");
+            if(user.getEmployee()!=null){
+                if(user.getEmployee().getIsEmployee()){
+                    rd =request.getRequestDispatcher("employee");
+                }
+            }
             if (user.getEmployee() != null) {
                 session.setAttribute("isEmployee", user.getEmployee().getIsEmployee());
             } else {

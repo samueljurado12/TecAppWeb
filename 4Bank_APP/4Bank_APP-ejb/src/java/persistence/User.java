@@ -17,7 +17,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sjuradoq
+ * @author RhoLouh
  */
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
@@ -41,7 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
     , @NamedQuery(name = "User.findByAddress", query = "SELECT u FROM User u WHERE u.address = :address")
     , @NamedQuery(name = "User.findByNif", query = "SELECT u FROM User u WHERE u.nif = :nif")
-    , @NamedQuery(name = "User.findByPhoneNumber", query = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber")})
+    , @NamedQuery(name = "User.findByPhoneNumber", query = "SELECT u FROM User u WHERE u.phoneNumber = :phoneNumber")
+    , @NamedQuery(name = "User.findByIsEmployee", query = "SELECT u FROM User u WHERE u.isEmployee = :isEmployee")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,13 +76,11 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
+    @Size(max = 45)
     @Column(name = "address")
     private String address;
-    @NotNull
     @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 15)
     @Column(name = "NIF")
     private String nif;
@@ -90,10 +88,14 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "phone_number")
     private int phoneNumber;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "isEmployee")
+    private boolean isEmployee;
+    @OneToMany(mappedBy = "idEmployee")
+    private List<Movement> movementList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUSER")
     private List<Account> accountList;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private Employee employee;
 
     public User() {
     }
@@ -102,16 +104,16 @@ public class User implements Serializable {
         this.idUSER = idUSER;
     }
 
-    public User(Integer idUSER, String username, String password, String name, String surname, String email, String address, String nif, int phoneNumber) {
+    public User(Integer idUSER, String username, String password, String name, String surname, String email, String nif, int phoneNumber, boolean isEmployee) {
         this.idUSER = idUSER;
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.address = address;
         this.nif = nif;
         this.phoneNumber = phoneNumber;
+        this.isEmployee = isEmployee;
     }
 
     public Integer getIdUSER() {
@@ -186,6 +188,23 @@ public class User implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
+    public boolean getIsEmployee() {
+        return isEmployee;
+    }
+
+    public void setIsEmployee(boolean isEmployee) {
+        this.isEmployee = isEmployee;
+    }
+
+    @XmlTransient
+    public List<Movement> getMovementList() {
+        return movementList;
+    }
+
+    public void setMovementList(List<Movement> movementList) {
+        this.movementList = movementList;
+    }
+
     @XmlTransient
     public List<Account> getAccountList() {
         return accountList;
@@ -193,14 +212,6 @@ public class User implements Serializable {
 
     public void setAccountList(List<Account> accountList) {
         this.accountList = accountList;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
     }
 
     @Override

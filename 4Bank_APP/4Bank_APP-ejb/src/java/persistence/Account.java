@@ -11,8 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,15 +19,16 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author sjuradoq
+ * @author RhoLouh
  */
 @Entity
-@Table(name = "ACCOUNT")
+@Table(name = "account")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
@@ -39,39 +38,40 @@ public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 24)
     @Column(name = "idACCOUNT")
-    private Integer idACCOUNT;
+    private String idACCOUNT;
     @Basic(optional = false)
     @NotNull
     @Column(name = "balance")
     private float balance;
-    @JoinColumn(name = "idUSER", referencedColumnName = "idUSER")
-    @ManyToOne(optional = false)
-    private User idUSER;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idACCOUNT")
     private List<Movement> movementList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idACCOUNTreceptor")
     private List<Movement> movementList1;
+    @JoinColumn(name = "idUSER", referencedColumnName = "idUSER")
+    @ManyToOne(optional = false)
+    private User idUSER;
 
     public Account() {
     }
 
-    public Account(Integer idACCOUNT) {
+    public Account(String idACCOUNT) {
         this.idACCOUNT = idACCOUNT;
     }
 
-    public Account(Integer idACCOUNT, float balance) {
+    public Account(String idACCOUNT, float balance) {
         this.idACCOUNT = idACCOUNT;
         this.balance = balance;
     }
 
-    public Integer getIdACCOUNT() {
+    public String getIdACCOUNT() {
         return idACCOUNT;
     }
 
-    public void setIdACCOUNT(Integer idACCOUNT) {
+    public void setIdACCOUNT(String idACCOUNT) {
         this.idACCOUNT = idACCOUNT;
     }
 
@@ -81,14 +81,6 @@ public class Account implements Serializable {
 
     public void setBalance(float balance) {
         this.balance = balance;
-    }
-
-    public User getIdUSER() {
-        return idUSER;
-    }
-
-    public void setIdUSER(User idUSER) {
-        this.idUSER = idUSER;
     }
 
     @XmlTransient
@@ -107,6 +99,14 @@ public class Account implements Serializable {
 
     public void setMovementList1(List<Movement> movementList1) {
         this.movementList1 = movementList1;
+    }
+
+    public User getIdUSER() {
+        return idUSER;
+    }
+
+    public void setIdUSER(User idUSER) {
+        this.idUSER = idUSER;
     }
 
     @Override

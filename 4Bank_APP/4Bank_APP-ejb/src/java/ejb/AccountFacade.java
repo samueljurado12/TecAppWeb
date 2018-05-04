@@ -33,7 +33,7 @@ public class AccountFacade extends AbstractFacade<Account> {
         super(Account.class);
     }
     
-    public Account queryAccountById(int id){
+    public Account queryAccountById(String id){
         Query q = this.em.createNamedQuery("Account.findByIdACCOUNT");
         q.setParameter("idACCOUNT", id);
         try{

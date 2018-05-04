@@ -32,6 +32,7 @@ public class MovementFacade extends AbstractFacade<Movement> {
         super(Movement.class);
     }
     
+    
     public List<Movement> queryAllMovementsFromAndToAccount(Account account) {
         Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNT = :idACCOUNT "
                 + "OR m.idACCOUNTreceptor = :idACCOUNT ORDER BY m.date DESC");

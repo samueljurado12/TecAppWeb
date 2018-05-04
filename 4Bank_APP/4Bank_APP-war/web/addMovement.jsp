@@ -13,12 +13,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-//    User userActive = (User) session.getAttribute("user");
-
-//    Account selectedAccount = (Account) session.getAttribute("selectedAccount");
-//    List<Movement> movementsList = (List<Movement>)session.getAttribute("movementList");
-//    Map<Integer, String> receptors = (Map) session.getAttribute("receptors");
-//    SimpleDateFormat dateFormat = new SimpleDateFormat("EE dd/MM/YY HH:mm");
+   // User selectedUser = (User) request.getAttribute("selectedUser");
+    Account selectedAccount = (Account) request.getAttribute("selectedAccount");
+    List<Movement> movementsList = (List<Movement>) request.getAttribute("movementList");
+    Map<Integer, String> recept = (Map) request.getAttribute("recept");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("EE dd/MM/YY HH:mm");
 %>
 <html>
     <head> 
@@ -51,7 +50,7 @@
                     </form>
                 </div>
                 <div class="col-md-6">
-                    <h1>        Accounts</h1>
+                    <h1>        Accounts: <%= selectedAccount.getIdACCOUNT()%> </h1>
                     <br/>
                     <div class="container">
                         <table class="table table-hover">
@@ -64,20 +63,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-
+                                <%
+                                    for (Movement movement : movementsList) {
+                                        if (movement.getIdACCOUNT().equals(selectedAccount)) {
+                                %>
                                 <tr>
-                                    <td></td>
-                                    <td style="color: red">-€</td>
-                                    <td>€</td>
-                                    <td></td>
+                                    <td><%= recept.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
+                                    <td style="color: red">-<%= movement.getAmount()%>€</td>
+                                    <td><%= movement.getNewBalanceSender()%>€</td>
+                                    <td><%= dateFormat.format(movement.getDate())%></td>
                                 </tr>
-
+                                <%
+                                } else if (movement.getIdACCOUNTreceptor().equals(selectedAccount)) {
+                                %>
                                 <tr>
-                                    <td></td>
-                                    <td style="color: green">€</td>
-                                    <td>€</td>
-                                    <td></td>
+                                    <td><%= recept.get(movement.getIdACCOUNT().getIdUSER().getIdUSER())%></td>
+                                    <td style="color: green"><%= movement.getAmount()%>€</td>
+                                    <td><%= movement.getNewBalanceReceiver()%>€</td>
+                                    <td><%= dateFormat.format(movement.getDate())%></td>
                                 </tr>
+                                <%
+                                        }
+                                    }
+                                %>
                             </tbody>
                         </table>
                     </div>

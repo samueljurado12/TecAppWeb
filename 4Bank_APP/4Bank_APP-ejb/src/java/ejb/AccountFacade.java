@@ -5,12 +5,14 @@
  */
 package ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import persistence.Account;
+import persistence.User;
 
 /**
  *
@@ -39,6 +41,12 @@ public class AccountFacade extends AbstractFacade<Account> {
         } catch (NoResultException e){
             return null;
         }
+    }
+
+    public List<Account> queryAllAccountsOfUser(User selectedUser) {
+        return this.em.createQuery("SELECT a FROM Account a WHERE a.idUSER = :idUSER")
+                .setParameter("idUSER", selectedUser)
+                .getResultList();
     }
     
 }

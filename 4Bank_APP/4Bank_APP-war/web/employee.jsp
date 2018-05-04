@@ -68,12 +68,11 @@
                                 <th scope="col">Username</th>
                                 <th scope="col">Full Name</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Options</th>                                </th>
+                                <th scope="col">Options</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <%
-                                if (userList != null) {
+                            <%                                if (userList != null) {
                             %>
 
                             <%
@@ -86,13 +85,15 @@
                                 <td><%= user.getName() + " " + user.getSurname()%></td>
                                 <td><%= user.getEmail()%></td>
                                 <td>
-                                    <button type="submit" class="btn btn-warning">
-                                        <i class="fa fa-pencil fa-lg"></i>
-                                    </button>
+                                    <form action="EditUser" method="GET">
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="fa fa-pencil fa-lg"></i>
+                                        </button>
+                                        <input type="hidden" name="idUser" value="<%= user.getIdUSER()%>"/>
                                     </form>
                                     <form action='RemoveUser' method='GET'>
                                         <button type="submit" class="btn btn-danger"> <i class="fa fa-times fa-lg"/> </button>
-                                        
+
                                         <input type="hidden" name="id" value="<%= user.getIdUSER()%>"/>
                                     </form>
                                 </td>

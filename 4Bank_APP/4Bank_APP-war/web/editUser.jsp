@@ -22,13 +22,13 @@
     </head>
     <body>
         <%@include file="header.jsp" %>
-        
+
         <div class="row">
-            
+
             <div class="col-md-6">
                 <h1>Update User:</h1>
                 <form action="UpdateUser" method="POST">
-                    
+
                     <div class="form-group row">
                         <label class="form-check-label col-md-4 col-form-label" for="username">
                             Username:
@@ -36,7 +36,7 @@
                         <h5 class="col-md-4"><%= selectedUser.getUsername()%></h5>
                         <input class="col-md-4 form-control" name="username" type="text">
                     </div>
-                    
+
                     <div class="form-group row">
                         <label class="form-check-label col-md-4 col-form-label" for="name">
                             Name:
@@ -44,7 +44,7 @@
                         <h5 class="col-md-4"><%= selectedUser.getName()%></h5>
                         <input class="col-md-4 form-control" name="name" type="text">
                     </div>
-                    
+
                     <div class="form-group row">
                         <label class="form-check-label col-md-4 col-form-label"for="surname">
                             Surname:
@@ -52,7 +52,7 @@
                         <h5 class="col-md-4"><%= selectedUser.getSurname()%></h5>
                         <input class="col-md-4 form-control" name="surname" type="text">
                     </div>
-                    
+
                     <div class="form-group row">
                         <label class="form-check-label col-md-4 col-form-label" for="email">
                             Email:
@@ -60,7 +60,7 @@
                         <h5 class="col-md-4"><%= selectedUser.getEmail()%></h5>
                         <input class="col-md-4 form-control" name="email" type="text">
                     </div>
-                        
+
                     <div class="form-group row">
                         <label class="form-check-label col-md-4 col-form-label" for="nif">
                             NIF:
@@ -68,7 +68,7 @@
                         <h5 class="col-md-4"><%= selectedUser.getNif()%></h5>
                         <input class="col-md-4 form-control" name="nif" type="text">
                     </div>
-                    
+
                     <div class="form-group row">
                         <label class="form-check-label col-md-4 col-form-label" for="phone">
                             Phone:
@@ -76,7 +76,7 @@
                         <h5 class="col-md-4"><%= selectedUser.getPhoneNumber()%></h5>
                         <input class="col-md-4 form-control" name="phone" type="text">
                     </div>
-                    
+
                     <div class="form-group row">
                         <label class="form-check-label col-md-4 col-form-label" for="address">
                             Address:
@@ -84,7 +84,7 @@
                         <h5 class="col-md-4"><%= selectedUser.getAddress()%></h5>
                         <input class="col-md-4 form-control" name="address" type="text">
                     </div>
-                    
+
                     <div class="form-group row">
                         <label class="form-check-label col-md-4 col-form-label" for="password">
                             Password:
@@ -92,18 +92,22 @@
                         <span class="col-md-4"></span>
                         <input class="col-md-4 form-control" type="password">
                     </div>
-                    
-                        <input type="hidden" name="idUSER" value="<%= selectedUser.getIdUSER() %>"   
-                        
-                    <button type="submit" class="btn btn-primary">Update User</button>    
-                        
+
+                    <input type="hidden" name="idUSER" value="<%= selectedUser.getIdUSER()%>"   
+
+                           <button type="submit" class="btn btn-primary">Update User</button>    
+
                 </form>
-                
+
             </div>
-            
-            
+
+
             <div class="col-md-6">
                 <h1>User Accounts</h1>
+                <form action="CreateAccount">
+                    <input hidden name="idUSER" value="<%= selectedUser.getIdUSER()%>">
+                    <button type="submit" class="btn btn-warning">New Account</button>
+                </form>
                 </br>
                 <table class="table table-hover">
                     <thead class="thead-light">
@@ -121,7 +125,7 @@
                             for (Account account : accountList) {
                         %>
                         <tr>
-                            <th scope="row"><%= account.getIdACCOUNT() %></th>
+                            <th scope="row"><%= account.getIdACCOUNT()%></th>
                             <td><%= account.getBalance()%></td>
                             <td>
                                 <form action="ListMovementEmployee" method="GET">

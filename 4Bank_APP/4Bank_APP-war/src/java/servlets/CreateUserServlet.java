@@ -69,8 +69,9 @@ public class CreateUserServlet extends HttpServlet {
             
             userFacade.create(newUser);
         }
-        
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/employee");
+        RequestDispatcher dispatcher = this.getServletContext()
+                .getRequestDispatcher("/EditUser?idUser="
+                        +userFacade.queryUserByUsername(username).getIdUSER());
         dispatcher.forward(request, response);
     }
 

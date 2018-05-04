@@ -40,7 +40,7 @@ public class EmployeeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String outputPage = "/employee.jsp";
-        List<User> userList = userFacade.findAll();
+        List<User> userList = userFacade.findAllNotEmployee();
 
         
         request.setAttribute("users", userList);

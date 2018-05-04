@@ -71,7 +71,7 @@ public class ListMovement extends HttpServlet {
         session.setAttribute("selectedAccount", selectedAccount);
         session.setAttribute("movementList", movementList);
         session.setAttribute("receptors", receptors);
-        response.sendRedirect("accounts.jsp");
+        response.sendRedirect("accounts");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

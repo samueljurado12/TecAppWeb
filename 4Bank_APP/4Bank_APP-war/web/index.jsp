@@ -15,7 +15,7 @@
             response.sendRedirect("employee");
         }
         else {
-            response.sendRedirect("accounts.jsp");
+            response.sendRedirect("accounts");
         }
     }
 %>

@@ -50,8 +50,14 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("isEmployee", user.getEmployee().getIsEmployee());
             } else {
                 session.setAttribute("isEmployee", false);
-            }
+            } 
+           if(user.getEmployee()!=null){
+                if(user.getEmployee().getIsEmployee()){
+                    response.sendRedirect("employee");
+                }
+            }else{
             rd.forward(request, response);
+            }
         } else {
             response.sendRedirect("");
         }

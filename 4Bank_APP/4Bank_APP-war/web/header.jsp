@@ -23,6 +23,9 @@
 
 <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
     <ul class="navbar-nav">
+          <%
+            if (!isEmployee) {
+        %>
         <li class="nav-item">
             <a class="nav-link" href="ListMovement">Accounts</a>
         </li>
@@ -36,6 +39,7 @@
             <a class="nav-link" href="contact_us.jsp">Contact Us</a>
         </li>
         <%
+            }
             if (isEmployee) {
         %>
         <li class="nav-item">

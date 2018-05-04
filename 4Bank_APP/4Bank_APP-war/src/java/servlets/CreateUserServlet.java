@@ -42,7 +42,8 @@ public class CreateUserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         List<User> userList = userFacade.findAll();
         
-        String username = request.getParameter("username");
+        String username = request.getParameter("nif");
+        String name = request.getParameter("username");
         String usermail = request.getParameter("mail");
         int userphone = Integer.parseInt(request.getParameter("phone"));
         String usernif = request.getParameter("nif");
@@ -59,7 +60,7 @@ public class CreateUserServlet extends HttpServlet {
             
             newUser.setUsername(username);
             newUser.setEmail(usermail);
-            newUser.setName(username);
+            newUser.setName(name);
             newUser.setPhoneNumber(userphone);
             newUser.setPassword(userpass);
             newUser.setAddress(address);
@@ -68,8 +69,9 @@ public class CreateUserServlet extends HttpServlet {
             
             userFacade.create(newUser);
         }
-        
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/employee");
+        RequestDispatcher dispatcher = this.getServletContext()
+                .getRequestDispatcher("/EditUser?idUser="
+                        +userFacade.queryUserByUsername(username).getIdUSER());
         dispatcher.forward(request, response);
     }
 

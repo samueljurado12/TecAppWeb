@@ -19,7 +19,7 @@
         <%@include file="header.jsp" %>
         <div class="container">
             <div class="row">
-                <div class="col-md-6" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
+                <div class="col-md-4" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
                     <h1>Create user:</h1>
                     </br>
 
@@ -53,7 +53,7 @@
                         <button type="submit" class="btn btn-primary">Create User</button>   
                     </form>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <h1>Update User:</h1>
                     </br>
                     <table class="table table-hover">
@@ -87,7 +87,9 @@
                                         <input type="hidden" name="idUser" value="<%= user.getIdUSER()%>"/>
                                     </form>
                                     <form action='RemoveUser' method='GET'>
-                                        <button type="submit" class="btn btn-danger"> <i class="fa fa-times fa-lg"/> </button>
+                                        <button type="submit" class="btn btn-danger"> 
+                                            <i class="fa fa-times fa-lg"></i> 
+                                        </button>
 
                                         <input type="hidden" name="id" value="<%= user.getIdUSER()%>"/>
                                     </form>

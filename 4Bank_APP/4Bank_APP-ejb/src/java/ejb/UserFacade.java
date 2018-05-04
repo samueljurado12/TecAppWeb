@@ -5,6 +5,7 @@
  */
 package ejb;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -44,6 +45,11 @@ public class UserFacade extends AbstractFacade<User> {
     public void deleteUserByID(int id){
         User toDelete = this.find(id);
         remove(toDelete);
+    }
+
+    public List<User> findAllNotEmployee() {
+        return this.em.createQuery("SELECT u FROM User u WHERE u.isEmployee <> true")
+                .getResultList();
     }
     
 }

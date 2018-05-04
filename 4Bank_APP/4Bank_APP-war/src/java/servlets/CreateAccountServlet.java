@@ -5,28 +5,31 @@
  */
 package servlets;
 
+import ejb.AccountFacade;
 import ejb.UserFacade;
 import java.io.IOException;
-import java.util.List;
 import javax.ejb.EJB;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import persistence.Account;
 import persistence.User;
 
 /**
  *
- * @author Guisanpea
+ * @author sjuradoq
  */
-@WebServlet(name = "employee", urlPatterns = {"/employee"})
-public class EmployeeServlet extends HttpServlet {
+@WebServlet(name = "CreateAccount", urlPatterns = {"/CreateAccount"})
+public class CreateAccountServlet extends HttpServlet {
+
+    @EJB
+    private AccountFacade accountFacade;
 
     @EJB
     private UserFacade userFacade;
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,15 +41,19 @@ public class EmployeeServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String outputPage = "/employee.jsp";
-        List<User> userList = userFacade.findAllNotEmployee();
-
+        int idUSER = Integer.parseInt(request.getParameter("idUSER"));
+        User user = userFacade.find(idUSER);
+        float initBalance = Float.parseFloat(request.getParameter("initialBalance"));
         
-        request.setAttribute("users", userList);
-        RequestDispatcher dispatcher = this.getServletContext()
-                                .getRequestDispatcher(outputPage);
-        dispatcher.forward(request, response);
+        //TODO set newAccount ID
+        
+        Account newAccount = new Account();
+        newAccount.setIdUSER(user);
+        newAccount.setBalance(initBalance);
+        
+        accountFacade.create(newAccount);
+        
+        response.sendRedirect("EditUser?idUser="+idUSER);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

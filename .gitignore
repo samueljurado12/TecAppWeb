@@ -61,3 +61,4 @@ pom.xml.tag
 /VazquezMoreno/nbproject/private/
 /VazquezMoreno/VazquezMoreno-war/nbproject/private/
 /VazquezMoreno/VazquezMoreno-ejb/nbproject/private/
+*.jsp~

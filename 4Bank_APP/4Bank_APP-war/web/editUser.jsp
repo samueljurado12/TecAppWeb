@@ -93,9 +93,9 @@
                         <input class="col-md-4 form-control" type="password">
                     </div>
 
-                    <input type="hidden" name="idUSER" value="<%= selectedUser.getIdUSER()%>"   
+                    <input type="hidden" name="idUSER" value="<%= selectedUser.getIdUSER()%>" >  
 
-                           <button type="submit" class="btn btn-primary">Update User</button>    
+                    <button type="submit" class="btn btn-primary">Update User</button>     
 
                 </form>
 
@@ -106,7 +106,13 @@
                 <h1>User Accounts</h1>
                 <form action="CreateAccount">
                     <input hidden name="idUSER" value="<%= selectedUser.getIdUSER()%>">
-                    <button type="submit" class="btn btn-warning">New Account</button>
+                    <div class="form-group row">
+                        <label for="initialBalance" class="form-check-label col-form-label col-md-3">
+                            Initial balance:</label>
+                        <input type="number" name="initialBalance" class="form-control col-md-4">
+                        <div class="col-md-1"></div>
+                        <button type="submit" class="btn btn-warning" class="col-md-4">New Account</button>
+                    </div>
                 </form>
                 </br>
                 <table class="table table-hover">
@@ -135,7 +141,9 @@
                                     <input type="hidden" name="idAcc" value="<%= account.getIdACCOUNT()%>"/>
                                 </form>
                                 <form action='#' method='GET'>
-                                    <button type="submit" class="btn btn-danger"> <i class="fa fa-times fa-lg"/> </button>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-times fa-lg"></i>
+                                    </button>
 
                                     <input type="hidden" name="id" value="<%= account.getIdACCOUNT()%>"/>
                                 </form>
@@ -152,7 +160,7 @@
                 </table>
             </div>
         </div>
-
+        <br>
 
     </body>
 </html>

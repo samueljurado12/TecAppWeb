@@ -4,8 +4,21 @@
     Author     : sjuradoq
 --%>
 
+<%@page import="persistence.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    User userActive = (User) session.getAttribute("user");
+    
+    if (userActive != null){
+        if(userActive.getIsEmployee()){
+            response.sendRedirect("employee");
+        }
+        else {
+            response.sendRedirect("accounts.jsp");
+        }
+    }
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

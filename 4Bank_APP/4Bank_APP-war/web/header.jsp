@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    User userHeader = (User) session.getAttribute("user");
     boolean isEmployee = ((Boolean) session.getAttribute("isEmployee")).booleanValue();
 %>
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -33,9 +34,6 @@
             <a class="nav-link" href="transfer.jsp">Transfer</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="user_info.jsp">User Info</a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link" href="contact_us.jsp">Contact Us</a>
         </li>
         <%
@@ -50,6 +48,9 @@
         %>
     </ul>
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="user_info.jsp"><%= userHeader.getName() + " " + userHeader.getSurname()%>      </a>
+        </li>
         <form method="post" action="LogoutServlet">
             <button class="btn btn-secondary" type="submit"><i class="fa fa-sign-out"></i> Logout</button>
         </form>

@@ -82,7 +82,11 @@
                         <h4>4.Transfer remarks:</h4>
                     </label>
                     <div class="col-sm-5">
-                        <textarea rows="4" name="remarks" class="form-control"></textarea>
+                        <input class="form-control" 
+                               name="remarks" 
+                               id="remarks"
+                               type="text"
+                               placeholder="Insert transfer remarks here">
                     </div>
                 </div>
 

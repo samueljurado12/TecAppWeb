@@ -55,7 +55,7 @@ public class ListMovementServletEmployee extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        int idAccount = Integer.parseInt(request.getParameter("idAcc"));
+        String idAccount = request.getParameter("idAcc");
         Account selectedAccount = accountFacade.find(idAccount);
         List <Movement> movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
         Map<Integer, String> recept = new HashMap<>();

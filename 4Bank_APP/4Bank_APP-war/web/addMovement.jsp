@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="surname" class="form-check-label col-md-3 col-form-label">Concept: </label>
-                            <input type="text" class="form-control col-md-6" name="concept:">
+                            <input type="text" class="form-control col-md-6" name="concept">
                         </div>
                         <div class="form-group row">
                             <label for="mail" class="form-check-label col-md-3 col-form-label">Amount:</label>

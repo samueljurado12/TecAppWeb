@@ -51,6 +51,9 @@ public class CreateAccountServlet extends HttpServlet {
         newAccount.setIdUSER(user);
         newAccount.setBalance(initBalance);
         
+        int rand = (int)Math.floor(Math.random()*(9000000000.0)+1000000000.0);
+        newAccount.setIdACCOUNT("ES0130031337" + Integer.toString((int)rand%100) + Integer.toString(rand));
+        
         accountFacade.create(newAccount);
         
         response.sendRedirect("EditUser?idUser="+idUSER);

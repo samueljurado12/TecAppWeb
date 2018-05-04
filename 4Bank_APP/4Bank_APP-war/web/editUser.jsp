@@ -104,7 +104,7 @@
 
             <div class="col-md-6">
                 <h1>User Accounts</h1>
-                <form action="CreateAccount">
+                <form action="CreateAccount" method="POST">
                     <input hidden name="idUSER" value="<%= selectedUser.getIdUSER()%>">
                     <div class="form-group row">
                         <label for="initialBalance" class="form-check-label col-form-label col-md-3">

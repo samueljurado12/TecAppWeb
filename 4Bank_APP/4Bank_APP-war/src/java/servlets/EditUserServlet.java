@@ -19,8 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import persistence.Account;
 import persistence.User;
 
-
-
 /**
  *
  * @author sjuradoq
@@ -33,8 +31,7 @@ public class EditUserServlet extends HttpServlet {
 
     @EJB
     private UserFacade userFacade;
-    
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,13 +43,18 @@ public class EditUserServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
+
         int userID = Integer.parseInt(request.getParameter("idUser"));
-        
+
         User selectedUser = userFacade.find(userID);
         List<Account> accountList = accountFacade.queryAllAccountsOfUser(selectedUser);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("edit_user.jsp");
+
+        request.setAttribute("selectedUser", selectedUser);
+        request.setAttribute("accountList", accountList);
+
+        RequestDispatcher rd = request.getRequestDispatcher("/editUser.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

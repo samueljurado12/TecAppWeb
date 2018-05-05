@@ -62,3 +62,6 @@ pom.xml.tag
 /VazquezMoreno/VazquezMoreno-war/nbproject/private/
 /VazquezMoreno/VazquezMoreno-ejb/nbproject/private/
 *.jsp~
+/twitter/nbproject/private/
+/twitter/twitter-war/nbproject/private/
+/twitter/twitter-ejb/nbproject/private/

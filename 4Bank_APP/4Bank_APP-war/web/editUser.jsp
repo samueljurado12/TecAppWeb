@@ -90,7 +90,7 @@
                             Password:
                         </label>
                         <span class="col-md-4"></span>
-                        <input class="col-md-4 form-control" type="password">
+                        <input class="col-md-4 form-control" type="password" name="password">
                     </div>
 
                     <input type="hidden" name="idUSER" value="<%= selectedUser.getIdUSER()%>" >  

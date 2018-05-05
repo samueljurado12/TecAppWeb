@@ -5,29 +5,23 @@
  */
 package servlets;
 
-import ejb.AccountFacade;
 import ejb.UserFacade;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import persistence.Account;
 import persistence.User;
 
 /**
  *
  * @author sjuradoq
  */
-@WebServlet(name = "CreateAccount", urlPatterns = {"/CreateAccount"})
-public class CreateAccountServlet extends HttpServlet {
-
-    @EJB
-    private AccountFacade accountFacade;
+@WebServlet(name = "UpdateUser", urlPatterns = {"/UpdateUser"})
+public class UpdateUserServlet extends HttpServlet {
 
     @EJB
     private UserFacade userFacade;
@@ -43,24 +37,38 @@ public class CreateAccountServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int idUSER = Integer.parseInt(request.getParameter("idUSER"));
-        User user = userFacade.find(idUSER);
-        float initBalance = Float.parseFloat(request.getParameter("initialBalance"));
-                
-        Account newAccount = new Account();
-        newAccount.setIdUSER(user);
-        newAccount.setBalance(initBalance);
+        response.setContentType("text/html;charset=UTF-8");
+        int idUser = Integer.parseInt(request.getParameter("idUSER"));
+        User user = userFacade.find(idUser);
 
-        double rand = Math.floor(Math.random()*(9000000000.0)+1000000000.0);
+        String newName = request.getParameter("name");
+        user.setName(newName.equals("") ? user.getName() : newName);
 
-        NumberFormat nf = DecimalFormat.getInstance();
-        nf.setMaximumFractionDigits(0);
-        String str = nf.format(rand).replaceAll("[-+.^:,]", "");
-        newAccount.setIdACCOUNT("ES0130031337" + Integer.toString((int)(rand%100)) + str);
+        String newSurname = request.getParameter("surname");
+        user.setSurname(newSurname.equals("") ? user.getSurname(): newSurname);
+
+        String newEmail = request.getParameter("email");
+        user.setEmail(newEmail.equals("") ? user.getEmail(): newEmail);
         
-        accountFacade.create(newAccount);
+        String newNIF = request.getParameter("nif");
+        user.setNif(newNIF.equals("") ? user.getNif(): newNIF);
         
-        response.sendRedirect("EditUser?idUser="+idUSER);
+        String newUsername = request.getParameter("username");
+        user.setUsername(newUsername.equals("") ? user.getNif(): newUsername);
+        
+        String newPhone = request.getParameter("phone");
+        user.setPhoneNumber(newPhone.equals("") ? user.getPhoneNumber() : Integer.parseInt(newPhone));
+        
+        String newAddr = request.getParameter("address");
+        user.setAddress(newAddr.equals("") ? user.getAddress() : newAddr);
+        
+        String newPass = request.getParameter("password");
+        user.setPassword(newPass.equals("") ? user.getPassword() : newPass);
+        
+        userFacade.edit(user);
+        
+        response.sendRedirect("EditUser?idUser="+idUser);
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

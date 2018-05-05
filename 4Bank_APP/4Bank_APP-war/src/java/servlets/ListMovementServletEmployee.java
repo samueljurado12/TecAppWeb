@@ -9,7 +9,6 @@ import ejb.AccountFacade;
 import ejb.MovementFacade;
 import ejb.UserFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +30,8 @@ import persistence.User;
 @WebServlet(name = "ListMovementEmployee", urlPatterns = {"/ListMovementEmployee"})
 public class ListMovementServletEmployee extends HttpServlet {
 
-//    @EJB
-//    private UserFacade userFacade;
+    @EJB
+    private UserFacade userFacade;
 
     @EJB
     private MovementFacade movementFacade;
@@ -56,11 +55,13 @@ public class ListMovementServletEmployee extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String idAccount = request.getParameter("idAcc");
+        String idUser = request.getParameter("idUser");
         Account selectedAccount = accountFacade.find(idAccount);
+        User selectedUser = userFacade.find(Integer.parseInt(idUser));
         List <Movement> movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
         Map<Integer, String> recept = new HashMap<>();
          User otherAccount = null;
-       
+         
         for (Movement mov : movementList) {
             otherAccount = getUser(mov, selectedAccount);
             recept.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
@@ -69,6 +70,7 @@ public class ListMovementServletEmployee extends HttpServlet {
         request.setAttribute("movementList", movementList);
         request.setAttribute("selectedAccount", selectedAccount);
         request.setAttribute("recept", recept);
+        request.setAttribute("selectedUser", selectedUser);
         
         RequestDispatcher rd = request.getRequestDispatcher("/addMovement.jsp");
         rd.forward(request, response);

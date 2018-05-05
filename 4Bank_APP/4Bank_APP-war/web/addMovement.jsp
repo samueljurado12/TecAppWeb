@@ -13,7 +13,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-   // User selectedUser = (User) request.getAttribute("selectedUser");
+    User selectedUser = (User) request.getAttribute("selectedUser");
     Account selectedAccount = (Account) request.getAttribute("selectedAccount");
     List<Movement> movementsList = (List<Movement>) request.getAttribute("movementList");
     Map<Integer, String> recept = (Map) request.getAttribute("recept");
@@ -33,19 +33,22 @@
                 <div class="col-md-6" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
                     <h1>Add Movement:</h1>
                     </br>
-                    <form action="AddMovement" method="post">
+                    <form action="CreateMovement" method="post">
                         <div class="form-group row">
-                            <label for="username" class="form-check-label col-md-3 col-form-label">Receptor Account Id:</label>
+                            <label for="receptorAccount" class="form-check-label col-md-3 col-form-label">Receptor Account Id:</label>
                             <input type="text" class="form-control col-md-6" name="idAccount_receptor">
                         </div>
                         <div class="form-group row">
-                            <label for="surname" class="form-check-label col-md-3 col-form-label">Concept: </label>
+                            <label for="concept" class="form-check-label col-md-3 col-form-label">Concept: </label>
                             <input type="text" class="form-control col-md-6" name="concept">
                         </div>
                         <div class="form-group row">
-                            <label for="mail" class="form-check-label col-md-3 col-form-label">Amount:</label>
-                            <input type="email" class="form-control col-md-6" name="amount">
+                            <label for="amount" class="form-check-label col-md-3 col-form-label">Amount:</label>
+                            <input type="text" class="form-control col-md-6" name="amount">
                         </div>
+                         <input type="hidden" name="selectedAccount" value="<%= selectedAccount.getIdACCOUNT()%>" > 
+                         <input type="hidden" name="selectedUser" value="<%= selectedUser.getIdUSER() %>" > 
+                         
                         <button type="submit" class="btn btn-primary">Add Movement</button>   
                     </form>
                 </div>
@@ -57,6 +60,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Entity</th>
+                                    <th>Concept</th>
                                     <th>Amount</th>
                                     <th>Balance</th>
                                     <th>Date</th>
@@ -69,6 +73,7 @@
                                 %>
                                 <tr>
                                     <td><%= recept.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
+                                    <td><%= movement.getConcept() %></td>
                                     <td style="color: red">-<%= movement.getAmount()%>€</td>
                                     <td><%= movement.getNewBalanceSender()%>€</td>
                                     <td><%= dateFormat.format(movement.getDate())%></td>
@@ -78,6 +83,7 @@
                                 %>
                                 <tr>
                                     <td><%= recept.get(movement.getIdACCOUNT().getIdUSER().getIdUSER())%></td>
+                                    <td><%= movement.getConcept() %></td>
                                     <td style="color: green"><%= movement.getAmount()%>€</td>
                                     <td><%= movement.getNewBalanceReceiver()%>€</td>
                                     <td><%= dateFormat.format(movement.getDate())%></td>

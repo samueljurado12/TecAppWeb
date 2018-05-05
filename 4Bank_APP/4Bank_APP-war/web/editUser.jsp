@@ -139,6 +139,7 @@
                                         <i class="fa fa-pencil fa-lg"></i>
                                     </button>
                                     <input type="hidden" name="idAcc" value="<%= account.getIdACCOUNT()%>"/>
+                                    <input type="hidden" name="idUser" value="<%= selectedUser.getIdUSER() %>"/>
                                 </form>
                                 <form action='#' method='GET'>
                                     <button type="submit" class="btn btn-danger">

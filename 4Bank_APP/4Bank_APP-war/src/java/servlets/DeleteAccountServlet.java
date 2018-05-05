@@ -8,6 +8,7 @@ package servlets;
 import ejb.AccountFacade;
 import ejb.UserFacade;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import javax.ejb.EJB;
@@ -21,10 +22,10 @@ import persistence.User;
 
 /**
  *
- * @author sjuradoq
+ * @author RhoLouh
  */
-@WebServlet(name = "CreateAccount", urlPatterns = {"/CreateAccount"})
-public class CreateAccountServlet extends HttpServlet {
+@WebServlet(name = "DeleteAccount", urlPatterns = {"/DeleteAccount"})
+public class DeleteAccountServlet extends HttpServlet {
 
     @EJB
     private AccountFacade accountFacade;
@@ -43,26 +44,14 @@ public class CreateAccountServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int idUSER = Integer.parseInt(request.getParameter("idUSER"));
-        User user = userFacade.find(idUSER);
-        float initBalance = Float.parseFloat(request.getParameter("initialBalance"));
-        
-        //TODO set newAccount ID
-        
-        Account newAccount = new Account();
-        newAccount.setIdUSER(user);
-        newAccount.setBalance(initBalance);
-        
-        double rand = Math.floor(Math.random()*(9000000000.0)+1000000000.0);
+        int idUSER = Integer.parseInt(request.getParameter("idUser"));
+        String idACC = request.getParameter("idAcc");
 
-        NumberFormat nf = DecimalFormat.getInstance();
-        nf.setMaximumFractionDigits(0);
-        String str = nf.format(rand).replaceAll("[-+.^:,]", "");
-        newAccount.setIdACCOUNT("ES0130031337" + Integer.toString((int)(rand%100)) + str);
-        
-        accountFacade.create(newAccount);
-        
-        response.sendRedirect("EditUser?idUser="+idUSER);
+        Account todelete = accountFacade.find(idACC);
+
+        accountFacade.remove(todelete);
+
+        response.sendRedirect("EditUser?idUser=" + idUSER);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

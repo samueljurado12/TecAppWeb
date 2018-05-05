@@ -140,12 +140,13 @@
                                     </button>
                                     <input type="hidden" name="idAcc" value="<%= account.getIdACCOUNT()%>"/>
                                 </form>
-                                <form action='#' method='GET'>
+                                <form action='DeleteAccount' method='GET'>
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-times fa-lg"></i>
                                     </button>
 
-                                    <input type="hidden" name="id" value="<%= account.getIdACCOUNT()%>"/>
+                                    <input type="hidden" name="idAcc" value="<%= account.getIdACCOUNT()%>"/>
+                                    <input type="hidden" name="idUser" value="<%= selectedUser.getIdUSER()%>"/>
                                 </form>
                             </td>
                         </tr>

@@ -51,16 +51,22 @@ public class MakeTransferServlet extends HttpServlet {
 
         Account senderAccount = accountFacade.queryAccountById(senderAccountNumber);
         Account receiverAccount = accountFacade.queryAccountById(receiverAccountNumber);
-
+        
+        char [] dst = new char[8];
+        String id = "";
+        if (receiverAccount != null){
+            receiverAccount.getIdACCOUNT().getChars(0, 8, dst, 0);
+            id = new String(dst);
+        }
         if (receiverAccount == null) {
             //TODO Error, account does not exist, back to transfer
-        } else if (senderAccount.getBalance() < 0) {
-            //TODO Error, you don't have money
+        } else if (senderAccount.getBalance() - amount < 0) {
+            //TODO Error, you don't have enough money
         } else if (amount == 0) {
             //TODO Error, you can't make a transfer without transfering money
         } else if (receiverAccount.equals(senderAccount)) {
             //TODO Error, you can't make a transfer to the same account you are sending from
-        } else {
+        } else if (id.equals("ES013003")){
             float newBalanceSender = senderAccount.getBalance() - amount;
             float newBalanceReceiver = receiverAccount.getBalance() + amount;
             senderAccount.setBalance(newBalanceSender);

@@ -25,7 +25,7 @@
 
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="padding-right:30px; padding-left:100px; border-right: 1px solid #ccc;">
                 <h1>Update User:</h1>
                 <form action="UpdateUser" method="POST">
 

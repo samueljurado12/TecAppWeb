@@ -8,6 +8,12 @@
 <!DOCTYPE html>
 <%
     User userHeader = (User) session.getAttribute("user");
+    
+    if(userHeader == null){
+        response.sendRedirect("");
+        return;
+    }
+    
     boolean isEmployee = ((Boolean) session.getAttribute("isEmployee")).booleanValue();
 %>
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">

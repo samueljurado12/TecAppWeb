@@ -8,10 +8,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    User userActive = (User) session.getAttribute("user");
+    User usuario = (User) session.getAttribute("user");
     
-    if (userActive != null){
-        if(userActive.getIsEmployee()){
+    if (usuario != null){
+        if(usuario.getIsEmployee()){
             response.sendRedirect("employee");
         }
         else {

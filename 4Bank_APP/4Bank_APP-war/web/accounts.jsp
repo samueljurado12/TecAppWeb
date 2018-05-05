@@ -13,7 +13,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    
+    if(session.getAttribute("user") == null){
+        response.sendRedirect("");
+        return;
+    }
+    
     User userActive = (User) session.getAttribute("user");
+    
     List<Account> accountsList = userActive.getAccountList();
     Account selectedAccount = (Account) session.getAttribute("selectedAccount");
 

@@ -13,6 +13,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    if(session.getAttribute("user") == null){
+        response.sendRedirect("");
+        return;
+    }
+    
     User selectedUser = (User) request.getAttribute("selectedUser");
     Account selectedAccount = (Account) request.getAttribute("selectedAccount");
     List<Movement> movementsList = (List<Movement>) request.getAttribute("movementList");

@@ -54,7 +54,7 @@ public class MakeTransferServlet extends HttpServlet {
         
         char [] dst = new char[8];
         String id = "";
-        if (receiverAccount != null){
+        if (receiverAccount != null && receiverAccount.getIdACCOUNT().length() == 24){
             receiverAccount.getIdACCOUNT().getChars(0, 8, dst, 0);
             id = new String(dst);
         }
@@ -62,7 +62,7 @@ public class MakeTransferServlet extends HttpServlet {
             //TODO Error, account does not exist, back to transfer
         } else if (senderAccount.getBalance() - amount < 0) {
             //TODO Error, you don't have enough money
-        } else if (amount == 0) {
+        } else if (amount <= 0) {
             //TODO Error, you can't make a transfer without transfering money
         } else if (receiverAccount.equals(senderAccount)) {
             //TODO Error, you can't make a transfer to the same account you are sending from

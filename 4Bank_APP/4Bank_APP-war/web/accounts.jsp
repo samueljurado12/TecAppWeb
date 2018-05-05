@@ -13,20 +13,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    
-    if(session.getAttribute("user") == null){
+
+    if (session.getAttribute("user") == null) {
         response.sendRedirect("");
         return;
     }
-    
+
     User userActive = (User) session.getAttribute("user");
-    
+
     List<Account> accountsList = userActive.getAccountList();
     Account selectedAccount = (Account) session.getAttribute("selectedAccount");
 
-    List<Movement> movementsList = (List<Movement>)session.getAttribute("movementList");
+    List<Movement> movementsList = (List<Movement>) session.getAttribute("movementList");
     Map<Integer, String> receptors = (Map) session.getAttribute("receptors");
-    
+
     SimpleDateFormat dateFormat = new SimpleDateFormat("EE dd/MM/YY HH:mm");
 %>
 <html>
@@ -40,11 +40,11 @@
         <h1>        Accounts</h1>
         <br/>
         <div class="container align-items-center">
-            <form action="ListMovement" method="post">
+            <form action="ListMovement" method="post" name="myForm">
                 <div class="form-group row">
                     <label  for ="selectedAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
                     <div class="col-sm-4">
-                        <select class="form-control" name="selectedAccount">
+                        <select onchange="document.myForm.submit();" class="form-control" name="selectedAccount">
                             <%  for (Account account : accountsList) {
                                     if (selectedAccount.equals(account)) {
                             %>
@@ -60,9 +60,6 @@
                     </div>
                     <div class="col-sm-3">
                         <h4><%= selectedAccount.getBalance()%>€</h4>
-                    </div>
-                    <div class="col-sm-2">
-                        <button class="btn btn-primary" type="submit">Refrescar</button>
                     </div>
                 </div>
             </form>

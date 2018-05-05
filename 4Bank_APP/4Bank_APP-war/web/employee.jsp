@@ -44,7 +44,6 @@
                             <label for="nif" class="form-check-label col-md-3 col-form-label">NIF: </label>
                             <input type="text" class="form-control col-md-6" name="nif">
                         </div>
-                        
                         <div class="form-group row">
                             <label for="Address" class="form-check-label col-md-3 col-form-label">Address: </label>
                             <input type="text" class="form-control col-md-6" name="adress">
@@ -86,7 +85,7 @@
                                         </button>
                                         <input type="hidden" name="idUser" value="<%= user.getIdUSER()%>"/>
                                     </form>
-                                    <form action='RemoveUser' method='GET'>
+                                    <form action='RemoveUser' method='post'>
                                         <button type="submit" class="btn btn-danger"> 
                                             <i class="fa fa-times fa-lg"></i> 
                                         </button>

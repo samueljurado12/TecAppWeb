@@ -40,10 +40,11 @@
         <h1>        Accounts</h1>
         <br/>
         <div class="container align-items-center">
-            <form action="ListMovement" method="post" name="myForm">
-                <div class="form-group row">
-                    <label  for ="selectedAccount" class="form-check-label col-sm-3 col-form-label"><h4>Current Account</h4></label>
-                    <div class="col-sm-4">
+
+            <div class="form-group row">
+                <label  for ="selectedAccount" class="form-check-label col-sm-2 col-form-label d-flex align-items-center"><h5>Current Account</h5></label>
+                <div class="col-sm-3 d-flex align-items-center">
+                    <form action="ListMovement" method="post" name="myForm">
                         <select onchange="document.myForm.submit();" class="form-control" name="selectedAccount">
                             <%  for (Account account : accountsList) {
                                     if (selectedAccount.equals(account)) {
@@ -57,18 +58,32 @@
                                 }
                             %>
                         </select>
-                    </div>
-                    <div class="col-sm-3">
-                        <h4><%= selectedAccount.getBalance()%>€</h4>
-                    </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col-sm-2 d-flex align-items-center">
+                    <h4><%= selectedAccount.getBalance()%>€</h4>
+                </div>
+                <div class="col-sm-5">
+                    <form action="CreateMovement" method="post">
+                        <div class="radio">
+                            <label><input type="radio" name="filter" value="0" checked="checked">Entity</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="filter" value="1">Concept</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="filter" value="2">Amount</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="container">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Entity</th>
+                        <th>Concept</th>
                         <th>Amount</th>
                         <th>Balance</th>
                         <th>Date</th>
@@ -81,6 +96,7 @@
                     %>
                     <tr>
                         <td><%= receptors.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
+                        <td><%= movement.getConcept()%></td>
                         <td style="color: red">-<%= movement.getAmount()%>€</td>
                         <td><%= movement.getNewBalanceSender()%>€</td>
                         <td><%= dateFormat.format(movement.getDate())%></td>
@@ -90,6 +106,7 @@
                     %>
                     <tr>
                         <td><%= receptors.get(movement.getIdACCOUNT().getIdUSER().getIdUSER())%></td>
+                        <td><%= movement.getConcept()%></td>
                         <td style="color: green"><%= movement.getAmount()%>€</td>
                         <td><%= movement.getNewBalanceReceiver()%>€</td>
                         <td><%= dateFormat.format(movement.getDate())%></td>

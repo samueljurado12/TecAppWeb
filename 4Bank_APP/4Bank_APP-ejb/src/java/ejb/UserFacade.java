@@ -51,5 +51,5 @@ public class UserFacade extends AbstractFacade<User> {
         return this.em.createQuery("SELECT u FROM User u WHERE u.isEmployee <> true")
                 .getResultList();
     }
-    
+      
 }

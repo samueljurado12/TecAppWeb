@@ -8,6 +8,8 @@ package servlets;
 import ejb.AccountFacade;
 import ejb.UserFacade;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -50,10 +52,13 @@ public class CreateAccountServlet extends HttpServlet {
         Account newAccount = new Account();
         newAccount.setIdUSER(user);
         newAccount.setBalance(initBalance);
-        
-        int rand = (int)Math.floor(Math.random()*(9000000000.0)+1000000000.0);
-        newAccount.setIdACCOUNT("ES0130031337" + Integer.toString((int)rand%100) + Integer.toString(rand));
-        System.out.println(newAccount.getIdACCOUNT());
+
+        double rand = Math.floor(Math.random()*(9000000000.0)+1000000000.0);
+
+        NumberFormat nf = DecimalFormat.getInstance();
+        nf.setMaximumFractionDigits(0);
+        String str = nf.format(rand).replaceAll("[-+.^:,]", "");
+        newAccount.setIdACCOUNT("ES0130031337" + Integer.toString((int)(rand%100)) + str);
         
         accountFacade.create(newAccount);
         

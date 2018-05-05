@@ -72,19 +72,20 @@ public class CreateMovementServlet extends HttpServlet {
         mov.setDate(new Date());
         Float balanceSender = senderAccount.getBalance() - Float.parseFloat(amount);
         mov.setNewBalanceSender(balanceSender);
+        senderAccount.setBalance(balanceSender);
         Float balanceReceiver = receptorAccount.getBalance() + Float.parseFloat(amount);
         mov.setNewBalanceReceiver(balanceReceiver);
+        receptorAccount.setBalance(balanceReceiver);
         User employee = (User) session.getAttribute("user");
         mov.setIdEmployee(employee);
         
         movementFacade.create(mov);
+        
+        accountFacade.edit(senderAccount);
+        accountFacade.edit(receptorAccount);
 
-        
-          RequestDispatcher rd = this.getServletContext()
-                .getRequestDispatcher("/EditUser?idUser="
+        response.sendRedirect("EditUser?idUser="
                         +request.getParameter("selectedUser"));
-        rd.forward(request, response);
-        
         
     }
 

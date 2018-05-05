@@ -40,7 +40,6 @@
         <h1>        Accounts</h1>
         <br/>
         <div class="container align-items-center">
-
             <div class="form-group row">
                 <label  for ="selectedAccount" class="form-check-label col-sm-2 col-form-label d-flex align-items-center"><h5>Current Account</h5></label>
                 <div class="col-sm-3 d-flex align-items-center">
@@ -64,16 +63,24 @@
                     <h4><%= selectedAccount.getBalance()%>€</h4>
                 </div>
                 <div class="col-sm-5">
-                    <form action="CreateMovement" method="post">
-                        <div class="radio">
-                            <label><input type="radio" name="filter" value="0" checked="checked">Entity</label>
+                    <form class="form-inline" action="CreateMovement" method="post">
+                        <div class="form-group col-sm-3">
+                            <div class="radio">
+                                <label><input type="radio" name="filter" value="0" checked="checked">Entity</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="filter" value="1">Concept</label>
+                            </div>
+                            <div class="radio">
+                                <label><input type="radio" name="filter" value="2">Amount</label>
+                            </div>
                         </div>
-                        <div class="radio">
-                            <label><input type="radio" name="filter" value="1">Concept</label>
+                        <div class="form-group col-sm-6">
+                            <input type="text" id="search" class="form-control" name="concept">
                         </div>
-                        <div class="radio">
-                            <label><input type="radio" name="filter" value="2">Amount</label>
-                        </div>
+                        <div class="form-group col-sm-3">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>   
                     </form>
                 </div>
             </div>

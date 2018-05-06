@@ -46,19 +46,20 @@ public class CreateAccountServlet extends HttpServlet {
         int idUSER = Integer.parseInt(request.getParameter("idUSER"));
         User user = userFacade.find(idUSER);
         float initBalance = Float.parseFloat(request.getParameter("initialBalance"));
-                
-        Account newAccount = new Account();
-        newAccount.setIdUSER(user);
-        newAccount.setBalance(initBalance);
+        if(initBalance > 0){
+            Account newAccount = new Account();
+            newAccount.setIdUSER(user);
+            newAccount.setBalance(initBalance);
 
-        double rand = Math.floor(Math.random()*(9000000000.0)+1000000000.0);
+            double rand = Math.floor(Math.random()*(9000000000.0)+1000000000.0);
 
-        NumberFormat nf = DecimalFormat.getInstance();
-        nf.setMaximumFractionDigits(0);
-        String str = nf.format(rand).replaceAll("[-+.^:,]", "");
-        newAccount.setIdACCOUNT("ES0130031337" + Integer.toString((int)(rand%100)) + str);
-        
-        accountFacade.create(newAccount);
+            NumberFormat nf = DecimalFormat.getInstance();
+            nf.setMaximumFractionDigits(0);
+            String str = nf.format(rand).replaceAll("[-+.^:,]", "");
+            newAccount.setIdACCOUNT("ES0130031337" + Integer.toString((int)(rand%100)) + str);
+
+            accountFacade.create(newAccount);
+        }        
         
         response.sendRedirect("EditUser?idUser="+idUSER);
     }

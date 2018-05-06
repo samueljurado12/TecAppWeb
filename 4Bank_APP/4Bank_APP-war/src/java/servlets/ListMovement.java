@@ -64,7 +64,6 @@ public class ListMovement extends HttpServlet {
             selectedAccount = accountFacade.queryAccountById(request.getParameter("selectedAccount"));
         }
         
-        //System.out.println(filter);
         if(filter == -1){  
             movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
         }
@@ -77,9 +76,7 @@ public class ListMovement extends HttpServlet {
         else if(filter == 2){
             movementList = movementFacade.AllMovementsSearchByEntity(selectedAccount, pattern);
         }
-        //movementList.sort((Movement o1, Movement o2) -> o2.getDate().compareTo(o1.getDate()));
         for (Movement mov : movementList) {
-            System.out.println(mov.getConcept());
             otherAccount = getUser(mov, selectedAccount);
             receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
         }

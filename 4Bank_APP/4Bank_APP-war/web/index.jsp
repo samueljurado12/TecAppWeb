@@ -67,7 +67,6 @@
                         <div>
                             <button type="submit" class="btn btn-primary">Log in</button>
                         </div>
-                        <a href="#">Forgot your password?
                         </a>
                     </form> 
                 </div>

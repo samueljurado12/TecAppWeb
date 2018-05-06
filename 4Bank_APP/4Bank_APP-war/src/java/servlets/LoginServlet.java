@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         User user = userFacade.queryUserByUsername(request.getParameter("username"));
-        if (user != null && user.getPassword().hashCode() == request.getParameter("pwd").hashCode()) {
+        if (user != null && request.getParameter("pwd") != null && user.getPassword().hashCode() == request.getParameter("pwd").hashCode()) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             session.setAttribute("selectedAccount", null);

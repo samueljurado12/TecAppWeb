@@ -63,7 +63,7 @@
                     <h4><%= selectedAccount.getBalance()%>€</h4>
                 </div>
                 <div class="col-sm-5">
-                    <form class="form-inline" action="CreateMovement" method="post">
+                    <form class="form-inline" action="ListMovement" method="post">
                         <div class="form-group col-sm-3">
                             <div class="radio">
                                 <label><input type="radio" name="filter" value="0" checked="checked">Date</label>
@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
-                            <input type="text" id="search" class="form-control">
+                            <input type="text" name="search" class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
                             <button type="submit" class="btn btn-primary">Search</button>

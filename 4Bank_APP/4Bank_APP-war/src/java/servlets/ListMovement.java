@@ -64,12 +64,12 @@ public class ListMovement extends HttpServlet {
             selectedAccount = accountFacade.queryAccountById(request.getParameter("selectedAccount"));
         }
         
-        System.out.println(filter);
+        //System.out.println(filter);
         if(filter == -1){  
             movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
         }
         else if(filter == 0){
-            movementList = movementFacade.AllMovementsSearchByDate(selectedAccount, pattern);
+            movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
         }
         else if(filter == 1){
             movementList = movementFacade.AllMovementsSearchByConcept(selectedAccount, pattern);

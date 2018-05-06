@@ -16,7 +16,7 @@
     if(session.getAttribute("user") == null){
         response.sendRedirect("");
         return;
-    }
+    }   
     
     User selectedUser = (User) request.getAttribute("selectedUser");
     Account selectedAccount = (Account) request.getAttribute("selectedAccount");

@@ -9,12 +9,11 @@
 <!DOCTYPE html>
 <%
     User usuario = (User) session.getAttribute("user");
-    
-    if (usuario != null){
-        if(usuario.getIsEmployee()){
+
+    if (usuario != null) {
+        if (usuario.getIsEmployee()) {
             response.sendRedirect("employee");
-        }
-        else {
+        } else {
             response.sendRedirect("accounts.jsp");
         }
     }
@@ -45,7 +44,7 @@
                 <div class="col-md-4">
                     <p>Sign in</p>
                     <hr/>
-                        <form method="post" action="LoginServlet">
+                    <form method="post" action="LoginServlet">
                         <div class="form-group">
                             <label for="username">Username:</label>
                             <input type="username" class="form-control" name="username">
@@ -54,6 +53,16 @@
                             <label for="pwd">Password:</label>
                             <input type="password" class="form-control" name="pwd">
                         </div>
+                        <%
+                            if (request.getAttribute("wrong") != null && request.getAttribute("wrong").equals("wrong")) {
+                        %>        
+                        <div class="form-group">
+                            <p class="text-danger">Wrong password/username</label>
+                        </div>
+                        <%
+                            }
+                        %> 
+
                         <hr/>
                         <div>
                             <button type="submit" class="btn btn-primary">Log in</button>

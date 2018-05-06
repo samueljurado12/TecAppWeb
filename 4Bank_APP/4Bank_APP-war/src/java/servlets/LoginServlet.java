@@ -55,7 +55,9 @@ public class LoginServlet extends HttpServlet {
                 rd.forward(request, response);
             }
         } else {
-            response.sendRedirect("");
+            request.setAttribute("wrong", "wrong");
+            RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/index.jsp");
+            rd.forward(request, response);
         }
     }
 

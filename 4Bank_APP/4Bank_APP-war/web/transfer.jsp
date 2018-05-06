@@ -10,6 +10,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    if(session.getAttribute("user") == null){
+        response.sendRedirect("");
+        return;
+    }
+    
     User userActive = (User) session.getAttribute("user");
     List<Account> accountsList = userActive.getAccountList();
     Account selectedAccount = (Account) session.getAttribute("selectedAccount");
@@ -89,6 +94,25 @@
                                placeholder="Insert transfer remarks here">
                     </div>
                 </div>
+                        
+                <%
+                    if (request.getAttribute("success") != null && request.getAttribute("success").equals("success")) {
+                %>        
+                <div class="form-group">
+                    <p class="text-success">Success!</label>
+                </div>
+                <%
+                    } else if (request.getAttribute("success") != null && request.getAttribute("success").equals("wrong")) {
+                %>        
+                <div class="form-group">
+                    <p class="text-danger">Something went wrong...</label>
+                </div>
+                <%
+                    }
+                %> 
+                
+
+                <hr/>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="reset" class="btn btn-danger">Reset</button>

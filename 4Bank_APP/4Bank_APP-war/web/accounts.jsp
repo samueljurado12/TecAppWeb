@@ -63,10 +63,10 @@
                     <h4><%= selectedAccount.getBalance()%>€</h4>
                 </div>
                 <div class="col-sm-5">
-                    <form class="form-inline" action="ListMovement" method="post">
+                    <form class="form-inline" action="ListMovement" method="post" name="searchForm">
                         <div class="form-group col-sm-3">
                             <div class="radio">
-                                <label><input type="radio" name="filter" value="0" checked="checked">Original</label>
+                                <label><input onchange="document.searchForm.submit();" type="radio" name="filter" value="0">Original</label>
                             </div>
                             <div class="radio">
                                 <label><input type="radio" name="filter" value="1">Concept</label>

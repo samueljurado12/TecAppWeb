@@ -40,4 +40,21 @@ public class MovementFacade extends AbstractFacade<Movement> {
         return q.getResultList();
     }
     
+    public List<Movement> AllMovementsOrderByConcept(Account account){
+        Query q = this.em.createQuery("select * from movement m where m.idACCOUNT = :idACCOUNT order by m.concept");
+        q.setParameter("idACCOUNT", account);
+        return q.getResultList();
+    }
+    
+    public List<Movement> AllMovementsOrderByDate(Account account){
+        Query q = this.em.createQuery("select * from movement m order by m.date");
+        q.setParameter("idACCOUNT", account);
+        return q.getResultList();
+    }
+    
+    public List<Movement> AllMovementsOrderByAmount(Account account){
+        Query q = this.em.createQuery("select * from movement m where m.idACCOUNT = :idACCOUNT order by m.amount");
+        q.setParameter("idACCOUNT", account);
+        return q.getResultList();
+    }
 }

@@ -53,6 +53,7 @@ public class ListMovement extends HttpServlet {
         List<Movement> movementList = null;
         Map<Integer, String> receptors = new HashMap<>();
         User otherAccount = null;
+        int type = Integer.parseInt(request.getParameter("filter"));
 
         if (request.getParameter("selectedAccount") == null) {
             selectedAccount = accountFacade.queryAccountById(user.getAccountList().get(0).getIdACCOUNT());
@@ -61,7 +62,9 @@ public class ListMovement extends HttpServlet {
         }
         
         movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
-
+        if(type==0){
+            movementList =movementFacade.
+        }
         //movementList.sort((Movement o1, Movement o2) -> o2.getDate().compareTo(o1.getDate()));
         for (Movement mov : movementList) {
             otherAccount = getUser(mov, selectedAccount);

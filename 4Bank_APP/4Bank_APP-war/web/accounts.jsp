@@ -66,7 +66,7 @@
                     <form class="form-inline" action="CreateMovement" method="post">
                         <div class="form-group col-sm-3">
                             <div class="radio">
-                                <label><input type="radio" name="filter" value="0" checked="checked">Entity</label>
+                                <label><input type="radio" name="filter" value="0" checked="checked">Date</label>
                             </div>
                             <div class="radio">
                                 <label><input type="radio" name="filter" value="1">Concept</label>

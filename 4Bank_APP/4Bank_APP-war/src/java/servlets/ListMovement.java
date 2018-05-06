@@ -53,17 +53,29 @@ public class ListMovement extends HttpServlet {
         List<Movement> movementList = null;
         Map<Integer, String> receptors = new HashMap<>();
         User otherAccount = null;
-        int type = Integer.parseInt(request.getParameter("filter"));
-
+        int filter = -1;
+        if (request.getParameter("filter") != null){
+            filter = Integer.parseInt(request.getParameter("filter"));
+        }
+        String pattern = request.getParameter("search");
         if (request.getParameter("selectedAccount") == null) {
             selectedAccount = accountFacade.queryAccountById(user.getAccountList().get(0).getIdACCOUNT());
         } else {
             selectedAccount = accountFacade.queryAccountById(request.getParameter("selectedAccount"));
         }
         
-        movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
-        if(type==0){
-            movementList =movementFacade.
+        System.out.println(filter);
+        if(filter == -1){  
+            movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
+        }
+        else if(filter == 0){
+            movementList = movementFacade.AllMovementsSearchByDate(selectedAccount, pattern);
+        }
+        else if(filter == 1){
+            movementList = movementFacade.AllMovementsSearchByConcept(selectedAccount, pattern);
+        }
+        else if(filter == 2){
+            //movementList = movementFacade.AllMovementsSearchByAmount(selectedAccount, pattern);
         }
         //movementList.sort((Movement o1, Movement o2) -> o2.getDate().compareTo(o1.getDate()));
         for (Movement mov : movementList) {

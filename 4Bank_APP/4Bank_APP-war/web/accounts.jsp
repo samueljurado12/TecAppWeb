@@ -76,7 +76,7 @@
                             </div>
                         </div>
                         <div class="form-group col-sm-6">
-                            <input type="text" id="search" class="form-control" name="concept">
+                            <input type="text" id="search" class="form-control">
                         </div>
                         <div class="form-group col-sm-3">
                             <button type="submit" class="btn btn-primary">Search</button>

@@ -54,7 +54,7 @@ public class UpdateUserServlet extends HttpServlet {
         user.setNif(newNIF.equals("") ? user.getNif(): newNIF);
         
         String newUsername = request.getParameter("username");
-        user.setUsername(newUsername.equals("") ? user.getNif(): newUsername);
+        user.setUsername(newUsername.equals("") ? user.getUsername(): newUsername);
         
         String newPhone = request.getParameter("phone");
         user.setPhoneNumber(newPhone.equals("") ? user.getPhoneNumber() : Integer.parseInt(newPhone));

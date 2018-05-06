@@ -47,7 +47,8 @@ public class MakeTransferServlet extends HttpServlet {
 
         String senderAccountNumber = request.getParameter("senderAccount");
         String receiverAccountNumber = request.getParameter("receiverAccount");
-        float amount = Float.parseFloat(request.getParameter("amount"));
+        String amountParam = request.getParameter("amount");
+        float amount = amountParam.equals("") ? -1 : Float.parseFloat(amountParam);
         String remarks = request.getParameter("remarks");
 
         Account senderAccount = accountFacade.queryAccountById(senderAccountNumber);

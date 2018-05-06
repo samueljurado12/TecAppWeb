@@ -10,6 +10,7 @@ import ejb.MovementFacade;
 import java.io.IOException;
 import java.util.Date;
 import javax.ejb.EJB;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,22 +52,22 @@ public class MakeTransferServlet extends HttpServlet {
 
         Account senderAccount = accountFacade.queryAccountById(senderAccountNumber);
         Account receiverAccount = accountFacade.queryAccountById(receiverAccountNumber);
-        
-        char [] dst = new char[8];
+
+        char[] dst = new char[8];
         String id = "";
-        if (receiverAccount != null){
+        if (receiverAccount != null && receiverAccount.getIdACCOUNT().length() == 24) {
             receiverAccount.getIdACCOUNT().getChars(0, 8, dst, 0);
             id = new String(dst);
         }
         if (receiverAccount == null) {
-            //TODO Error, account does not exist, back to transfer
+            request.setAttribute("success", "wrong");
         } else if (senderAccount.getBalance() - amount < 0) {
-            //TODO Error, you don't have enough money
-        } else if (amount == 0) {
-            //TODO Error, you can't make a transfer without transfering money
+            request.setAttribute("success", "wrong");
+        } else if (amount <= 0) {
+            request.setAttribute("success", "wrong");
         } else if (receiverAccount.equals(senderAccount)) {
-            //TODO Error, you can't make a transfer to the same account you are sending from
-        } else if (id.equals("ES013003")){
+            request.setAttribute("success", "wrong");
+        } else if (id.equals("ES013003")) {
             float newBalanceSender = senderAccount.getBalance() - amount;
             float newBalanceReceiver = receiverAccount.getBalance() + amount;
             senderAccount.setBalance(newBalanceSender);
@@ -87,8 +88,10 @@ public class MakeTransferServlet extends HttpServlet {
             newMovement.setDate(new Date());
 
             movementsFacade.create(newMovement);
+            request.setAttribute("success", "success");
         }
-        response.sendRedirect("transfer.jsp");
+        RequestDispatcher rd = this.getServletContext().getRequestDispatcher("/transfer.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

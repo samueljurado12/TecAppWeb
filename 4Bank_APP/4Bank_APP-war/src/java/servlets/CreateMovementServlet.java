@@ -58,11 +58,34 @@ public class CreateMovementServlet extends HttpServlet {
         String idAccount_receptor = request.getParameter("idAccount_receptor");
         String concept = request.getParameter("concept");
         String amount = request.getParameter("amount");
+        int type = Integer.parseInt(request.getParameter("type"));
         
-        Account senderAccount = accountFacade.queryAccountById(selected_account);
-        Account receptorAccount = accountFacade.queryAccountById(idAccount_receptor);
+        Account senderAccount;
+        Account receptorAccount;
+        Float balanceSender;
+        Float balanceReceiver;
         
-      
+        if(type == 0){
+            senderAccount = accountFacade.queryAccountById(selected_account);
+            receptorAccount = accountFacade.queryAccountById(idAccount_receptor);
+            balanceSender = senderAccount.getBalance() - Float.parseFloat(amount);
+            balanceReceiver = receptorAccount.getBalance() + Float.parseFloat(amount);
+        }
+        else if (type == 1){
+            senderAccount = accountFacade.queryAccountById(selected_account);
+            receptorAccount = accountFacade.queryAccountById("0");
+            balanceSender = senderAccount.getBalance() - Float.parseFloat(amount);
+            balanceReceiver = Float.parseFloat("0");
+            concept = "Extraction";
+        }
+        else {
+            senderAccount = accountFacade.queryAccountById("0");
+            receptorAccount = accountFacade.queryAccountById(selected_account);
+            balanceSender = Float.parseFloat("0");
+            balanceReceiver = receptorAccount.getBalance() + Float.parseFloat(amount);
+            concept = "Deposit";
+        }
+        
         
         Movement mov = new Movement();
         mov.setIdACCOUNT(senderAccount);
@@ -70,10 +93,8 @@ public class CreateMovementServlet extends HttpServlet {
         mov.setConcept(concept);
         mov.setAmount(Float.parseFloat(amount));
         mov.setDate(new Date());
-        Float balanceSender = senderAccount.getBalance() - Float.parseFloat(amount);
         mov.setNewBalanceSender(balanceSender);
         senderAccount.setBalance(balanceSender);
-        Float balanceReceiver = receptorAccount.getBalance() + Float.parseFloat(amount);
         mov.setNewBalanceReceiver(balanceReceiver);
         receptorAccount.setBalance(balanceReceiver);
         User employee = (User) session.getAttribute("user");

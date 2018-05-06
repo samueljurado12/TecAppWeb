@@ -39,12 +39,10 @@ public class DeleteUserServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String userParameter = request.getParameter("id");
-        System.out.println(userParameter);
         int userId = Integer.valueOf(userParameter);
         userFacade.deleteUserByID(userId);
         
-        RequestDispatcher dispatcher = this.getServletContext().getRequestDispatcher("/employee");
-        dispatcher.forward(request, response);
+        response.sendRedirect("employee");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -25,72 +25,72 @@
 
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-6" style="padding-right:30px; padding-left:100px; border-right: 1px solid #ccc;">
                 <h1>Update User:</h1>
                 <form action="UpdateUser" method="POST">
 
                     <div class="form-group row">
-                        <label class="form-check-label col-md-4 col-form-label" for="username">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
                             Username:
                         </label>
-                        <h5 class="col-md-4"><%= selectedUser.getUsername()%></h5>
-                        <input class="col-md-4 form-control" name="username" type="text">
+                        <h5 class="col-md-5 d-flex align-items-center"><%= selectedUser.getUsername()%></h5>
+                        <input class="col-md-5 form-control" name="username" type="text">
                     </div>
 
                     <div class="form-group row">
-                        <label class="form-check-label col-md-4 col-form-label" for="name">
+                        <label class="form-check-label col-md-2 col-form-label" for="name">
                             Name:
                         </label>
-                        <h5 class="col-md-4"><%= selectedUser.getName()%></h5>
-                        <input class="col-md-4 form-control" name="name" type="text">
+                        <h5 class="col-md-5 d-flex align-items-center"><%= selectedUser.getName()%></h5>
+                        <input class="col-md-5 form-control" name="name" type="text">
                     </div>
 
                     <div class="form-group row">
-                        <label class="form-check-label col-md-4 col-form-label"for="surname">
+                        <label class="form-check-label col-md-2 col-form-label"for="surname">
                             Surname:
                         </label>
-                        <h5 class="col-md-4"><%= selectedUser.getSurname()%></h5>
-                        <input class="col-md-4 form-control" name="surname" type="text">
+                        <h5 class="col-md-5 d-flex align-items-center"><%= selectedUser.getSurname()%></h5>
+                        <input class="col-md-5 form-control" name="surname" type="text">
                     </div>
 
                     <div class="form-group row">
-                        <label class="form-check-label col-md-4 col-form-label" for="email">
+                        <label class="form-check-label col-md-2 col-form-label" for="email">
                             Email:
                         </label>
-                        <h5 class="col-md-4"><%= selectedUser.getEmail()%></h5>
-                        <input class="col-md-4 form-control" name="email" type="text">
+                        <h5 class="col-md-5 d-flex align-items-center"><%= selectedUser.getEmail()%></h5>
+                        <input class="col-md-5 form-control" name="email" type="text">
                     </div>
 
                     <div class="form-group row">
-                        <label class="form-check-label col-md-4 col-form-label" for="nif">
+                        <label class="form-check-label col-md-2 col-form-label" for="nif">
                             NIF:
                         </label>
-                        <h5 class="col-md-4"><%= selectedUser.getNif()%></h5>
-                        <input class="col-md-4 form-control" name="nif" type="text">
+                        <h5 class="col-md-5 d-flex align-items-center"><%= selectedUser.getNif()%></h5>
+                        <input class="col-md-5 form-control" name="nif" type="text">
                     </div>
 
                     <div class="form-group row">
-                        <label class="form-check-label col-md-4 col-form-label" for="phone">
+                        <label class="form-check-label col-md-2 col-form-label" for="phone">
                             Phone:
                         </label>
-                        <h5 class="col-md-4"><%= selectedUser.getPhoneNumber()%></h5>
-                        <input class="col-md-4 form-control" name="phone" type="text">
+                        <h5 class="col-md-5 d-flex align-items-center"><%= selectedUser.getPhoneNumber()%></h5>
+                        <input class="col-md-5 form-control" name="phone" type="text">
                     </div>
 
                     <div class="form-group row">
-                        <label class="form-check-label col-md-4 col-form-label" for="address">
+                        <label class="form-check-label col-md-2 col-form-label" for="address">
                             Address:
                         </label>
-                        <h5 class="col-md-4"><%= selectedUser.getAddress()%></h5>
-                        <input class="col-md-4 form-control" name="address" type="text">
+                        <h5 class="col-md-5 d-flex align-items-center"><%= selectedUser.getAddress()%></h5>
+                        <input class="col-md-5 form-control" name="address" type="text">
                     </div>
 
                     <div class="form-group row">
-                        <label class="form-check-label col-md-4 col-form-label" for="password">
+                        <label class="form-check-label col-md-2 col-form-label" for="password">
                             Password:
                         </label>
-                        <span class="col-md-4"></span>
-                        <input class="col-md-4 form-control" type="password" name="password">
+                        <span class="col-md-5"></span>
+                        <input class="col-md-5 form-control" type="password" name="password">
                     </div>
 
                     <input type="hidden" name="idUSER" value="<%= selectedUser.getIdUSER()%>" >  

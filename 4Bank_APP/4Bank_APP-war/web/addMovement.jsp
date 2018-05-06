@@ -13,6 +13,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
+    if(session.getAttribute("user") == null){
+        response.sendRedirect("");
+        return;
+    }   
+    
     User selectedUser = (User) request.getAttribute("selectedUser");
     Account selectedAccount = (Account) request.getAttribute("selectedAccount");
     List<Movement> movementsList = (List<Movement>) request.getAttribute("movementList");
@@ -34,21 +39,35 @@
                     <h1>Add Movement:</h1>
                     </br>
                     <form action="CreateMovement" method="post">
+                        <div class="radio">
+                            <label><input onclick= "document.getElementById('receptor').disabled=false;document.getElementById('concept').disabled=false;"
+                                          type="radio" name="type" value="0" checked="checked">Transfer</label>
+                        </div>
+                        <div class="radio">
+                            <label><input onclick= "document.getElementById('receptor').disabled=true;document.getElementById('concept').disabled=true;"
+                                          type="radio" name="type" value="1">Extract</label>
+                        </div>
+                        <div class="radio">
+                            <label><input onclick= "document.getElementById('receptor').disabled=true;document.getElementById('concept').disabled=true;"
+                                          type="radio" name="type" value="2">Deposit</label>
+                        </div>
+                        <br>
+                        <br>
                         <div class="form-group row">
                             <label for="receptorAccount" class="form-check-label col-md-3 col-form-label">Receptor Account Id:</label>
-                            <input type="text" class="form-control col-md-6" name="idAccount_receptor">
+                            <input type="text" id="receptor" class="form-control col-md-6" name="idAccount_receptor">
                         </div>
                         <div class="form-group row">
                             <label for="concept" class="form-check-label col-md-3 col-form-label">Concept: </label>
-                            <input type="text" class="form-control col-md-6" name="concept">
+                            <input type="text" id="concept" class="form-control col-md-6" name="concept">
                         </div>
                         <div class="form-group row">
                             <label for="amount" class="form-check-label col-md-3 col-form-label">Amount:</label>
                             <input type="text" class="form-control col-md-6" name="amount">
                         </div>
-                         <input type="hidden" name="selectedAccount" value="<%= selectedAccount.getIdACCOUNT()%>" > 
-                         <input type="hidden" name="selectedUser" value="<%= selectedUser.getIdUSER() %>" > 
-                         
+                        <input type="hidden" name="selectedAccount" value="<%= selectedAccount.getIdACCOUNT()%>" > 
+                        <input type="hidden" name="selectedUser" value="<%= selectedUser.getIdUSER()%>" > 
+
                         <button type="submit" class="btn btn-primary">Add Movement</button>   
                     </form>
                 </div>
@@ -73,7 +92,7 @@
                                 %>
                                 <tr>
                                     <td><%= recept.get(movement.getIdACCOUNTreceptor().getIdUSER().getIdUSER())%></td>
-                                    <td><%= movement.getConcept() %></td>
+                                    <td><%= movement.getConcept()%></td>
                                     <td style="color: red">-<%= movement.getAmount()%>€</td>
                                     <td><%= movement.getNewBalanceSender()%>€</td>
                                     <td><%= dateFormat.format(movement.getDate())%></td>
@@ -83,7 +102,7 @@
                                 %>
                                 <tr>
                                     <td><%= recept.get(movement.getIdACCOUNT().getIdUSER().getIdUSER())%></td>
-                                    <td><%= movement.getConcept() %></td>
+                                    <td><%= movement.getConcept()%></td>
                                     <td style="color: green"><%= movement.getAmount()%>€</td>
                                     <td><%= movement.getNewBalanceReceiver()%>€</td>
                                     <td><%= dateFormat.format(movement.getDate())%></td>

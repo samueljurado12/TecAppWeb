@@ -40,21 +40,18 @@ public class MovementFacade extends AbstractFacade<Movement> {
         return q.getResultList();
     }
     
-    public List<Movement> AllMovementsOrderByConcept(Account account){
-        Query q = this.em.createQuery("select * from movement m where m.idACCOUNT = :idACCOUNT order by m.concept");
+    public List<Movement> AllMovementsSearchByConcept(Account account, String pattern){
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.concept LIKE :pattern AND m.idACCOUNT = :idACCOUNT ");
         q.setParameter("idACCOUNT", account);
+        q.setParameter("pattern", "%"+pattern+"%");
         return q.getResultList();
     }
     
-    public List<Movement> AllMovementsOrderByDate(Account account){
-        Query q = this.em.createQuery("select * from movement m order by m.date");
+    public List<Movement> AllMovementsSearchByDate(Account account, String pattern){
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.date LIKE :pattern AND m.idACCOUNT = :idACCOUNT ");
         q.setParameter("idACCOUNT", account);
+        q.setParameter("pattern", "%"+pattern+"%");
         return q.getResultList();
     }
     
-    public List<Movement> AllMovementsOrderByAmount(Account account){
-        Query q = this.em.createQuery("select * from movement m where m.idACCOUNT = :idACCOUNT order by m.amount");
-        q.setParameter("idACCOUNT", account);
-        return q.getResultList();
-    }
 }

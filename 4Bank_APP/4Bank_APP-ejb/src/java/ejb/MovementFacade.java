@@ -41,17 +41,21 @@ public class MovementFacade extends AbstractFacade<Movement> {
     }
     
     public List<Movement> AllMovementsSearchByConcept(Account account, String pattern){
-        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.concept LIKE :pattern AND m.idACCOUNT = :idACCOUNT ");
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.concept LIKE :pattern AND "
+                + "(m.idACCOUNT = :idACCOUNT OR m.idACCOUNTreceptor = :idACCOUNT) ORDER BY m.date DESC");
         q.setParameter("idACCOUNT", account);
         q.setParameter("pattern", "%"+pattern+"%");
         return q.getResultList();
     }
     
-    public List<Movement> AllMovementsSearchByDate(Account account, String pattern){
-        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.date LIKE :pattern AND m.idACCOUNT = :idACCOUNT ");
+    public List<Movement> AllMovementsSearchByEntity(Account account, String pattern){
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE ((m.idACCOUNTreceptor.idUSER.name"
+                + " LIKE :pattern OR m.idACCOUNTreceptor.idUSER.surname LIKE :pattern) AND m.idACCOUNT ="
+                + " :idACCOUNT) OR (m.idACCOUNTreceptor = :idACCOUNT AND (m.idACCOUNT.idUSER.name LIKE "
+                + ":pattern OR m.idACCOUNT.idUSER.surname LIKE :pattern)) ORDER BY m.date DESC");
         q.setParameter("idACCOUNT", account);
+        
         q.setParameter("pattern", "%"+pattern+"%");
         return q.getResultList();
     }
-    
 }

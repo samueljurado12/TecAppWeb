@@ -66,13 +66,13 @@
                     <form class="form-inline" action="ListMovement" method="post">
                         <div class="form-group col-sm-3">
                             <div class="radio">
-                                <label><input type="radio" name="filter" value="0" checked="checked">Date</label>
+                                <label><input type="radio" name="filter" value="0" checked="checked">Original</label>
                             </div>
                             <div class="radio">
                                 <label><input type="radio" name="filter" value="1">Concept</label>
                             </div>
                             <div class="radio">
-                                <label><input type="radio" name="filter" value="2">Amount</label>
+                                <label><input type="radio" name="filter" value="2">Entity</label>
                             </div>
                         </div>
                         <div class="form-group col-sm-6">

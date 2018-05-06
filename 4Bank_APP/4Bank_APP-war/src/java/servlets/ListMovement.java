@@ -75,10 +75,11 @@ public class ListMovement extends HttpServlet {
             movementList = movementFacade.AllMovementsSearchByConcept(selectedAccount, pattern);
         }
         else if(filter == 2){
-            //movementList = movementFacade.AllMovementsSearchByAmount(selectedAccount, pattern);
+            movementList = movementFacade.AllMovementsSearchByEntity(selectedAccount, pattern);
         }
         //movementList.sort((Movement o1, Movement o2) -> o2.getDate().compareTo(o1.getDate()));
         for (Movement mov : movementList) {
+            System.out.println(mov.getConcept());
             otherAccount = getUser(mov, selectedAccount);
             receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
         }

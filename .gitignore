@@ -58,13 +58,7 @@ pom.xml.tag
 /4Bank_APP/4Bank_APP-war/nbproject/
 /4Bank_APP/4Bank_APP-ejb/nbproject/
 /4Bank_APP/build.xml
-/VazquezMoreno/nbproject/private/
-/VazquezMoreno/VazquezMoreno-war/nbproject/private/
-/VazquezMoreno/VazquezMoreno-ejb/nbproject/private/
-*.jsp~
-/twitter/nbproject/private/
-/twitter/twitter-war/nbproject/private/
-/twitter/twitter-ejb/nbproject/private/
-/4Bank_JSF/nbproject/private/
-/4Bank_JSF/4Bank_JSF-war/nbproject/private/
-/4Bank_JSF/4Bank_JSF-ejb/nbproject/private/
+
+/4Bank_JSF/nbproject/
+/4Bank_JSF/4Bank_JSF-war/nbproject/
+/4Bank_JSF/4Bank_JSF-ejb/nbproject/

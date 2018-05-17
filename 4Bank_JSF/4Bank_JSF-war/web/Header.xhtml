@@ -17,17 +17,19 @@
 
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Accounts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Transfer</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Employee</a>
+            <h:panelGroup> <!--TODO insert rendered attribute to check if user is not employee-->
+                <li class="nav-item">
+                    <h:link class="nav-link" value="Accounts" outcome="Accounts"></h:link>
+                </li>
+                <li class="nav-item">
+                    <h:link class="nav-link" value="Transfer" outcome="Transfer"></h:link>
+                </li>
+                <li class="nav-item">
+                    <h:link class="nav-link" value="Contact Us" ><!--outcome=""--></h:link>
+                </li>
+            </h:panelGroup>
+            <li class="nav-item"> <!--TODO insert rendered attribute to check if user is employee-->
+                <h:link class="nav-link" value="Employee"> <!--outcome=""--></h:link>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">

@@ -88,10 +88,10 @@ public class AccountsBean {
         this.accountList = accountFacade.findAll();
         this.selectedAccount = accountList.get(0);
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
-       // for (Movement mov : movementList) {
-       //     User otherAccount = getUser(mov, selectedAccount);
-       //     receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
-       // }
+        for (Movement mov : movementList) {
+            User otherAccount = getUser(mov, selectedAccount);
+            receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
+        }
     }
     
     private User getUser(Movement mov, Account selectedAccount) {

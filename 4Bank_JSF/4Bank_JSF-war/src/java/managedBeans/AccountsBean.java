@@ -85,6 +85,14 @@ public class AccountsBean {
     public AccountsBean() {
     }
     
+    public void doUpdateTable(){
+        this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
+        for (Movement mov : movementList) {
+            User otherAccount = getUser(mov, selectedAccount);
+            receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
+        }
+    }
+    
     public String formatDate(Date date){
         return new SimpleDateFormat("EEE dd/MM/YYYY").format(date);
     }
@@ -94,11 +102,7 @@ public class AccountsBean {
         this.activeUser = SessionUtils.getActiveUser();
         this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
         this.selectedAccount = accountList.get(0);
-        this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
-        for (Movement mov : movementList) {
-            User otherAccount = getUser(mov, selectedAccount);
-            receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
-        }
+        doUpdateTable();
     }
     
     private User getUser(Movement mov, Account selectedAccount) {

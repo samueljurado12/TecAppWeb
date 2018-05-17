@@ -7,10 +7,9 @@ package managedBeans;
  */
 
 import ejb.UserFacade;
-import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.servlet.http.HttpSession;
 import persistence.User;

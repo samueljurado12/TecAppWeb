@@ -7,6 +7,8 @@ package managedBeans;
 
 import ejb.AccountFacade;
 import ejb.MovementFacade;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -83,9 +85,14 @@ public class AccountsBean {
     public AccountsBean() {
     }
     
+    public String formatDate(Date date){
+        return new SimpleDateFormat("EEE dd/MM/YYYY").format(date);
+    }
+    
     @PostConstruct
     private void init(){
-        this.accountList = accountFacade.findAll();
+        this.activeUser = SessionUtils.getActiveUser();
+        this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
         this.selectedAccount = accountList.get(0);
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
         for (Movement mov : movementList) {

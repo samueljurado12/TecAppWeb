@@ -9,6 +9,7 @@ package managedBeans;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import persistence.User;
 
 /**
  *
@@ -41,4 +42,13 @@ public class SessionUtils {
 		else
 			return null;
 	}
+        
+        public static User getActiveUser(){
+            HttpSession session = getSession();
+            if(session != null){
+                return (User) session.getAttribute("user");
+            } else {
+                return null;
+            }
+        }
 }

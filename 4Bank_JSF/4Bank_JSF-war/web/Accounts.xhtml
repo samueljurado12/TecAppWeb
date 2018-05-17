@@ -59,10 +59,12 @@
                     <f:facet name="header">
                         Balance
                     </f:facet>
-                    <h:panelGrid rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}">
-                        #{movement.newBalanceSender}
+                    <h:panelGrid rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
+                                 style="color: red">
+                        -#{movement.newBalanceSender}
                     </h:panelGrid>
-                    <h:panelGrid rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}">
+                    <h:panelGrid rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
+                                 style="color: green">
                         #{movement.newBalanceReceiver}                    
                     </h:panelGrid>
                 </h:column>
@@ -70,7 +72,7 @@
                     <f:facet name="header">
                         Date
                     </f:facet>
-                    #{movement.date}
+                    #{accountsBean.formatDate(movement.date)}
                 </h:column>
 
             </h:dataTable>

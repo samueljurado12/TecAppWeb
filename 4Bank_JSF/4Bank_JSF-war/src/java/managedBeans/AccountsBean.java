@@ -8,6 +8,7 @@ package managedBeans;
 import ejb.AccountFacade;
 import ejb.MovementFacade;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
@@ -34,6 +35,15 @@ public class AccountsBean {
     List<Account> accountList;
     Account selectedAccount;
     List<Movement> movementList;
+    Map<Integer, String> receptors;
+
+    public Map<Integer, String> getReceptors() {
+        return receptors;
+    }
+
+    public void setReceptors(Map<Integer, String> receptors) {
+        this.receptors = receptors;
+    }
 
     public List<Movement> getMovementList() {
         return movementList;
@@ -78,5 +88,17 @@ public class AccountsBean {
         this.accountList = accountFacade.findAll();
         this.selectedAccount = accountList.get(0);
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
+       // for (Movement mov : movementList) {
+       //     User otherAccount = getUser(mov, selectedAccount);
+       //     receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
+       // }
+    }
+    
+    private User getUser(Movement mov, Account selectedAccount) {
+        if (mov.getIdACCOUNT().equals(selectedAccount)) {
+            return mov.getIdACCOUNTreceptor().getIdUSER();
+        } else {
+            return mov.getIdACCOUNT().getIdUSER();
+        }
     }
 }

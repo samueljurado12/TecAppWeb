@@ -11,28 +11,68 @@
         <ui:include src="Header.xhtml"></ui:include>
         <br></br>
         <div class="container">
-            <h:form>
+            <h:form id="myForm">
                 <div class=" form-group row">
-
-                        <label  for ="selectedAccount" class="form-check-label 
-                                col-sm-2 col-form-label">
-                            <h5>Current Account:</h5>
-                        </label>
-                        <h:selectOneMenu id="selectedAccount"
-                                         class="form-control col-sm-3"
-                                         value="#{accountsBean.selectedAccount}">
-                            <f:selectItems value="#{accountsBean.accountList}"
-                                           var="account"
-                                           itemValue="#{account.idACCOUNT}"
-                                           itemLabel="#{account.idACCOUNT}">
-                            </f:selectItems>
-                        </h:selectOneMenu>
+                    <label  for ="selectedAccount" class="form-check-label 
+                            col-sm-2 col-form-label">
+                        <h5>Current Account:</h5>
+                    </label>
+                    <h:selectOneMenu id="selectedAccount"
+                                     class="form-control col-sm-3"
+                                     value="#{accountsBean.selectedAccount}"
+                                     onchange="document.myForm.submit();">
+                        <f:selectItems value="#{accountsBean.accountList}"
+                                       var="account"
+                                       itemValue="#{account.idACCOUNT}"
+                                       itemLabel="#{account.idACCOUNT}">
+                        </f:selectItems>
+                    </h:selectOneMenu>
                 </div>
             </h:form>
             <h:dataTable id="movements"
                          value="#{accountsBean.movementList}"
                          var="movement">
-                
+                <h:column>
+                    <f:facet name="header">
+                        Entity
+                    </f:facet>
+                    <h:panelGrid rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}">
+                        #{accountsBean.receptors.get(movement.idACCOUNTreceptor.idACCOUNT)}
+                    </h:panelGrid>
+                    <h:panelGrid rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}">
+                        #{accountsBean.receptors.get(movement.idACCOUNT.idACCOUNT)}
+                    </h:panelGrid>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Concept
+                    </f:facet>
+                    #{movement.concept}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Amount
+                    </f:facet>
+                    #{movement.amount}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Balance
+                    </f:facet>
+                    <h:panelGrid rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}">
+                        #{movement.newBalanceSender}
+                    </h:panelGrid>
+                    <h:panelGrid rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}">
+                        #{movement.newBalanceReceiver}                    
+                    </h:panelGrid>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Date
+                    </f:facet>
+                    #{movement.date}
+                </h:column>
+
             </h:dataTable>
         </div>
 

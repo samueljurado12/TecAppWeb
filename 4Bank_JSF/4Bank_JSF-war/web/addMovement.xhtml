@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>4Bank-Add Movement</title>
+    </h:head>
+    <h:body>
+        <ui:include src ="Header.xhtml"> </ui:include>
+        <br/>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
+                    <h1>Add Movement:</h1>
+                    <br/>
+                    <h:form>
+                        <h:selectOneRadio layout="pageDirection"> 
+                            <div>  <f:selectItem itemValue = "0" itemLabel = "Transfer" /> </div>
+                            <div>  <f:selectItem itemValue = "1" itemLabel = "Extract" />  </div>
+                            <div>   <f:selectItem itemValue = "2" itemLabel = "Deposit" /> </div>
+
+                        </h:selectOneRadio>
+                        <br/>
+                        <br/>
+                        <div class="form-group row">
+                            <label for="receptorAccount" class="form-check-label col-md-3 col-form-label">Receptor Account Id:</label>
+                            <h:inputText/>
+                        </div>
+                        <div class="form-group row">
+                            <label for="concept" class="form-check-label col-md-3 col-form-label">Concept: </label>
+                            <h:inputText/>
+                        </div>
+                        <div class="form-group row">
+                            <label for="amount" class="form-check-label col-md-3 col-form-label">Amount:</label>
+                            <h:inputText/>
+                        </div>
+                        <h:commandButton class="btn btn-primary" value="Add Movement"/>  
+                    </h:form>
+                </div>
+                <div class="col-md-6">
+                    <h1>        Accounts: </h1>
+                    <br/>
+                    <div class="container">
+                        <table class="table table-hover">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Entity</th>
+                                    <th>Concept</th>
+                                    <th>Amount</th>
+                                    <th>Balance</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="color: red">-€</td>
+                                    <td>€</td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td style="color: green">€</td>
+                                    <td>€</td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+

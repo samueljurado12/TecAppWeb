@@ -5,8 +5,10 @@
  */
 package managedBeans;
 
+import java.util.List;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import persistence.User;
 
 /**
  *
@@ -15,12 +17,14 @@ import javax.enterprise.context.Dependent;
 @Named(value = "employeeBean")
 @Dependent
 public class EmployeeBean {
-
+    
+    List<User> users;
     /**
      * Creates a new instance of EmployeeBean
      */
     public EmployeeBean() {
     }
+    
     
     
 }

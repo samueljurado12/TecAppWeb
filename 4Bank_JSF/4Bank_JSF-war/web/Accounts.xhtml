@@ -37,12 +37,12 @@
                     <f:facet name="header">
                         Entity
                     </f:facet>
-                    <h:panelGrid rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}">
-                        #{accountsBean.receptors.get(movement.idACCOUNTreceptor.idACCOUNT)}
-                    </h:panelGrid>
-                    <h:panelGrid rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}">
-                        #{accountsBean.receptors.get(movement.idACCOUNT.idACCOUNT)}
-                    </h:panelGrid>
+                    <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
+                        value="#{accountsBean.receptors.get(movement.idACCOUNTreceptor.idUSER.idUSER)}">
+                    </h:outputText>
+                    <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
+                        value="#{accountsBean.receptors.get(movement.idACCOUNT.idUSER.idUSER)}">
+                    </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
@@ -60,14 +60,14 @@
                     <f:facet name="header">
                         Balance
                     </f:facet>
-                    <h:panelGrid rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
-                                 style="color: red">
-                        -#{movement.newBalanceSender}
-                    </h:panelGrid>
-                    <h:panelGrid rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
-                                 style="color: green">
-                        #{movement.newBalanceReceiver}                    
-                    </h:panelGrid>
+                    <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
+                                 style="color: red"
+                        value="-#{movement.newBalanceSender}">
+                    </h:outputText>
+                    <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
+                                 style="color: green"
+                        value="#{movement.newBalanceReceiver}">                    
+                    </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">

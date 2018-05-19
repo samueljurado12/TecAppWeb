@@ -11,10 +11,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpSession;
 import persistence.Account;
 import persistence.Movement;
 import persistence.User;
@@ -32,6 +35,9 @@ public class AccountsBean {
 
     @EJB
     private AccountFacade accountFacade;
+    
+    @Inject
+    private LoginBean login;
     
     User activeUser;
     List<Account> accountList;
@@ -87,6 +93,7 @@ public class AccountsBean {
     
     public void doUpdateTable(){
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
+        receptors = new TreeMap<Integer, String>();
         for (Movement mov : movementList) {
             User otherAccount = getUser(mov, selectedAccount);
             receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
@@ -99,8 +106,9 @@ public class AccountsBean {
     
     @PostConstruct
     private void init(){
-        this.activeUser = SessionUtils.getActiveUser();
-        this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
+        HttpSession session = SessionUtils.getSession();
+        this.activeUser = (User)session.getAttribute("user");
+        this.accountList = activeUser.getAccountList();
         this.selectedAccount = accountList.get(0);
         doUpdateTable();
     }

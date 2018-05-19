@@ -25,6 +25,7 @@ public class LoginBean implements Serializable {
     @EJB
     private UserFacade userFacade;
     
+    private User user;
     private String username;
     private String password;
     private String msg; //TODO necesario para fallo en login 
@@ -55,17 +56,25 @@ public class LoginBean implements Serializable {
     public void setMsg(String msg) {
         this.msg = msg;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     
     
     public String doLogin(){
-        User user = userFacade.queryUserByUsername(username);
-        
+        User usuario = userFacade.queryUserByUsername(username);
+        setUser(usuario);
         if(user != null && username != null && password.equals(user.getPassword())){
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("user", user);
             session.setAttribute("selectedAccount", null);
             if (user.getIsEmployee())
-                return "Accounts";
+                return "Employee";
             else
                 return "Accounts";
         }

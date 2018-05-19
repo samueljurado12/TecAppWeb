@@ -5,13 +5,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>4Bank-transfer</title>
     </h:head>
     <h:body>
         <ui:include src ="Header.xhtml"> </ui:include>
         <h1>Transfer</h1>
 
-        <br></br>
+        <br/>
         <div class="container align-items-center">
             <h:form>
                 <div class="form-group row">
@@ -34,14 +34,14 @@
                             class="form-check-label col-sm-3 col-form-label">
                         <h4>2.Payment to:</h4>
                     </label>
-                    <h:inputText class="form-control col-sm-3" value="#{transferBean.idReceptorAccount}" ></h:inputText>
+                    <h:inputText class="form-control col-sm-3" value="#{transferBean.idReceptorAccount}"/>
                 </div>
                 <div class = "form-group row">
                      <label for="amount" 
                            class="form-check-label col-sm-3 col-form-label">
                         <h4>3.Amount(€):</h4>
                     </label>
-                    <h:inputText class="form-control col-sm-3" value="#{transferBean.amount}"></h:inputText>
+                    <h:inputText class="form-control col-sm-3" value="#{transferBean.amount}"/>
                     <div class="col-sm-4">
                         <p style="margin-top: 0.5em">(Fee amount): 0.00€</p>
                     </div>
@@ -51,10 +51,10 @@
                            class="form-check-label col-sm-3 col-form-label">
                         <h4>4.Transfer remarks:</h4>
                     </label>
-                    <h:inputText class="form-control col-sm-3" value="#{transferBean.concept}"></h:inputText>
+                    <h:inputText class="form-control col-sm-3" value="#{transferBean.concept}"/>
 
                 </div>
-                <h:commandButton action="#{transferBean.doTransfer()}" value="Submit" class="btn btn-primary"></h:commandButton>
+                <h:commandButton class="btn btn-primary" value="Submit" action="#{transferBean.doTransfer()}"/> 
             </h:form>
         </div>
     </h:body>

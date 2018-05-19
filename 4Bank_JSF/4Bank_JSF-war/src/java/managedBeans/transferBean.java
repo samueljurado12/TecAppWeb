@@ -9,6 +9,7 @@ package managedBeans;
 import ejb.AccountFacade;
 import ejb.MovementFacade;
 import ejb.UserFacade;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -25,7 +26,8 @@ import persistence.User;
  */
 @Named(value = "transferBean")
 @Dependent
-public class transferBean {
+public class transferBean implements Serializable  {
+
 
     @EJB
     private UserFacade userFacade;
@@ -42,7 +44,8 @@ public class transferBean {
     Movement myMovement;
     Float amount;
     String concept;
-    User employee;
+    User  activeUser;
+    Account selectedAccount, receptorAccount;
 
     public Float getAmount() {
         return amount;
@@ -50,6 +53,12 @@ public class transferBean {
 
     public void setAmount(Float amount) {
         this.amount = amount;
+    }
+
+      /**
+     * Creates a new instance of transferBean
+     */
+    public transferBean() {
     }
 
     public String getConcept() {
@@ -84,28 +93,6 @@ public class transferBean {
         this.idReceptorAccount = idReceptorAccount;
     }
 
-    public User getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(User employee) {
-        this.employee = employee;
-    }
-
-  
-
-   
-
-    
-        
-    /**
-     * Creates a new instance of transferBean
-     */
-    public transferBean() {
-    }
-    
-    
-    
     public List<Account> getAccountList() {
         return accountList;
     }
@@ -113,19 +100,30 @@ public class transferBean {
     public void setAccountList(List<Account> accountList) {
         this.accountList = accountList;
     }
+    
+
+    @PostConstruct 
+    private void init(){
+        this.activeUser = SessionUtils.getActiveUser();
+        this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
+        this.selectedAccount = accountList.get(0);
+    }
     public String doTransfer(){
         myMovement = new Movement();
-        myMovement.setAmount(amount);
+//        System.out.println("MY CANTIDAD " + amount);
+//        myMovement.setAmount(amount);
+       System.out.println("MY CONCEPTO " + concept);
         myMovement.setConcept(concept);
+       
         myMovement.setDate(new Date());
-        Account selectedAccount = accountFacade.find(idSelectedAccount);
+        System.out.println("MY CUENTA " + idSelectedAccount);
+        selectedAccount = accountFacade.find(idSelectedAccount);
         myMovement.setIdACCOUNT(selectedAccount);
-        Account receptorAccount = accountFacade.find(idReceptorAccount);
+        receptorAccount = accountFacade.find(idReceptorAccount);
         myMovement.setIdACCOUNTreceptor(receptorAccount);
-        employee = userFacade.find(7);
-        myMovement.setIdEmployee(employee);
         float aux = selectedAccount.getBalance();
-        if(aux-amount>0){
+        System.out.println("ESTO ES MI BALANCEEEEE" + aux);
+        if((aux- amount )>0){
             aux=aux-amount;
         }else{
             aux=0;
@@ -136,13 +134,8 @@ public class transferBean {
         aux=aux+amount;
         myMovement.setNewBalanceReceiver(aux);
         
+        movementFacade.create(myMovement);
+        
         return "Transfer";
-    }
-
-    @PostConstruct 
-    private void init(){
-        this.accountList=accountFacade.findAll();
-        
-        
     }
 }

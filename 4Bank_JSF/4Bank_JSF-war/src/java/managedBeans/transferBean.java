@@ -31,8 +31,6 @@ import persistence.User;
 public class transferBean  {
 
 
-    @EJB
-    private UserFacade userFacade;
 
     @EJB
     private MovementFacade movementFacade;

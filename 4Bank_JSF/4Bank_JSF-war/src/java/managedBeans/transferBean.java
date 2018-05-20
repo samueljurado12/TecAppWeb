@@ -166,7 +166,9 @@ public class transferBean  {
         receptorAccount.setBalance(aux);
         accountFacade.edit(receptorAccount);
         movementFacade.create(myMovement);
-        
+        this.amount=null; 
+        this.idReceptorAccount=null;
+        this.concept=null;
         return "Transfer";
     }
 }

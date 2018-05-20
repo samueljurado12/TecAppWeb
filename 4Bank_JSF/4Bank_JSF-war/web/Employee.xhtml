@@ -41,8 +41,7 @@
                             <label for="Address" class="form-check-label col-md-3 col-form-label">Address: </label>
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.address}"></h:inputText>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Create User</button>   
+                        <h:commandButton class="btn btn-primary" value="Create User" action="#{createUserBean.createUser()}"/>
                     </h:form>
                 </div>
                 <div class="col-md-8">

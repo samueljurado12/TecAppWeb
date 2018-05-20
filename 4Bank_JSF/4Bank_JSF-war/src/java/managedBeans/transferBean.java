@@ -16,6 +16,8 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
+import javax.servlet.http.HttpSession;
 import persistence.Account;
 import persistence.Movement;
 import persistence.User;
@@ -25,8 +27,8 @@ import persistence.User;
  * @author JavierVazquez
  */
 @Named(value = "transferBean")
-@Dependent
-public class transferBean implements Serializable  {
+@RequestScoped
+public class transferBean  {
 
 
     @EJB
@@ -47,34 +49,19 @@ public class transferBean implements Serializable  {
     User  activeUser;
     Account selectedAccount, receptorAccount;
 
-    public Float getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Float amount) {
-        this.amount = amount;
-    }
-
+  
       /**
      * Creates a new instance of transferBean
      */
     public transferBean() {
     }
 
-    public String getConcept() {
-        return concept;
+    public List<Account> getAccountList() {
+        return accountList;
     }
 
-    public void setConcept(String concept) {
-        this.concept = concept;
-    }
-
-    public Movement getMyMovement() {
-        return myMovement;
-    }
-
-    public void setMyMovement(Movement myMovement) {
-        this.myMovement = myMovement;
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
     }
 
     public String getIdSelectedAccount() {
@@ -93,26 +80,66 @@ public class transferBean implements Serializable  {
         this.idReceptorAccount = idReceptorAccount;
     }
 
-    public List<Account> getAccountList() {
-        return accountList;
+    public Movement getMyMovement() {
+        return myMovement;
     }
 
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+    public void setMyMovement(Movement myMovement) {
+        this.myMovement = myMovement;
     }
-    
+
+    public Float getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Float amount) {
+        this.amount = amount;
+    }
+
+    public String getConcept() {
+        return concept;
+    }
+
+    public void setConcept(String concept) {
+        this.concept = concept;
+    }
+
+    public User getActiveUser() {
+        return activeUser;
+    }
+
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
+    }
+
+    public Account getSelectedAccount() {
+        return selectedAccount;
+    }
+
+    public void setSelectedAccount(Account selectedAccount) {
+        this.selectedAccount = selectedAccount;
+    }
+
+    public Account getReceptorAccount() {
+        return receptorAccount;
+    }
+
+    public void setReceptorAccount(Account receptorAccount) {
+        this.receptorAccount = receptorAccount;
+    }
 
     @PostConstruct 
     private void init(){
-        this.activeUser = SessionUtils.getActiveUser();
-        this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
+        HttpSession session = SessionUtils.getSession();
+        this.activeUser = (User)session.getAttribute("user");
+        this.accountList = activeUser.getAccountList();
         this.selectedAccount = accountList.get(0);
     }
     public String doTransfer(){
         myMovement = new Movement();
-//        System.out.println("MY CANTIDAD " + amount);
-//        myMovement.setAmount(amount);
-       System.out.println("MY CONCEPTO " + concept);
+
+        myMovement.setAmount(amount);
+     
         myMovement.setConcept(concept);
        
         myMovement.setDate(new Date());
@@ -122,18 +149,22 @@ public class transferBean implements Serializable  {
         receptorAccount = accountFacade.find(idReceptorAccount);
         myMovement.setIdACCOUNTreceptor(receptorAccount);
         float aux = selectedAccount.getBalance();
-        System.out.println("ESTO ES MI BALANCEEEEE" + aux);
+       
         if((aux- amount )>0){
             aux=aux-amount;
+            
         }else{
             aux=0;
         }
+        selectedAccount.setBalance(aux);
+        accountFacade.edit(selectedAccount);
         myMovement.setNewBalanceSender(aux);
         
         aux = receptorAccount.getBalance();
         aux=aux+amount;
         myMovement.setNewBalanceReceiver(aux);
-        
+        receptorAccount.setBalance(aux);
+        accountFacade.edit(receptorAccount);
         movementFacade.create(myMovement);
         
         return "Transfer";

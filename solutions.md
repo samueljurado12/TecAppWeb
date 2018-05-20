@@ -29,9 +29,42 @@
 
 	Then place it in [/path/to/glassfish/installation]/glassfish/lib
 
+## Problem 3
+  Caused by: javax.validation.ConstraintViolationException: Bean Validation constraint(s) violated 
+  while executing Automatic Bean Validation on callback event:'prePersist'. Please refer to 
+  embedded ConstraintViolations for details.
+
+## Solution
+This is caused because on the persistency entities there is some constraint that is violated, to know exactly what constraint add this to the AbstractFacade
+
+  public void create(T entity) {
+
+    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    Validator validator = factory.getValidator();
+    Set&lt;ConstraintViolation&lt;T&gt;&gt; constraintViolations = validator.validate(entity);
+    if(constraintViolations.size() &gt; 0){
+        Iterator&lt;ConstraintViolation&lt;T&gt;&gt; iterator = constraintViolations.iterator();
+        while(iterator.hasNext()){
+            ConstraintViolation&lt;T&gt; cv = iterator.next();
+            System.err.println(cv.getRootBeanClass().getName()+"."+cv.getPropertyPath() + " " +cv.getMessage());
+
+            JsfUtil.addErrorMessage(cv.getRootBeanClass().getSimpleName()+"."+cv.getPropertyPath() + " " +cv.getMessage());
+        }
+    }else{
+        getEntityManager().persist(entity);
+    }
+} 
+
+## Problem 4
+  Created jdbc resources dont't appear
+
+## Solution
+  Create folder WEB-INF in project main folder
+  Copy file from configuration files to that folders
+  In persistence unit copy the value from that file on property "jndi-name"
 # Problems with incosistent solutions but that often work.
 
-## Problem 3
+## Problem I.1
 	WELD-000227: Bean identifier index inconsistency detected - the distributed container probably doesn't work with identical applications
 
 ## Solution

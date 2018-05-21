@@ -28,7 +28,7 @@ import persistence.User;
  */
 @Named(value = "transferBean")
 @RequestScoped
-public class transferBean  {
+public class TransferBean  {
 
 
 
@@ -51,7 +51,7 @@ public class transferBean  {
       /**
      * Creates a new instance of transferBean
      */
-    public transferBean() {
+    public TransferBean() {
     }
 
     public List<Account> getAccountList() {

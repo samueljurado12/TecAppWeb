@@ -30,7 +30,7 @@ import persistence.User;
  */
 @Named(value = "accountsEmployeeBean")
 @RequestScoped
-public class accountsEmployeeBean {
+public class AccountsEmployeeBean {
 
     @EJB
     private UserFacade userFacade;
@@ -92,7 +92,7 @@ public class accountsEmployeeBean {
     /**
      * Creates a new instance of accountsEmployeeBean
      */
-    public accountsEmployeeBean() {
+    public AccountsEmployeeBean() {
     }
     
     public void doUpdateTable(Integer idUser){
@@ -114,7 +114,7 @@ public class accountsEmployeeBean {
     @PostConstruct
     private void init(){
         
-        doUpdateTable(5);
+        doUpdateTable(2);
     }
     
     private User getUser(Movement mov, Account selectedAccount) {

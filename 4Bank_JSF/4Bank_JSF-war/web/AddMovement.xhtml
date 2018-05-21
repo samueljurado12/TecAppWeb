@@ -16,25 +16,32 @@
                     <h1>Add Movement:</h1>
                     <br/>
                     <h:form>
-                        <h:selectOneRadio layout="pageDirection"> 
-                            <div>  <f:selectItem itemValue = "0" itemLabel = "Transfer" /> </div>
-                            <div>  <f:selectItem itemValue = "1" itemLabel = "Extract" />  </div>
-                            <div>   <f:selectItem itemValue = "2" itemLabel = "Deposit" /> </div>
-
+                        <h:selectOneRadio id="radiob" layout="pageDirection" value="#{addMovementBean.selectedItem}"> 
+                            <div>  <f:selectItem itemValue = "0" itemLabel = "Transfer">
+                                </f:selectItem> </div>
+                            <div>  <f:selectItem itemValue = "1" itemLabel = "Extract">
+                                </f:selectItem>  </div>
+                            <div>  <f:selectItem itemValue = "2" itemLabel = "Deposit">
+                                </f:selectItem> </div>
+                            <f:ajax event="click" execute="radiob" render="inputs"/>
                         </h:selectOneRadio>
                         <br/>
                         <br/>
-                        <div class="form-group row">
-                            <label for="receptorAccount" class="form-check-label col-md-3 col-form-label">Receptor Account Id:</label>
-                            <h:inputText/>
-                        </div>
-                        <div class="form-group row">
-                            <label for="concept" class="form-check-label col-md-3 col-form-label">Concept: </label>
-                            <h:inputText/>
-                        </div>
-                        <div class="form-group row">
-                            <label for="amount" class="form-check-label col-md-3 col-form-label">Amount:</label>
-                            <h:inputText/>
+                        <div>
+                            <h:panelGroup id="inputs">
+                            <div class="form-group row">
+                                <label for="receptorAccount" class="form-check-label col-md-3 col-form-label">Receptor Account Id:</label>
+                                <h:inputText class="form-control col-md-6" disabled="#{addMovementBean.selectedItem eq 0}"/>
+                            </div>
+                            <div class="form-group row">
+                                <label for="concept" class="form-check-label col-md-3 col-form-label">Concept: </label>
+                                <h:inputText class="form-control col-md-6" disabled="#{addMovementBean.selectedItem eq 0}"/>
+                            </div>
+                                </h:panelGroup>
+                                <div class="form-group row">
+                                <label for="amount" class="form-check-label col-md-3 col-form-label">Amount:</label>
+                                <h:inputText class="form-control col-md-6"/>
+                            </div>
                         </div>
                       <!--  <h:inputHidden id="selectedUser" value="#{accountsEmployeeBean.activeUser}" />
                         <h:inputHidden id="selectedAccount" value="#{accountsEmployeeBean.selectedAccount}"/> -->

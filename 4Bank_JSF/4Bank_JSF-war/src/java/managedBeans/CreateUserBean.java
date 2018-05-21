@@ -19,7 +19,7 @@ import persistence.User;
  */
 @Named(value = "createUserBean")
 @RequestScoped
-public class createUserBean {
+public class CreateUserBean {
 
     @EJB
     private UserFacade userFacade;
@@ -89,7 +89,7 @@ public class createUserBean {
     /**
      * Creates a new instance of createUserBean
      */
-    public createUserBean() {
+    public CreateUserBean() {
     }
     @PostConstruct 
     private void init(){

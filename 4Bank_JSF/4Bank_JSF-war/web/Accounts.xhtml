@@ -54,18 +54,23 @@
                     <f:facet name="header">
                         Amount
                     </f:facet>
-                    #{movement.amount}
+                    <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
+                                 style="color: red"
+                        value="-#{movement.newBalanceSender}">
+                    </h:outputText>
+                    <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
+                                 style="color: green"
+                        value="#{movement.newBalanceSender}">
+                    </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         Balance
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
-                                 style="color: red"
-                        value="-#{movement.newBalanceSender}">
+                        value="#{movement.newBalanceSender}">
                     </h:outputText>
                     <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
-                                 style="color: green"
                         value="#{movement.newBalanceReceiver}">                    
                     </h:outputText>
                 </h:column>

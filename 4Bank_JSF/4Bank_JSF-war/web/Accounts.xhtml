@@ -19,8 +19,7 @@
                     </label>
                     <h:selectOneMenu id="selectedAccount"
                                      class="form-control col-sm-3"
-                                     value="#{accountsBean.selectedAccount}"
-                                     onchange="#{accountsBean.doUpdateTable()}">
+                                     value="#{accountsBean.selectedAccount}">
                         <f:selectItems value="#{accountsBean.accountList}"
                                        var="account"
                                        itemValue="#{account.idACCOUNT}"

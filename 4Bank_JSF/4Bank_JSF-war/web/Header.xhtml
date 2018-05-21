@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>  
     <div class="row">
         <div class="col-md-3">
-            <h:graphicImage value="resources/4bank.png" class="img-fluid" alt="4BankLogo"></h:graphicImage>
+            <h:graphicImage value="resources/4bank.png" styleClass="img-fluid" alt="4BankLogo"></h:graphicImage>
         </div>
         <div class="col-md-4">
             <h2 style="color: graytext; margin-top: 1em">
@@ -17,7 +17,7 @@
 
     <nav class="navbar navbar-expand-xl navbar-dark bg-dark sticky-top">
         <ul class="navbar-nav">
-            <h:panelGroup rendered="#{!loginBean.user.isEmployee}"> <!--TODO insert rendered attribute to check if user is not employee-->
+            <h:panelGroup rendered="#{!loginBean.user.isEmployee}">
                 <li class="nav-item">
                     <h:link class="nav-link" value="Accounts" outcome="Accounts"></h:link>
                 </li>
@@ -25,22 +25,22 @@
                     <h:link class="nav-link" value="Transfer" outcome="Transfer"></h:link>
                 </li>
                 <li class="nav-item">
-                    <h:link class="nav-link" value="Contact Us" outcome="contact_us"> </h:link>
+                    <h:link styleClass="nav-link" value="Contact Us" outcome="contact_us"> </h:link>
                 </li>
             </h:panelGroup>
             
-            <h:panelGroup rendered="#{loginBean.user.isEmployee}"> <!--TODO insert rendered attribute to check if user is not employee-->
+            <h:panelGroup rendered="#{loginBean.user.isEmployee}">
                 <li class="nav-item">
-                    <h:link class="nav-link" value="Employee" outcome="Employee"></h:link>
+                    <h:link styleClass="nav-link" value="Employee" outcome="Employee"></h:link>
                 </li>
             </h:panelGroup>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <h:link class="nav-link" value="#{loginBean.user.name} #{loginBean.user.surname}" ></h:link>
+                <h:link styleClass="nav-link" value="#{loginBean.user.name} #{loginBean.user.surname}"></h:link>
             </li>
             <h:form>
-                <h:commandLink class="btn btn-secondary" value="Logout" action="#{logoutBean.doLogout()}"> <i class="fa fa-sign-out"></i></h:commandLink>>
+                <h:commandLink styleClass="btn btn-secondary" value="Logout" action="#{logoutBean.doLogout()}"> <i class="fa fa-sign-out"></i></h:commandLink>
             </h:form>
         </ul>
     </nav>

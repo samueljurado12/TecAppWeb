@@ -93,7 +93,7 @@ public class AccountsBean {
     
     public void doUpdateTable(){
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
-        receptors = new TreeMap<Integer, String>();
+        receptors = new TreeMap<>();
         for (Movement mov : movementList) {
             User otherAccount = getUser(mov, selectedAccount);
             receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());

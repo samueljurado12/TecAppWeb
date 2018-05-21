@@ -19,17 +19,17 @@
                     </label>
                     <h:selectOneMenu id="selectedAccount"
                                      class="form-control col-sm-3"
-                                     value="#{accountsBean.selectedAccount}"
-                                     onchange="#{accountsBean.doUpdateTable()}">
+                                     value="#{accountsBean.selectedAccount}">
                         <f:selectItems value="#{accountsBean.accountList}"
                                        var="account"
                                        itemValue="#{account.idACCOUNT}"
                                        itemLabel="#{account.idACCOUNT}">
                         </f:selectItems>
+                        <f:ajax render="movementsTable"></f:ajax>
                     </h:selectOneMenu>
                 </div>
             </h:form>
-            <h:dataTable id="movements"
+            <h:dataTable id="movementsTable"
                          value="#{accountsBean.movementList}"
                          var="movement"
                          class="table">

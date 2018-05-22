@@ -19,13 +19,13 @@
                     </label>
                     <h:selectOneMenu id="selectedAccount"
                                      class="form-control col-sm-3"
-                                     value="#{accountsBean.selectedAccount}">
+                                     value="#{accountsBean.selectedAccountID}">
                         <f:selectItems value="#{accountsBean.accountList}"
                                        var="account"
                                        itemValue="#{account.idACCOUNT}"
                                        itemLabel="#{account.idACCOUNT}">
                         </f:selectItems>
-                        <f:ajax render="movementsTable"></f:ajax>
+                        <f:ajax event="change" render="movementsTable"></f:ajax>
                     </h:selectOneMenu>
                 </div>
             </h:form>
@@ -56,11 +56,11 @@
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
                                  style="color: red"
-                        value="-#{movement.newBalanceSender}">
+                        value="-#{movement.amount}€">
                     </h:outputText>
-                    <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
+                    <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
                                  style="color: green"
-                        value="#{movement.newBalanceSender}">
+                        value="#{movement.amount}€">
                     </h:outputText>
                 </h:column>
                 <h:column>

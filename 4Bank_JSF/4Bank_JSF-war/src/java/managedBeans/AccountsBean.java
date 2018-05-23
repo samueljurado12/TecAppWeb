@@ -121,7 +121,7 @@ public class AccountsBean {
         this.activeUser = (User)session.getAttribute("user");
         this.accountList = activeUser.getAccountList();
         this.selectedAccount = accountList.get(0);
-        this.selectedAccountID = this.selectedAccount.getIdACCOUNT();
+        this.selectedAccountID = selectedAccount.getIdACCOUNT();
         doUpdateTable();
     }
     

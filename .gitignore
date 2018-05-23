@@ -1,4 +1,3 @@
-#
 # Project specific excludes
 #
 
@@ -63,3 +62,7 @@ pom.xml.tag
 /4Bank_JSF/4Bank_JSF-war/nbproject/
 /4Bank_JSF/4Bank_JSF-ejb/nbproject/
 /4Bank_JSF/build.xml
+
+# Guisanpea Files
+docker-compose.yml
+4Bank_JSF/setup/glassfish-resources.xml

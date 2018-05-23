@@ -13,20 +13,23 @@
         <div class="container">
             <h:form id="myForm">
                 <div class=" form-group row">
-                    <label  for ="selectedAccount" class="form-check-label 
+                    <label  for="selectedAccount" class="form-check-label 
                             col-sm-2 col-form-label">
                         <h5>Current Account:</h5>
                     </label>
                     <h:selectOneMenu id="selectedAccount"
-                                     class="form-control col-sm-3"
-                                     value="#{accountsBean.selectedAccount}">
+                                     styleClass="form-control col-sm-3"
+                                     value="#{accountsBean.selectedAccountID}">
                         <f:selectItems value="#{accountsBean.accountList}"
                                        var="account"
                                        itemValue="#{account.idACCOUNT}"
                                        itemLabel="#{account.idACCOUNT}">
                         </f:selectItems>
-                        <f:ajax render="movementsTable"></f:ajax>
+                        <f:ajax render="movementsTable"></f:ajax> <!-- Ajax not working as supposed-->
                     </h:selectOneMenu>
+                    <label class="form-check-label col-sm-4">
+                        <h4>#{accountsBean.selectedAccount.balance} €</h4>
+                    </label>
                 </div>
             </h:form>
             <h:dataTable id="movementsTable"
@@ -56,11 +59,11 @@
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
                                  style="color: red"
-                        value="-#{movement.newBalanceSender}">
+                        value="-#{movement.amount} €">
                     </h:outputText>
-                    <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
+                    <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
                                  style="color: green"
-                        value="#{movement.newBalanceSender}">
+                        value="#{movement.amoun} €">
                     </h:outputText>
                 </h:column>
                 <h:column>

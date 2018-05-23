@@ -39,11 +39,21 @@ public class AccountsBean {
     @Inject
     private LoginBean login;
     
+    String selectedAccountID;
+    
     User activeUser;
     List<Account> accountList;
     Account selectedAccount;
     List<Movement> movementList;
     Map<Integer, String> receptors;
+
+    public String getSelectedAccountID() {
+        return selectedAccountID;
+    }
+
+    public void setSelectedAccountID(String selectedAccountID) {
+        this.selectedAccountID = selectedAccountID;
+    }
 
     public Map<Integer, String> getReceptors() {
         return receptors;
@@ -92,6 +102,7 @@ public class AccountsBean {
     }
     
     public void doUpdateTable(){
+        this.selectedAccount = accountFacade.find(this.selectedAccountID);
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
         receptors = new TreeMap<>();
         for (Movement mov : movementList) {
@@ -110,6 +121,7 @@ public class AccountsBean {
         this.activeUser = (User)session.getAttribute("user");
         this.accountList = activeUser.getAccountList();
         this.selectedAccount = accountList.get(0);
+        this.selectedAccountID = selectedAccount.getIdACCOUNT();
         doUpdateTable();
     }
     

@@ -7,9 +7,10 @@ package managedBeans;
 
 import ejb.UserFacade;
 import javax.annotation.PostConstruct;
-import javax.inject.Named;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedProperty;
+import javax.inject.Named;
 import persistence.User;
 
 /**
@@ -19,8 +20,10 @@ import persistence.User;
 @Named(value = "userBean")
 @RequestScoped
 public class UserBean {
+
     @EJB
-    UserFacade userFacade;
+    private UserFacade userFacade;
+    
 
     @ManagedProperty("#{param.userID}")
     protected String userID;

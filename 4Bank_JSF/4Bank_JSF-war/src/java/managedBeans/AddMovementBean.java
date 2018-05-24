@@ -6,9 +6,8 @@
 package managedBeans;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 import persistence.Account;
 import persistence.Movement;
 import persistence.User;

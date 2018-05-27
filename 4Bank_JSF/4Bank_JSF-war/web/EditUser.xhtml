@@ -5,122 +5,93 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <title>4Bank - Edit User</title>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-                <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-                    </h:head>
-                    <h:body>
-                        <ui:include src="Header.xhtml"></ui:include>
-                        <br></br>
-                        <div class="row">
-                            <div class="col-md-6" style="padding-right:30px; padding-left:100px; border-right: 1px solid #ccc;">
-                                <h1>Update User:</h1>
-                                <h:form>
-                                    <div class="form-group row">
-                                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">Username:</label>
-                                        <h5 class="col-md-5 d-flex align-items-center"><%= #{user.username}%></h5>
-                                        <h:inputText class="col-md-5 form-control" value="#{updateUserBean.username}"/>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="name">Name: </label>
-                                        <h5 class="col-md-5 d-flex align-items-center"><%= #{user.name}%></h5>
-                                        <h:inputText class="col-md-5 form-control" value="#{updateUserBean.name}"/>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="surname">Surname: </label>
-                                        <h5 class="col-md-5 d-flex align-items-center"><%= #{user.surname}%></h5>
-                                        <h:inputText class="col-md-5 form-control" value="#{updateUserBean.surname}"/>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="email">Email: </label>
-                                        <h5 class="col-md-5 d-flex align-items-center"><%= #{user.mail}%></h5>
-                                        <h:inputText class="col-md-5 form-control" value="#{updateUserBean.mail}"/>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="nif">NIF: </label>
-                                        <h5 class="col-md-5 d-flex align-items-center"><%= #{user.nif}%></h5>
-                                        <h:inputText class="col-md-5 form-control" value="#{updateUserBean.nif}"/>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="phone">Phone: </label>
-                                        <h5 class="col-md-5 d-flex align-items-center"><%= #{user.phone}%></h5>
-                                        <h:inputText class="col-md-5 form-control" value="#{updateUserBean.phone}"/>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="address">Address: </label>
-                                        <h5 class="col-md-5 d-flex align-items-center"><%= #{user.address}%></h5>
-                                        <h:inputText class="col-md-5 form-control" value="#{updateUserBean.address}"/>
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="password">Password: </label>
-                                        <h5 class="col-md-5 d-flex align-items-center"><%= #{user.password}%></h5>
-                                        <h:inputText class="col-md-5 form-control" value="#{updateUserBean.password}">
-                                    </div>
-                                    <h:commandButton class="btn btn-warning" value="Edit" action="#{updateUserBean.updateUser(editUserBean.userID)}"></h:commandButton>
-                            </h:form>
-                        </div>
-                        <div class="col-md-6">
-                            <h1>User Accounts</h1>
-                            <h:form id="myForm">
-                                <h:inputHidden value="#{editUserBean.userID}" id="idUSER" />
-                                <div class="form-group row">
-                                    <label for="initialBalance" class="form-check-label col-form-label col-md-3">
-                                        Initial balance:</label>
-                                    <h:inputText class="form-control col-md-4" value="#{createAccountBean.balance}"/>
-                                    <div class="col-md-1"></div>
-                                    <h:commandButton class="btn btn-warning col-md-4" value="Create Account" action ="#{createAccountBean.createAccount()}"></h:commandButton>
-                                </div>
-                            </h:form>
-                            </br>
-                            <h:dataTable id="accounts"
-                                         value="#{editUserBean.accountList}"
-                                         var="account"
-                                         class="table table-hover">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">Account number</th>
-                                        <th scope="col">Balance</th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <h:column>
-                                    <f:facet name="header">
-                                        ID
-                                    </f:facet>
-                                    #{account.idACCOUNT}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        Balance
-                                    </f:facet>
-                                    #{account.balance}
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        Options
-                                    </f:facet>
-                                    <div class="container">
-                                        <h:form> 
-                                            <h:commandButton class="btn btn-warning" value=""> <i class="fa fa-pencil fa-lg"></i></h:commandButton>
-                                            <h:inputHidden value="#{account.idACCOUNT}" id="idACCOUNT" />
-                                            <h:inputHidden value="#{editUserBean.userID}" id="idUser" />
-                                        </h:form>
-                                        <h:form>
-                                            <h:commandButton class="btn btn-danger" action="#{deleteAccountBean.deleteAccount(account.idACCOUNT)}"> <i class="fa fa-times fa-lg"></i></h:commandButton>
-                                        </h:form>
-                                    </div>
-                                </h:column>
-                            </h:dataTable>
-                        </div>
+        <title>4Bank- Edit User</title>
+    </h:head>
+    <h:body>
+        <ui:include src ="Header.xhtml"> </ui:include>
+        <br/>
+        <div class="row">
+            <div class="col-md-6" style="padding-right:30px; padding-left:100px; border-right: 1px solid #ccc;">
+                <h1>Update User:</h1>   
+                <h:form>
+                    <div class="form-group row">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
+                            Username:
+                        </label>
+                        <h:outputText class = "col-md-5 d-flex align-items-center" value ="#{editUserBean.username}"> </h:outputText>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.username}"/>
                     </div>
-                </h:body>
-                </html>
+                    <div class="form-group row">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
+                            Name:
+                        </label>
+                        <h:outputText class = "col-md-5 d-flex align-items-center" value ="#{editUserBean.name}"> </h:outputText>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.name}" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
+                            Surname:
+                        </label>
+                        <h:outputText class = "col-md-5 d-flex align-items-center" value ="#{editUserBean.surname}"> </h:outputText>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.surname}" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
+                            Email:
+                        </label>
+                        <h:outputText class = "col-md-5 d-flex align-items-center" value ="#{editUserBean.email}"> </h:outputText>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.email}" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
+                            NIF:
+                        </label>
+                        <h:outputText class = "col-md-5 d-flex align-items-center" value ="#{editUserBean.nif}"> </h:outputText>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.nif}" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
+                            Phone:
+                        </label>
+                        <h:outputText class = "col-md-5 d-flex align-items-center" value ="#{editUserBean.phone}"> </h:outputText>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.phone}" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
+                            Address:
+                        </label>
+                        <h:outputText class = "col-md-5 d-flex align-items-center" value ="#{editUserBean.address}"> </h:outputText>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.address}" />
+                    </div>
+                    <div class="form-group row">
+                        <label class="form-check-label col-md-2 col-form-label d-flex align-items-center" for="username">
+                            Password:
+                        </label>
+                        <h:outputText class = "col-md-5 d-flex align-items-center" > </h:outputText>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.password}"/>
+                    </div>
+
+                    <h:inputHidden id = "idUser" value="#{editUserBean.idUser}" />
+
+
+                    <h:commandButton class="btn btn-primary" value="Submit" action="#{editUserBean.EditValues()}"/> 
+                </h:form>
+            </div>
+            <div class="col-md-6">
+                 <h1>User Accounts</h1>
+                 <h:form>
+                    <div class="form-group row">
+                        <label for="initialBalance" class="form-check-label col-form-label col-md-3">
+                            Initial balance:</label>
+                        <h:inputText class="form-control col-md-4" value="#{createAccountBean.amount}"></h:inputText>
+                        <div class="col-md-1"></div>
+                        <h:commandButton class="btn btn-warning col-md-4" value="New Account" action="#{createAccountBean.newAccount()}">
+                            <f:param id="idUser" name="idUser" value="#{editUserBean.idUser}"/>
+                        </h:commandButton> 
+                    </div> 
+                 </h:form>
+            </div>
+        </div>
+    </h:body>
+</html>
 

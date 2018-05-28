@@ -27,29 +27,28 @@
                         </h:selectOneRadio>
                         <br/>
                         <br/>
-                        <div>
-                            <h:panelGroup id="inputs">
+                        <h:panelGroup id="inputs">
                             <div class="form-group row">
                                 <label for="receptorAccount" class="form-check-label col-md-3 col-form-label">Receptor Account Id:</label>
-                                <h:inputText class="form-control col-md-6" disabled="#{addMovementBean.selectedItem eq 0}"/>
+                                <h:inputText class="form-control col-md-6" disabled="#{addMovementBean.selectedItem ne 0}"
+                                             value="#{addMovementBean.receptorAccountNumber}"/>
                             </div>
                             <div class="form-group row">
                                 <label for="concept" class="form-check-label col-md-3 col-form-label">Concept: </label>
-                                <h:inputText class="form-control col-md-6" disabled="#{addMovementBean.selectedItem eq 0}"/>
+                                <h:inputText class="form-control col-md-6" disabled="#{addMovementBean.selectedItem ne 0}"
+                                             value="#{addMovementBean.concept}"/>
                             </div>
-                                </h:panelGroup>
-                                <div class="form-group row">
-                                <label for="amount" class="form-check-label col-md-3 col-form-label">Amount:</label>
-                                <h:inputText class="form-control col-md-6"/>
-                            </div>
+                        </h:panelGroup>
+                        <div class="form-group row">
+                            <label for="amount" class="form-check-label col-md-3 col-form-label">Amount:</label>
+                            <h:inputText class="form-control col-md-6" value="#{addMovementBean.amount}"/>
                         </div>
-                      <!--  <h:inputHidden id="selectedUser" value="#{accountsEmployeeBean.activeUser}" />
-                        <h:inputHidden id="selectedAccount" value="#{accountsEmployeeBean.selectedAccount}"/> -->
-                        <h:commandButton class="btn btn-primary" value="Add Movement"/>  
+                   <!-- <h:inputHidden id="selectedAccount" value="#{accountsEmployeeBean.selectedAccount}"/> -->
+                        <h:commandButton class="btn btn-primary" action="#{addMovementBean.doAddMovement(loginBean.user)}" value="Add Movement"/>  
                     </h:form>
                 </div>
                 <div class="col-md-6">
-                    <h1>        Accounts: </h1>
+                    <h1>        Movements: </h1>
                     <br/>
                     <div class="container">
 

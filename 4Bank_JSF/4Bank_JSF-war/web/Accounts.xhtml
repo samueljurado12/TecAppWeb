@@ -25,7 +25,7 @@
                                        itemValue="#{account.idACCOUNT}"
                                        itemLabel="#{account.idACCOUNT}">
                         </f:selectItems>
-                        <f:ajax render="movementsTable"></f:ajax> <!-- Ajax not working as supposed-->
+                        <f:ajax event="change" execute="selectedAccount" render="movementsTable"></f:ajax> <!-- Ajax not working as supposed-->
                     </h:selectOneMenu>
                     <label class="form-check-label col-sm-4">
                         <h4>#{accountsBean.selectedAccount.balance} €</h4>
@@ -33,7 +33,7 @@
                 </div>
             </h:form>
             <h:dataTable id="movementsTable"
-                         value="#{accountsBean.movementList}"
+                         value="#{accountsBean.doGetMovements()}"
                          var="movement"
                          class="table">
                 <h:column>

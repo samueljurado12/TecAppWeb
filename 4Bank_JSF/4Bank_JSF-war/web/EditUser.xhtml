@@ -90,6 +90,43 @@
                         </h:commandButton> 
                     </div> 
                 </h:form>
+                <h:dataTable id="users"
+                             value="#{editUserBean.accounts}"
+                                 var="account"
+                                 class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Account number</th>
+                                <th scope="col">Balance</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </thead>
+                        <h:column>
+                            <f:facet name="header">
+                                Account number
+                            </f:facet>
+                            #{account.idACCOUNT}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Balance
+                            </f:facet>
+                            #{account.balance}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Options
+                            </f:facet>
+                            <div class="container">
+                                <h:form> 
+                                    <h:commandLink class="btn btn-warning" value="" action ="#{editUserBean.doEdit(user.idUSER)}"> <i class="fa fa-pencil fa-lg"></i></h:commandLink>
+                                </h:form>
+                                <h:form> 
+                                    <h:commandLink class="btn btn-danger" value=""> <i class="fa fa-times fa-lg"></i></h:commandLink>
+                                </h:form>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
             </div>
         </div>
     </h:body>

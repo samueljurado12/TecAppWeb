@@ -5,11 +5,13 @@
  */
 package managedBeans;
 
+import ejb.AccountFacade;
 import ejb.UserFacade;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
+import persistence.Account;
 import persistence.User;
 
 /**
@@ -21,10 +23,13 @@ import persistence.User;
 public class EditUserBean {
 
     @EJB
+    private AccountFacade accountFacade;
+
+    @EJB
     private UserFacade userFacade;
 
-   
-
+    private List<Account> accounts;
+    
     int idUser;
     User myUser;
     String username;
@@ -108,6 +113,16 @@ public class EditUserBean {
         this.idUser = idUser;
     }
 
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
+    
+    
+
     /**
      * Creates a new instance of EditUserBean
      */
@@ -125,6 +140,7 @@ public class EditUserBean {
         this.address = myUser.getNif();
         this.phone = myUser.getPhoneNumber();
         this.password=myUser.getPassword();
+        this.accounts = accountFacade.queryAllAccountsOfUser(myUser);
         return "EditUser";
     }
 
@@ -166,4 +182,5 @@ public class EditUserBean {
     public void setName(String name) {
         this.name = name;
     }
+    
 }

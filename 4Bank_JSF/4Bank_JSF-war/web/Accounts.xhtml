@@ -25,11 +25,11 @@
                                        itemValue="#{account.idACCOUNT}"
                                        itemLabel="#{account.idACCOUNT}">
                         </f:selectItems>
-                        <f:ajax event="change" execute="selectedAccount" render="movementsTable"></f:ajax> <!-- Ajax not working as supposed-->
+                        <f:ajax event="change" execute="@form" render="movementsTable balance"></f:ajax> <!-- Ajax not working as supposed-->
                     </h:selectOneMenu>
-                    <label class="form-check-label col-sm-4">
-                        <h4>#{accountsBean.selectedAccount.balance} €</h4>
-                    </label>
+                    <h4 class="align-self-center"><h:outputText id="balance" class="form-check-label col-sm-4" value="#{accountsBean.selectedAccount.balance} €">
+                    </h:outputText>
+                    </h4>
                 </div>
             </h:form>
             <h:dataTable id="movementsTable"
@@ -59,7 +59,7 @@
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
                                   style="color: red"
-
+                                  
                                   value="-#{movement.amount} €">
                     </h:outputText>
                     <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
@@ -86,10 +86,10 @@
                         <f:convertDateTime pattern="EEE dd/MM/YYYY"></f:convertDateTime>
                     </h:outputText>
                 </h:column>
-
+                
             </h:dataTable>
         </div>
-
+        
     </h:body>
 </html>
 

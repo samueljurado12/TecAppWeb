@@ -16,10 +16,8 @@ import java.util.TreeMap;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.event.ValueChangeEvent;
-import javax.servlet.http.HttpSession;
+import javax.inject.Inject;
 import persistence.Account;
 import persistence.Movement;
 import persistence.User;
@@ -40,6 +38,9 @@ public class AccountsEmployeeBean {
 
     @EJB
     private MovementFacade movementFacade;
+    
+    @Inject
+    private LoginBean loginBean;
 
     User activeUser;
     List<Account> accountList;
@@ -95,12 +96,10 @@ public class AccountsEmployeeBean {
     public AccountsEmployeeBean() {
     }
     
-    public void doUpdateTable(Integer idUser){
-        this.activeUser = (User)userFacade.find(idUser);
-        this.accountList = activeUser.getAccountList();
-        this.selectedAccount=accountList.get(0);
+    public void doUpdateTable(){
+        
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
-        receptors = new TreeMap<Integer, String>();
+        receptors = new TreeMap<>();
         for (Movement mov : movementList) {
             User otherAccount = getUser(mov, selectedAccount);
             receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
@@ -111,10 +110,22 @@ public class AccountsEmployeeBean {
         return new SimpleDateFormat("EEE dd/MM/YYYY").format(date);
     }
     
+    public List<Movement> movementsWithSession() {
+        this.selectedAccount = this.loginBean.getAccountaux();
+        doUpdateTable();
+        return this.movementList;
+    }
+
+    
+    public String doMovements(String idAccount){
+        this.selectedAccount = accountFacade.find(idAccount);
+        this.loginBean.setAccountaux(selectedAccount);
+        return "AddMovement";
+    }
+    
     @PostConstruct
     private void init(){
-        
-        doUpdateTable(2);
+        doUpdateTable();
     }
     
     private User getUser(Movement mov, Account selectedAccount) {

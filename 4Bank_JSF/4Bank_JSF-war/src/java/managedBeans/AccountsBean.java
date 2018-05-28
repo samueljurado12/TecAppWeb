@@ -7,8 +7,6 @@ package managedBeans;
 
 import ejb.AccountFacade;
 import ejb.MovementFacade;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -111,15 +109,12 @@ public class AccountsBean {
         }
     }
     
-    public String formatDate(Date date){
-        return new SimpleDateFormat("EEE dd/MM/YYYY").format(date);
-    }
-    
     @PostConstruct
     private void init(){
         HttpSession session = SessionUtils.getSession();
-        this.activeUser = (User)session.getAttribute("user");
-        this.accountList = activeUser.getAccountList();
+        //this.activeUser = (User)session.getAttribute("user");
+        this.activeUser = login.getUser();
+        this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
         this.selectedAccount = accountList.get(0);
         this.selectedAccountID = selectedAccount.getIdACCOUNT();
         doUpdateTable();

@@ -41,10 +41,10 @@
                         Entity
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
-                        value="#{accountsBean.receptors.get(movement.idACCOUNTreceptor.idUSER.idUSER)}">
+                                  value="#{accountsBean.receptors.get(movement.idACCOUNTreceptor.idUSER.idUSER)}">
                     </h:outputText>
                     <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
-                        value="#{accountsBean.receptors.get(movement.idACCOUNT.idUSER.idUSER)}">
+                                  value="#{accountsBean.receptors.get(movement.idACCOUNT.idUSER.idUSER)}">
                     </h:outputText>
                 </h:column>
                 <h:column>
@@ -58,13 +58,13 @@
                         Amount
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
-                                 style="color: red"
+                                  style="color: red"
 
-                        value="-#{movement.amount} €">
+                                  value="-#{movement.amount} €">
                     </h:outputText>
                     <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
-                                 style="color: green"
-                        value="#{movement.amoun} €">
+                                  style="color: green"
+                                  value="#{movement.amoun} €">
                     </h:outputText>
                 </h:column>
                 <h:column>
@@ -72,17 +72,19 @@
                         Balance
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
-                        value="#{movement.newBalanceSender}">
+                                  value="#{movement.newBalanceSender}">
                     </h:outputText>
                     <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
-                        value="#{movement.newBalanceReceiver}">                    
+                                  value="#{movement.newBalanceReceiver}">                    
                     </h:outputText>
                 </h:column>
                 <h:column>
                     <f:facet name="header">
                         Date
                     </f:facet>
-                    #{accountsBean.formatDate(movement.date)}
+                    <h:outputText value="#{movement.date}">
+                        <f:convertDateTime pattern="EEE dd/MM/YYYY"></f:convertDateTime>
+                    </h:outputText>
                 </h:column>
 
             </h:dataTable>

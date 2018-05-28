@@ -15,7 +15,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpSession;
 import persistence.Account;
 import persistence.Movement;
 import persistence.User;
@@ -111,8 +110,6 @@ public class AccountsBean {
     
     @PostConstruct
     private void init(){
-        HttpSession session = SessionUtils.getSession();
-        //this.activeUser = (User)session.getAttribute("user");
         this.activeUser = login.getUser();
         this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
         this.selectedAccount = accountList.get(0);

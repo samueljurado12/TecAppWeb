@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import persistence.Account;
 import persistence.User;
 
@@ -22,6 +23,9 @@ import persistence.User;
 @RequestScoped
 public class EditUserBean {
 
+    @Inject 
+    private LoginBean loginBean;
+    
     @EJB
     private AccountFacade accountFacade;
 
@@ -40,6 +44,15 @@ public class EditUserBean {
     int phone;
     String address;
     String password;
+    String newPassword;
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
 
     public String getSurname() {
         return surname;
@@ -132,6 +145,7 @@ public class EditUserBean {
     public String doEdit(int idUser) {
         this.idUser = idUser;
         this.myUser = userFacade.find(idUser);
+        this.loginBean.setUseraux(myUser);
         this.username = myUser.getUsername();
         this.name = myUser.getName();
         this.surname = myUser.getSurname();
@@ -145,7 +159,8 @@ public class EditUserBean {
     }
 
     public String EditValues() {
-        myUser = userFacade.find(idUser);
+        
+        myUser = this.loginBean.getUseraux();
     
         if (this.username != null && !username.equals(myUser.getUsername())) {
             myUser.setUsername(username);
@@ -168,11 +183,22 @@ public class EditUserBean {
         if (phone != 0 && phone != myUser.getPhoneNumber()) {
             myUser.setUsername(username);
         }
-        if (password != null && !password.equals(myUser.getPassword())) {
+       /* if(password!=null && !password.equals(myUser.getPassword())){
             myUser.setPassword(password);
+        } */
+        if (!newPassword.equals("") && !newPassword.equals(myUser.getPassword())) {
+            myUser.setPassword(newPassword);
+            password=newPassword;
+            newPassword="";
         } 
         userFacade.edit(myUser);
+        myUser=null;
         return "EditUser";
+    }
+    public List<Account> accountsWithSession() {
+        this.myUser=this.loginBean.getUseraux();
+        this.accounts=myUser.getAccountList();
+        return accounts;
     }
 
     public String getName() {

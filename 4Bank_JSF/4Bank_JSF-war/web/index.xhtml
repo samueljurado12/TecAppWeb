@@ -1,19 +1,22 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>4Bank</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
     </h:head>
     <h:body>
+        <f:loadBundle basename="messages" var="msgs"/>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <h:graphicImage class="img-fluid" value="resources/4bank.png"/>
                 </div>
                 <div class="col-md-8 text-right">
-                    <h2 style="color: DarkGray;">Your Bank and each day <br/> more people one's</h2>
+                    <h2 style="color: DarkGray;
+                        text-align: left" class="col-md-6">#{msgs.headerMsg}</h2>
                 </div>
             </div>
         </div>
@@ -24,22 +27,22 @@
                     <h:graphicImage class="img-fluid" value="resources/4bank-promocion.png"/>
                 </div>
                 <div class="col-md-4">
-                    <p>Sign in</p>
+                    <p>#{msgs.indexSign}</p>
                     <hr/>
                     <h:form>
                         <div class="form-group">
-                            <label for="username">Username:</label>
+                            <label for="username">#{msgs.indexUsername}</label>
                             <br/>
                             <h:inputText class="form-control" value="#{loginBean.username}"/>
                         </div>
                         <div class="form-group">
-                            <label for="pwd">Password:</label>
+                            <label for="pwd">#{msgs.indexPassword}</label>
                             <br/>
                             <h:inputSecret class="form-control" value="#{loginBean.password}"/>
                         </div>
                         <hr/>
                         <div>
-                            <h:commandButton class="btn btn-primary" value="Login" action="#{loginBean.doLogin()}"/>
+                            <h:commandButton class="btn btn-primary" value="#{msgs.indexButton}" action="#{loginBean.doLogin()}"/>
                         </div>
                     </h:form>
                 </div>

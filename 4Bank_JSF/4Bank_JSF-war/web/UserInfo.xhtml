@@ -4,10 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>4Bank- User Info</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        </h:head>
+        <title>4Bank - User Info</title>
+    </h:head>
     <h:body>
         <ui:include src="Header.xhtml"></ui:include>
         <h1>User Info</h1>
@@ -21,15 +19,15 @@
                                 <img src="resources/4bank-user.png" alt="user-image" class="img-fluid"/>
                             </div>
                             <div class="col-sm-6 col-md-8">
-                                <h4> #{userBean.currentUser.name}  #{userBean.currentUser.surname}</h4>
-                                <small><cite title="localizacion"> #{userBean.currentUser.address}> <i class="glyphicon glyphicon-map-marker">
+                                <h4> #{loginBean.user.name}  #{loginBean.user.surname}</h4>
+                                <small><cite title="localizacion"> #{loginBean.user.address} <i class="glyphicon glyphicon-map-marker">
                                         </i></cite></small>
                                 <p>
-                                    <i class="glyphicon glyphicon-envelope"></i>#{userBean.currentUser.email}
+                                    #{loginBean.user.email}
                                     <br />
-                                    <i class="glyphicon glyphicon-earphone"></i>#{userBean.currentUser.phoneNumber}
+                                    #{loginBean.user.phoneNumber}
                                     <br />
-                                    <i class="glyphicon glyphicon-gift"></i>#{userBean.currentUser.nif}
+                                    #{loginBean.user.nif}
                                 </p>
                             </div>
                         </div>

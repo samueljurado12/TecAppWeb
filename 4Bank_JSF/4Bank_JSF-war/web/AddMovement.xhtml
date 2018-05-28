@@ -12,7 +12,7 @@
         <br/>
         <div class="container">
             <div class="row">
-                <div class="col-md-6" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
+                <div class="col-md-5" style="padding-right:5px; padding-left:10px; border-right: 1px solid #ccc;">
                     <h1>Add Movement:</h1>
                     <br/>
                     <h:form>
@@ -46,11 +46,12 @@
                         <h:commandButton class="btn btn-primary" action="#{addMovementBean.doAddMovement(loginBean.user)}" value="Add Movement"/>  
                     </h:form>
                 </div>
-                <div class="col-md-6">
-                    <h1>        Movements: </h1>
+                <div class="col-md-7">
+                    <h2>        Account:  <h:outputText value ="#{accountsEmployeeBean.selectedAccount.idACCOUNT}"> </h:outputText></h2>
+                    <h1> Movements: </h1>
                     <br/>
                     <div class="container">
-
+                        
                         <h:dataTable id="movements"
                                      value="#{accountsEmployeeBean.movementsWithSession()}"
                                      var="movement"
@@ -76,18 +77,23 @@
                                 <f:facet name="header">
                                     Amount
                                 </f:facet>
-                                #{movement.amount}
+                                <h:outputText rendered="#{movement.idACCOUNT eq accountsEmployeeBean.selectedAccount}"
+                                              style="color: red"
+                                              value="-#{movement.amount} €">
+                                </h:outputText>
+                                <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsEmployeeBean.selectedAccount}"
+                                              style="color: green"
+                                              value="#{movement.amount} €">
+                                </h:outputText>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     Balance
                                 </f:facet>
                                 <h:outputText rendered="#{movement.idACCOUNT eq accountsEmployeeBean.selectedAccount}"
-                                              style="color: red"
-                                              value="-#{movement.newBalanceSender}">
+                                              value="#{movement.newBalanceSender}">
                                 </h:outputText>
                                 <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsEmployeeBean.selectedAccount}"
-                                              style="color: green"
                                               value="#{movement.newBalanceReceiver}">                    
                                 </h:outputText>
                             </h:column>

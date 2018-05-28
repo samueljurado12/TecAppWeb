@@ -87,7 +87,6 @@ public class CreateAccountBean {
     }
     
     public String newAccount(){
-        System.out.println("MUISISI" + idUser);
         myUser= userFacade.find(idUser);
         if(amount > 0){
             Account newAccount = new Account();

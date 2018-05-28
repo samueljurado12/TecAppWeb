@@ -10,7 +10,7 @@ import ejb.UserFacade;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import persistence.User;
 
@@ -18,7 +18,7 @@ import persistence.User;
  *
  * @author RhoLouh
  */
-@ManagedBean(name = "loginBean")
+@Named(value = "loginBean")
 @SessionScoped
 public class LoginBean implements Serializable {
     

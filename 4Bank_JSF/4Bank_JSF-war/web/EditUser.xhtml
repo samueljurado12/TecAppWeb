@@ -85,10 +85,8 @@
                             Initial balance:</label>
                         <h:inputText class="form-control col-md-4" value="#{createAccountBean.amount}"></h:inputText>
                         <div class="col-md-1"></div>
-                        <f:metadata>
-                            <f:viewParam name="id" value="#{editUserBean.idUser}" />
-                        </f:metadata>
-                        <h:commandButton class="btn btn-warning col-md-4" value="New Account" action="#{createAccountBean.newAccount()}">
+                       
+                        <h:commandButton class="btn btn-warning col-md-4" value="New Account" action="#{createAccountBean.newAccount(editUserBean.idUser)}">
                         </h:commandButton> 
                     </div> 
                 </h:form>

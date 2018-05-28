@@ -95,7 +95,10 @@
                                 <f:facet name="header">
                                     Date
                                 </f:facet>
-                                #{accountsEmployeeBean.formatDate(movement.date)}
+                                <h:outputText value="#{accountsEmployeeBean.formatDate(movement.date)}">
+                                    <f:convertDateTime pattern="EEE dd/MM/YYYY"></f:convertDateTime>
+                                </h:outputText>
+                                
                             </h:column>
                         </h:dataTable>
                     </div>

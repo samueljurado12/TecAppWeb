@@ -30,7 +30,7 @@ public class CreateAccountBean {
     @EJB
     private UserFacade userFacade;
    
-    @Inject @Param
+    
     private int idUser;
     
     

@@ -8,6 +8,7 @@ package managedBeans;
 import ejb.AccountFacade;
 import ejb.UserFacade;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -142,21 +143,6 @@ public class EditUserBean {
     public EditUserBean() {
     }
 
-    public String doEdit(int idUser) {
-        this.idUser = idUser;
-        this.myUser = userFacade.find(idUser);
-        this.loginBean.setUseraux(myUser);
-        this.username = myUser.getUsername();
-        this.name = myUser.getName();
-        this.surname = myUser.getSurname();
-        this.email = myUser.getEmail();
-        this.nif = myUser.getNif();
-        this.address = myUser.getNif();
-        this.phone = myUser.getPhoneNumber();
-        this.password=myUser.getPassword();
-        this.accounts = accountFacade.queryAllAccountsOfUser(myUser);
-        return "EditUser";
-    }
 
     public String EditValues() {
         
@@ -208,5 +194,23 @@ public class EditUserBean {
     public void setName(String name) {
         this.name = name;
     }
+    
+    @PostConstruct
+    public void init(){
+        this.myUser = this.loginBean.getUseraux();
+        this.idUser = myUser.getIdUSER();
+        this.myUser = userFacade.find(idUser);
+        this.username = myUser.getUsername();
+        this.name = myUser.getName();
+        this.surname = myUser.getSurname();
+        this.email = myUser.getEmail();
+        this.nif = myUser.getNif();
+        this.address = myUser.getNif();
+        this.phone = myUser.getPhoneNumber();
+        this.password=myUser.getPassword();
+        this.accounts = accountFacade.queryAllAccountsOfUser(myUser);
+    }
+    
+    
     
 }

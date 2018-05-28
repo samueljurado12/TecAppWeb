@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import persistence.User;
 
 /**
@@ -23,6 +24,9 @@ public class EmployeeBean {
     
     @EJB
     private UserFacade userFacade;
+    
+    @Inject
+    private LoginBean loginBean;
     
     List<User> users;
 
@@ -43,6 +47,11 @@ public class EmployeeBean {
     @PostConstruct
     public void init(){
         this.users = userFacade.findAllNotEmployee();
+    }
+    
+    public String doEdit(int idUser){
+        this.loginBean.setUseraux(userFacade.find(idUser));
+        return "EditUser";
     }
     
 }

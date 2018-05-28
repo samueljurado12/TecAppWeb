@@ -108,13 +108,17 @@ public class AccountsBean {
         }
     }
     
+    public List<Movement> doGetMovements(){
+        this.doUpdateTable();
+        return movementList;
+    }
+    
     @PostConstruct
     private void init(){
         this.activeUser = login.getUser();
         this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
         this.selectedAccount = accountList.get(0);
         this.selectedAccountID = selectedAccount.getIdACCOUNT();
-        doUpdateTable();
     }
     
     private User getUser(Movement mov, Account selectedAccount) {

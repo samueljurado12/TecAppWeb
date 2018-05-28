@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import persistence.Account;
 import persistence.User;
 
 /**
@@ -29,6 +30,24 @@ public class LoginBean implements Serializable {
     private String username;
     private String password;
     private String msg; //TODO necesario para fallo en login 
+    private User useraux;
+    private Account accountaux;
+
+    public Account getAccountaux() {
+        return accountaux;
+    }
+
+    public void setAccountaux(Account accountaux) {
+        this.accountaux = accountaux;
+    }
+
+    public User getUseraux() {
+        return useraux;
+    }
+
+    public void setUseraux(User useraux) {
+        this.useraux = useraux;
+    }
 
     public LoginBean() {
     }
@@ -73,6 +92,7 @@ public class LoginBean implements Serializable {
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("user", user);
             session.setAttribute("selectedAccount", null);
+            session.setAttribute("useraux", useraux);
             return user.getIsEmployee() ? "Employee" : "Accounts";
         }
         else {

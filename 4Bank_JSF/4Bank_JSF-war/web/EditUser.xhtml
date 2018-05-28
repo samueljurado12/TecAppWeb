@@ -68,13 +68,13 @@
                             Password:
                         </label>
                         <h:outputText class = "col-md-5 d-flex align-items-center" > </h:outputText>
-                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.password}"/>
+                        <h:inputText class="col-md-5 form-control" value="#{editUserBean.newPassword}"/>
                     </div>
 
-                    <h:inputHidden id = "idUser" value="#{editUserBean.idUser}" />
-
-
-                    <h:commandButton class="btn btn-primary" value="Submit" action="#{editUserBean.EditValues()}"/> 
+                    <h:commandButton class="btn btn-primary" value="Submit" action="#{editUserBean.EditValues()}">
+                    <f:ajax execute="@form"   
+                            render="@form"/>
+                    </h:commandButton> 
                 </h:form>
             </div>
             <div class="col-md-6">
@@ -86,10 +86,52 @@
                         <h:inputText class="form-control col-md-4" value="#{createAccountBean.amount}"></h:inputText>
                         <div class="col-md-1"></div>
                        
-                        <h:commandButton class="btn btn-warning col-md-4" value="New Account" action="#{createAccountBean.newAccount(editUserBean.idUser)}">
+                        <h:commandButton class="btn btn-warning col-md-4" value="New Account" action="#{createAccountBean.newAccount()}">
+                       <f:ajax execute="@form"   
+                            render="users"/>
                         </h:commandButton> 
                     </div> 
                 </h:form>
+                <h:dataTable id="users"
+                             value="#{editUserBean.accountsWithSession()}"
+                                 var="account"
+                                 class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Account number</th>
+                                <th scope="col">Balance</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </thead>
+                        <h:column>
+                            <f:facet name="header">
+                                Account number
+                            </f:facet>
+                            #{account.idACCOUNT}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Balance
+                            </f:facet>
+                            #{account.balance}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                Options
+                            </f:facet>
+                            <div class="container">
+                                <h:form> 
+                                    <h:commandLink class="btn btn-warning" value="" action ="#{accountsEmployeeBean.doMovements(account.idACCOUNT)}"> <i class="fa fa-pencil fa-lg"></i></h:commandLink>
+                                </h:form>
+                                <h:form> 
+                                    <h:commandLink class="btn btn-danger" value="" action="#{deleteAccountBean.deleteAccount(account)}"> <i class="fa fa-times fa-lg"></i>
+                                    <f:ajax execute="@form"   render="user"/>
+                                    </h:commandLink>
+                                    
+                                </h:form>
+                            </div>
+                        </h:column>
+                    </h:dataTable>
             </div>
         </div>
     </h:body>

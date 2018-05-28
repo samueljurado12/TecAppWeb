@@ -11,7 +11,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import persistence.Account;
 import persistence.User;
 
@@ -20,10 +21,12 @@ import persistence.User;
  * @author JavierVazquez
  */
 @Named(value = "createAccountBean")
-@Dependent
+@RequestScoped
 public class CreateAccountBean {
    
-    
+    @Inject 
+    private LoginBean loginBean;
+     
     @EJB
     private AccountFacade accountFacade;
 
@@ -86,9 +89,9 @@ public class CreateAccountBean {
     public CreateAccountBean() {
     }
     
-    public String newAccount(){
-        System.out.println("MUISISI" + idUser);
-        myUser= userFacade.find(idUser);
+    public void newAccount(){
+        
+        myUser= this.loginBean.getUseraux();
         if(amount > 0){
             Account newAccount = new Account();
             newAccount.setIdUSER(myUser);
@@ -103,6 +106,6 @@ public class CreateAccountBean {
 
             accountFacade.create(newAccount);
         }   
-        return "Employee";
+//        return "Employee";
     }
 }

@@ -6,12 +6,10 @@
 package managedBeans;
 
 import ejb.UserFacade;
+import java.io.Serializable;
 import javax.ejb.EJB;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 import persistence.User;
 
@@ -19,9 +17,9 @@ import persistence.User;
  *
  * @author RhoLouh
  */
-@ManagedBean(name = "logoutBean")
+@Named(value = "logoutBean")
 @SessionScoped
-public class LogoutBean {
+public class LogoutBean implements Serializable {
 
     @EJB
     private UserFacade userFacade;

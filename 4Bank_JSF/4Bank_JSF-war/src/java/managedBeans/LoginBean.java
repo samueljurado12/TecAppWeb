@@ -73,10 +73,7 @@ public class LoginBean implements Serializable {
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("user", user);
             session.setAttribute("selectedAccount", null);
-            if (user.getIsEmployee())
-                return "Employee";
-            else
-                return "Accounts";
+            return user.getIsEmployee() ? "Employee" : "Accounts";
         }
         else {
             return "index";

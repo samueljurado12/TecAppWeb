@@ -183,8 +183,8 @@ public class EditUserBean {
     }
     public List<Account> accountsWithSession() {
         this.myUser=this.loginBean.getUseraux();
-        this.accounts=myUser.getAccountList();
-        return accounts;
+        this.accounts=accountFacade.queryAllAccountsOfUser(myUser);
+        return this.accounts;
     }
 
     public String getName() {
@@ -209,6 +209,7 @@ public class EditUserBean {
         this.phone = myUser.getPhoneNumber();
         this.password=myUser.getPassword();
         this.accounts = accountFacade.queryAllAccountsOfUser(myUser);
+        
     }
     
     

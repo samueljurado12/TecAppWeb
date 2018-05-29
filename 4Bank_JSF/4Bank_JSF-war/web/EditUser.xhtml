@@ -88,8 +88,7 @@
                             <div class="col-md-1"></div>
                             
                             <h:commandButton class="btn btn-warning col-md-4" value="New Account" action="#{createAccountBean.newAccount()}">
-                                <f:ajax execute="@form"   
-                                        render="users"/>
+                                <f:ajax execute="@form" render="users @form"></f:ajax>  
                             </h:commandButton> 
                         </div> 
                     </h:form>
@@ -130,7 +129,7 @@
                                     <div class="col-md-4">
                                         <h:form> 
                                             <h:commandLink class="btn btn-danger" value="" action="#{deleteAccountBean.deleteAccount(account)}"> <i class="fa fa-times fa-lg"></i>
-                                                <f:ajax execute="@form"   render="user"/>
+                                                <f:ajax execute="@form" render="users"></f:ajax>
                                             </h:commandLink>
                                         </h:form>
                                     </div>

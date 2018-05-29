@@ -8,7 +8,7 @@ package managedBeans;
 import ejb.AccountFacade;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import persistence.Account;
 
 /**
@@ -16,7 +16,7 @@ import persistence.Account;
  * @author JavierVazquez
  */
 @Named(value = "deleteAccountBean")
-@Dependent
+@RequestScoped
 public class DeleteAccountBean {
 
     @EJB

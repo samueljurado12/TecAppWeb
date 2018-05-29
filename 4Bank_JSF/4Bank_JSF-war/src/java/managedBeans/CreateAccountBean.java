@@ -11,7 +11,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import persistence.Account;
 import persistence.User;
 
@@ -20,7 +21,7 @@ import persistence.User;
  * @author JavierVazquez
  */
 @Named(value = "createAccountBean")
-@Dependent
+@RequestScoped
 public class CreateAccountBean {
    
     
@@ -30,6 +31,8 @@ public class CreateAccountBean {
     @EJB
     private UserFacade userFacade;
    
+    @Inject
+    private LoginBean loginBean;
     
     private int idUser;
     
@@ -86,8 +89,10 @@ public class CreateAccountBean {
     public CreateAccountBean() {
     }
     
-    public String newAccount(){
-        myUser= userFacade.find(idUser);
+    
+    
+    public void newAccount(){
+        myUser= this.loginBean.getUseraux();
         if(amount > 0){
             Account newAccount = new Account();
             newAccount.setIdUSER(myUser);
@@ -99,9 +104,11 @@ public class CreateAccountBean {
             nf.setMaximumFractionDigits(0);
             String str = nf.format(rand).replaceAll("[-+.^:,]", "");
             newAccount.setIdACCOUNT("ES0130031337" + Integer.toString((int)(rand%100)) + str);
-
             accountFacade.create(newAccount);
+            myUser.getAccountList().add(newAccount);
+            newAccount=null;
         }   
-        return "Employee";
+          this.amount=0;
+//        return "Employee";
     }
 }

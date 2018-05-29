@@ -15,7 +15,7 @@
                 <div class=" form-group row">
                     <label  for="selectedAccount" class="form-check-label 
                             col-sm-2 col-form-label">
-                        <h5>Current Account:</h5>
+                        <h5>#{msgs.accountsCurrent}</h5>
                     </label>
                     <h:selectOneMenu id="selectedAccount"
                                      styleClass="form-control col-sm-3"
@@ -25,7 +25,7 @@
                                        itemValue="#{account.idACCOUNT}"
                                        itemLabel="#{account.idACCOUNT}">
                         </f:selectItems>
-                        <f:ajax event="change" execute="@form" render="movementsTable balance"></f:ajax> <!-- Ajax not working as supposed-->
+                        <f:ajax event="change" execute="@form" render="movementsTable balance"></f:ajax>
                     </h:selectOneMenu>
                     <h4 class="align-self-center"><h:outputText id="balance" class="form-check-label col-sm-4" value="#{accountsBean.selectedAccount.balance} €">
                     </h:outputText>
@@ -38,7 +38,7 @@
                          class="table">
                 <h:column>
                     <f:facet name="header">
-                        Entity
+                        #{msgs.accountsEntity}
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
                                   value="#{accountsBean.receptors.get(movement.idACCOUNTreceptor.idUSER.idUSER)}">
@@ -49,13 +49,13 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        Concept
+                        #{msgs.accountsConcept}
                     </f:facet>
                     #{movement.concept}
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        Amount
+                        #{msgs.accountsAmount}
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
                                   style="color: red"
@@ -69,7 +69,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        Balance
+                        #{msgs.accountsBalance}
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
                                   value="#{movement.newBalanceSender}">
@@ -80,7 +80,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        Date
+                        #{msgs.accountsDate}
                     </f:facet>
                     <h:outputText value="#{movement.date}">
                         <f:convertDateTime pattern="EEE dd/MM/YYYY"></f:convertDateTime>

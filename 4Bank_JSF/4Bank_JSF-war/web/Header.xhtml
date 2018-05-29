@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-4">
             <h2 style="color: graytext; margin-top: 1em">
-                Your bank and each day more people's one
+                #{msgs.headerMsg}
             </h2>
         </div>
     </div>
@@ -19,19 +19,19 @@
         <ul class="navbar-nav">
             <h:panelGroup rendered="#{!loginBean.user.isEmployee}">
                 <li class="nav-item">
-                    <h:link class="nav-link" value="Accounts" outcome="Accounts"></h:link>
+                    <h:link class="nav-link" value="#{msgs.navbarAccounts}" outcome="Accounts"></h:link>
                 </li>
                 <li class="nav-item">
-                    <h:link class="nav-link" value="Transfer" outcome="Transfer"></h:link>
+                    <h:link class="nav-link" value="#{msgs.navbarTransfer}" outcome="Transfer"></h:link>
                 </li>
                 <li class="nav-item">
-                    <h:link styleClass="nav-link" value="Contact Us" outcome="Contact_us"> </h:link>
+                    <h:link styleClass="nav-link" value="#{msgs.navbarContact}" outcome="Contact_us"> </h:link>
                 </li>
             </h:panelGroup>
             
             <h:panelGroup rendered="#{loginBean.user.isEmployee}">
                 <li class="nav-item">
-                    <h:link styleClass="nav-link" value="Employee" outcome="Employee"></h:link>
+                    <h:link styleClass="nav-link" value="#{msgs.navbarEmployee}" outcome="Employee"></h:link>
                 </li>
             </h:panelGroup>
         </ul>
@@ -40,7 +40,7 @@
                 <h:link styleClass="nav-link" value="#{loginBean.user.name} #{loginBean.user.surname}" outcome="UserInfo"></h:link>
             </li>
             <h:form>
-                <h:commandLink styleClass="btn btn-secondary" value="Logout" action="#{logoutBean.doLogout()}"> <i class="fa fa-sign-out"></i></h:commandLink>
+                <h:commandLink styleClass="btn btn-secondary" value="#{msgs.navbarLogout}" action="#{logoutBean.doLogout()}"> <i class="fa fa-sign-out"></i></h:commandLink>
             </h:form>
         </ul>
     </nav>

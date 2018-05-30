@@ -8,14 +8,11 @@ package managedBeans;
 
 import ejb.AccountFacade;
 import ejb.MovementFacade;
-import ejb.UserFacade;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.enterprise.context.RequestScoped;
 import javax.servlet.http.HttpSession;
 import persistence.Account;

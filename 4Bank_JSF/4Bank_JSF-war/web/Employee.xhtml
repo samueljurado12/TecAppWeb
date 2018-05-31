@@ -10,7 +10,7 @@
     <h:body>
         <ui:include src="Header.xhtml"></ui:include>
         <br></br>
-        
+
         <div class="container">
             <div class="row">
                 <div class="col-md-4" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
@@ -41,25 +41,20 @@
                             <label for="Address" class="form-check-label col-md-3 col-form-label">Address: </label>
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.address}"></h:inputText>
                         </div>
-                        <h:commandButton class="btn btn-primary" value="Create User" action="#{createUserBean.createUser()}"/>
+                        <h:commandButton class="btn btn-primary" value="Create User" action="#{createUserBean.createUser()}">
+                            <f:ajax  execute="@form" 
+                                render="users @form"/>
+                        </h:commandButton>
                     </h:form>
                 </div>
                 <div class="col-md-8">
                     <h1>Update User:</h1>
                     <br></br>
                     <h:dataTable id="users"
-                                 value="#{employeeBean.users}"
+                                 value="#{employeeBean.getActualUsers()}"
                                  var="user"
                                  class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Options</th>
-                            </tr>
-                        </thead>
+
                         <h:column>
                             <f:facet name="header">
                                 ID
@@ -97,7 +92,9 @@
                                     </div>
                                     <div class="col-md-4">
                                         <h:form> 
-                                            <h:commandLink class="btn btn-danger" value=""> <i class="fa fa-times fa-lg"></i></h:commandLink>
+                                            <h:commandLink class="btn btn-danger" value="" action="#{deleteUserBean.deleteUser(user)}"> <i class="fa fa-times fa-lg"></i>
+                                                <f:ajax   
+                                                    render="users"/></h:commandLink>    
                                         </h:form>
                                     </div>
                                 </div>

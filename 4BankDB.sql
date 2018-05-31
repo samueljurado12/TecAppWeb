@@ -13,20 +13,20 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema 4bankdb
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `4bankdb` ;
+DROP SCHEMA IF EXISTS `4BankDB` ;
 
 -- -----------------------------------------------------
 -- Schema 4bankdb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `4bankdb` DEFAULT CHARACTER SET utf8 ;
-USE `4bankdb` ;
+CREATE SCHEMA IF NOT EXISTS `4BankDB` DEFAULT CHARACTER SET utf8 ;
+USE `4BankDB` ;
 
 -- -----------------------------------------------------
--- Table `4bankdb`.`USER`
+-- Table `4bankdb`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `4bankdb`.`USER` ;
+DROP TABLE IF EXISTS `4BankDB`.`user` ;
 
-CREATE TABLE IF NOT EXISTS `4bankdb`.`USER` (
+CREATE TABLE IF NOT EXISTS `4BankDB`.`user` (
   `idUSER` INT(11) NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
@@ -47,11 +47,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `4bankdb`.`ACCOUNT`
+-- Table `4bankdb`.`account`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `4bankdb`.`ACCOUNT` ;
+DROP TABLE IF EXISTS `4BankDB`.`account` ;
 
-CREATE TABLE IF NOT EXISTS `4bankdb`.`ACCOUNT` (
+CREATE TABLE IF NOT EXISTS `4BankDB`.`account` (
   `idACCOUNT` VARCHAR(24) NOT NULL,
   `idUSER` INT(11) NOT NULL,
   `balance` FLOAT NOT NULL DEFAULT '0',
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `4bankdb`.`ACCOUNT` (
   INDEX `fk_ACCOUNT_1_idx` (`idUSER` ASC),
   CONSTRAINT `fk_ACCOUNT_1`
     FOREIGN KEY (`idUSER`)
-    REFERENCES `4bankdb`.`USER` (`idUSER`)
+    REFERENCES `4bankdb`.`user` (`idUSER`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB
@@ -67,11 +67,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `4bankdb`.`MOVEMENT`
+-- Table `4bankdb`.`movement`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `4bankdb`.`MOVEMENT` ;
+DROP TABLE IF EXISTS `4BankDB`.`movement` ;
 
-CREATE TABLE IF NOT EXISTS `4bankdb`.`MOVEMENT` (
+CREATE TABLE IF NOT EXISTS `4BankDB`.`movement` (
   `idMOVEMENT` INT(11) NOT NULL AUTO_INCREMENT,
   `idACCOUNT` VARCHAR(24) NOT NULL,
   `idACCOUNT_receptor` VARCHAR(24) NOT NULL,
@@ -87,17 +87,17 @@ CREATE TABLE IF NOT EXISTS `4bankdb`.`MOVEMENT` (
   INDEX `fk_MOVEMENT_3_idx` (`idEmployee` ASC),
   CONSTRAINT `fk_MOVEMENT_1`
     FOREIGN KEY (`idACCOUNT`)
-    REFERENCES `4bankdb`.`ACCOUNT` (`idACCOUNT`)
+    REFERENCES `4bankdb`.`account` (`idACCOUNT`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_MOVEMENT_2`
     FOREIGN KEY (`idACCOUNT_receptor`)
-    REFERENCES `4bankdb`.`ACCOUNT` (`idACCOUNT`)
+    REFERENCES `4bankdb`.`account` (`idACCOUNT`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_MOVEMENT_3`
     FOREIGN KEY (`idEmployee`)
-    REFERENCES `4bankdb`.`USER` (`idUSER`)
+    REFERENCES `4bankdb`.`user` (`idUSER`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB

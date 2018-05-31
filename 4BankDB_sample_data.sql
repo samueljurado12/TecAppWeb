@@ -19,6 +19,14 @@
 -- Dumping data for table `account`
 --
 
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (0,'0','entidadbanco','4Bank','Entity','4Bank@4Bank.com','4Bank','0',0,1),(1,'emp','emp','Emp','Loyee','employee@4Bank.com','4Bank','43243255',999999999,1),(2,'BenitoPerez','Ben123','Benito','Perez','benito@example.com','Avenido Usted','12345678',600600600,0),(3,'Manoleishon','Man876','Manolo','Garcia','manoleishon@example.com','Calle Seusted','87654321',666666666,0);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 LOCK TABLES `account` WRITE;
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` VALUES ('0',0,0),('ES0130031337319449418831',2,3397),('ES0130031337506173885050',2,2000),('ES0130031337684662597168',3,4000);
@@ -39,11 +47,7 @@ UNLOCK TABLES;
 -- Dumping data for table `user`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,'0','entidadbanco','4Bank','Entity','4Bank@4Bank.com','4Bank','0',0,1),(1,'emp','emp','Emp','Loyee','employee@4Bank.com','4Bank','43243255',999999999,1),(2,'BenitoPerez','Ben123','Benito','Perez','benito@example.com','Avenido Usted','12345678',600600600,0),(3,'Manoleishon','Man876','Manolo','Garcia','manoleishon@example.com','Calle Seusted','87654321',666666666,0);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -54,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-06 23:14:06
+-- Dump completed on 2018-05-06 23:14:06ACCOUNT

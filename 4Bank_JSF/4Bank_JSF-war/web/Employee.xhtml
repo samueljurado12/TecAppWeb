@@ -10,38 +10,44 @@
     <h:body>
         <ui:include src="Header.xhtml"></ui:include>
         <br></br>
-        
+
         <div class="container">
             <div class="row">
                 <div class="col-md-4" style="padding-right:20px; padding-left:20px; border-right: 1px solid #ccc;">
-                    <h1>Create user:</h1>
+                    <h1>#{msgs.employeeTitleCreate}</h1>
                     <br></br>
                     <h:form id="createUser">
                         <div class="form-group row">
-                            <label for="username" class="form-check-label col-md-3 col-form-label">Name:</label>
+                            <label for="username" class="form-check-label col-md-3 col-form-label">
+                                #{msgs.employeeFormName}</label>
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.name}"></h:inputText>
                         </div>
                         <div class="form-group row">
-                            <label for="surname" class="form-check-label col-md-3 col-form-label">Surname: </label>
+                            <label for="surname" class="form-check-label col-md-3 col-form-label">
+                                #{msgs.employeeFormSurname}</label>
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.surname}"></h:inputText>
                         </div>
                         <div class="form-group row">
-                            <label for="mail" class="form-check-label col-md-3 col-form-label">Mail:</label>
+                            <label for="mail" class="form-check-label col-md-3 col-form-label">
+                                #{msgs.employeeFormMail}</label>
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.mail}"></h:inputText>
                         </div>
                         <div class="form-group row">
-                            <label for="phone" class="form-check-label col-md-3 col-form-label">Phone:</label>
+                            <label for="phone" class="form-check-label col-md-3 col-form-label">
+                                #{msgs.employeeFormPhone}</label>
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.phone}"></h:inputText>
                         </div>
                         <div class="form-group row">
-                            <label for="nif" class="form-check-label col-md-3 col-form-label">NIF: </label>
+                            <label for="nif" class="form-check-label col-md-3 col-form-label">
+                                #{msgs.employeeFormNIF}</label>
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.nif}"></h:inputText>
                         </div>
                         <div class="form-group row">
-                            <label for="Address" class="form-check-label col-md-3 col-form-label">Address: </label>
+                            <label for="Address" class="form-check-label col-md-3 col-form-label">
+                                #{msgs.employeeFormAddress}</label>
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.address}"></h:inputText>
                         </div>
-                        <h:commandButton class="btn btn-primary" value="Create User" action="#{createUserBean.createUser()}"/>
+                        <h:commandButton class="btn btn-primary" value="#{msgs.employeeCreateButton}" action="#{createUserBean.createUser()}"/>
                     </h:form>
                 </div>
                 <div class="col-md-8">
@@ -53,40 +59,40 @@
                                  class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Full Name</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Options</th>
+                                <th scope="col">#{msgs.employeeTableID}</th>
+                                <th scope="col">#{msgs.employeeTableUsername}</th>
+                                <th scope="col">#{msgs.employeeTableFullName}</th>
+                                <th scope="col">#{msgs.employeeTableEmail}</th>
+                                <th scope="col">#{msgs.employeeTableOptions}</th>
                             </tr>
                         </thead>
                         <h:column>
                             <f:facet name="header">
-                                ID
+                                #{msgs.employeeTableID}
                             </f:facet>
                             #{user.idUSER}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                Username
+                                #{msgs.employeeTableUsername}
                             </f:facet>
                             #{user.username}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                Full Name
+                                #{msgs.employeeTableFullName}
                             </f:facet>
                             #{user.name} #{user.surname}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                Email
+                                #{msgs.employeeTableEmail}
                             </f:facet>
                             #{user.email}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
-                                Options
+                                #{msgs.employeeTableOptions}
                             </f:facet>
                             <div class="container">
                                 <div class="row">

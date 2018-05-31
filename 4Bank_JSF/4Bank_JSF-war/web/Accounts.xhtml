@@ -12,7 +12,7 @@
         <br></br>
         <div class="container">
             <h:form id="myForm">
-                <div class=" form-group row">
+                <div class="form-group row  align-items-center">
                     <label  for="selectedAccount" class="form-check-label 
                             col-sm-2 col-form-label">
                         <h5>#{msgs.accountsCurrent}</h5>
@@ -28,9 +28,34 @@
                         <f:ajax event="change" execute="@form" render="movementsTable balance"></f:ajax>
                     </h:selectOneMenu>
                     <h4 class="align-self-center"><h:outputText id="balance" class="form-check-label col-sm-4" value="#{accountsBean.selectedAccount.balance} €">
-                    </h:outputText>
+                        </h:outputText>
                     </h4>
+                    <div class="col-sm-5">
+                        <div class="form-inline">
+                            <h:selectManyCheckbox>
+                                <div class="form-group col-sm-3">
+                                    <label>
+                                        <f:selectItem itemValue="Concept" itemLabel="Concept" />
+                                    </label>
+                                    <label>
+                                        <f:selectItem itemValue="Entity" itemLabel="Entity" />
+                                    </label>
+                                </div>
+                            </h:selectManyCheckbox>
+                            <div class="form-group col-sm-6">
+                                <h:inputText class="form-control" id="searchByConcept" />
+                                 <h:inputText class="form-control" id="searchByEntity" />
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <h:commandButton class="btn btn-primary" value="Search">
+                                </h:commandButton>
+                                 <h:commandButton class="btn btn-primary" value="Original">
+                                </h:commandButton>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
             </h:form>
             <h:dataTable id="movementsTable"
                          value="#{accountsBean.doGetMovements()}"
@@ -59,7 +84,7 @@
                     </f:facet>
                     <h:outputText rendered="#{movement.idACCOUNT eq accountsBean.selectedAccount}"
                                   style="color: red"
-                                  
+
                                   value="-#{movement.amount} €">
                     </h:outputText>
                     <h:outputText rendered="#{movement.idACCOUNTreceptor eq accountsBean.selectedAccount}"
@@ -86,10 +111,10 @@
                         <f:convertDateTime pattern="EEE dd/MM/YYYY"></f:convertDateTime>
                     </h:outputText>
                 </h:column>
-                
+
             </h:dataTable>
         </div>
-        
+
     </h:body>
 </html>
 

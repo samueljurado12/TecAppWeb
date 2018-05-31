@@ -30,7 +30,7 @@ public class AddMovementBean {
 
     @EJB
     private AccountFacade accountFacade;
-    
+
     @Inject
     private LoginBean login;
 
@@ -40,7 +40,7 @@ public class AddMovementBean {
 
     private Movement myMovement;
     private Account selectedAccount;
-    private User selectedUser;
+    private User activeUser;
     private int selectedItem;
 
     /**
@@ -89,12 +89,12 @@ public class AddMovementBean {
         this.selectedAccount = selectedAccount;
     }
 
-    public User getSelectedUser() {
-        return selectedUser;
+    public User getActiveUser() {
+        return activeUser;
     }
 
-    public void setSelectedUser(User selectedUser) {
-        this.selectedUser = selectedUser;
+    public void setActiveUser(User selectedUser) {
+        this.activeUser = selectedUser;
     }
 
     public int getSelectedItem() {
@@ -108,7 +108,8 @@ public class AddMovementBean {
     @PostConstruct
     private void init() {
         this.selectedItem = 0;
-        this.selectedUser = login.getUser();
+        this.activeUser = login.getUser();
+        this.selectedAccount = login.getAccountaux();
     }
 
     public String doAddMovement(User employee) {
@@ -122,15 +123,15 @@ public class AddMovementBean {
                 receptorAccount = accountFacade.find(receptorAccountNumber);
                 genMovement(senderAccount, receptorAccount, amount, concept, true);
                 break;
-            case 1: // Deposit
-                senderAccount = accountFacade.find(0);
+            case 1: // Extraction
+                senderAccount = selectedAccount;
+                receptorAccount = accountFacade.find("0");
+                genMovement(senderAccount, receptorAccount, amount, "Extraction", false);
+                break;
+            case 2: // Deposit
+                senderAccount = accountFacade.find("0");
                 receptorAccount = selectedAccount;
                 genMovement(senderAccount, receptorAccount, amount, "Deposit", false);
-                break;
-            case 2: // Extraction
-                senderAccount = selectedAccount;
-                receptorAccount = accountFacade.find(0);
-                genMovement(senderAccount, receptorAccount, amount, "Extraction", false);
                 break;
         }
 
@@ -138,7 +139,7 @@ public class AddMovementBean {
     }
 
     private void genMovement(Account sender, Account receiver, float amount, String concept, boolean isTransfer) {
-        myMovement = new Movement(1);
+        myMovement = new Movement();
         float newBalanceSender = sender.getBalance() - amount;
         float newBalanceReceiver = receiver.getBalance() - amount;
         if (isTransfer) {
@@ -148,7 +149,7 @@ public class AddMovementBean {
             accountFacade.edit(receiver);
 
         } else {
-            if (sender.equals(accountFacade.find(0))) {
+            if (sender.equals(accountFacade.find("0"))) {
                 receiver.setBalance(newBalanceReceiver);
                 accountFacade.edit(receiver);
             } else {
@@ -164,7 +165,7 @@ public class AddMovementBean {
         myMovement.setNewBalanceSender(newBalanceSender);
         myMovement.setNewBalanceReceiver(newBalanceReceiver);
         myMovement.setDate(new Date());
-        myMovement.setIdEmployee(selectedUser);
+        myMovement.setIdEmployee(activeUser);
 
         movementFacade.create(myMovement);
     }

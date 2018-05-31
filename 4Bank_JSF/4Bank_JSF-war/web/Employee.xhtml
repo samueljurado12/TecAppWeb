@@ -48,24 +48,16 @@
                             <h:inputText class="form-control col-md-6" value="#{createUserBean.address}"></h:inputText>
                         </div>
                         <h:commandButton class="btn btn-primary" value="#{msgs.employeeCreateButton}" action="#{createUserBean.createUser()}"/>
+
                     </h:form>
                 </div>
                 <div class="col-md-8">
                     <h1>#{msgs.employeeTitleUpdate}</h1>
                     <br></br>
                     <h:dataTable id="users"
-                                 value="#{employeeBean.users}"
+                                 value="#{employeeBean.getActualUsers()}"
                                  var="user"
                                  class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">#{msgs.employeeTableID}</th>
-                                <th scope="col">#{msgs.employeeTableUsername}</th>
-                                <th scope="col">#{msgs.employeeTableFullName}</th>
-                                <th scope="col">#{msgs.employeeTableEmail}</th>
-                                <th scope="col">#{msgs.employeeTableOptions}</th>
-                            </tr>
-                        </thead>
                         <h:column>
                             <f:facet name="header">
                                 #{msgs.employeeTableID}
@@ -103,7 +95,9 @@
                                     </div>
                                     <div class="col-md-4">
                                         <h:form> 
-                                            <h:commandLink class="btn btn-danger" value=""> <i class="fa fa-times fa-lg"></i></h:commandLink>
+                                            <h:commandLink class="btn btn-danger" value="" action="#{deleteUserBean.deleteUser(user)}"> <i class="fa fa-times fa-lg"></i>
+                                                <f:ajax   
+                                                    render="users"/></h:commandLink>    
                                         </h:form>
                                     </div>
                                 </div>

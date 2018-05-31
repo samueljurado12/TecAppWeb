@@ -181,6 +181,7 @@ public class EditUserBean {
         myUser=null;
         return "EditUser";
     }
+    
     public List<Account> accountsWithSession() {
         this.myUser=this.loginBean.getUseraux();
         this.accounts=accountFacade.queryAllAccountsOfUser(myUser);

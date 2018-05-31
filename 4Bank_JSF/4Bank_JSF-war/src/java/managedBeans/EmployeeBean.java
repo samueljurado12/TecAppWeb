@@ -53,5 +53,8 @@ public class EmployeeBean {
         this.loginBean.setUseraux(userFacade.find(idUser));
         return "EditUser";
     }
+    public List<User> getActualUsers() {
+        return userFacade.findAllNotEmployee();
+    }
     
 }

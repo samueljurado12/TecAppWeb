@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import persistence.User;
 
 /**
@@ -19,7 +20,7 @@ import persistence.User;
 @Named(value = "createUserBean")
 @RequestScoped
 public class CreateUserBean {
-
+        
     @EJB
     private UserFacade userFacade;
 

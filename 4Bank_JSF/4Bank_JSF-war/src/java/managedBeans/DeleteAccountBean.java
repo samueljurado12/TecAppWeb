@@ -9,6 +9,7 @@ import ejb.AccountFacade;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import persistence.Account;
 
 /**
@@ -21,7 +22,10 @@ public class DeleteAccountBean {
 
     @EJB
     private AccountFacade accountFacade;
-
+    
+    @Inject
+    private AccountsBean accountBeans;     
+    
     Account account; 
 
     public Account getAccount() {
@@ -43,6 +47,7 @@ public class DeleteAccountBean {
     public void deleteAccount (Account a){
         Account account = a;
         accountFacade.remove(account);
+        this.accountBeans.accountList.remove(account);
         account=null;
     }
 }

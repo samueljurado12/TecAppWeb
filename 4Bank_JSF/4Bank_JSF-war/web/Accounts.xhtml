@@ -33,39 +33,36 @@
                     </h4>
                     <div class="col-sm-5">
                         <div class="row">
-                        <div class="col-sm-8">
-                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <h:selectBooleanCheckbox 
-                                            id="filterConcept"
-                                            value="#{accountsBean.filterConceptBool}"></h:selectBooleanCheckbox>
-                                            #{msgs.accountsConcept} 
+                            <div class="col-sm-8">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <h:selectBooleanCheckbox 
+                                                id="filterConcept"
+                                                value="#{accountsBean.filterConceptBool}"></h:selectBooleanCheckbox>
+                                                #{msgs.accountsConcept} 
+                                        </div>
                                     </div>
+                                    <h:inputText class="form-control" id="searchByConcept" value="#{accountsBean.filterConcept}" />
                                 </div>
-                                <h:inputText class="form-control" id="searchByConcept" value="#{accountsBean.filterConcept}" />
-                            </div>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">
-                                        <h:selectBooleanCheckbox 
-                                            id="filterEntity"
-                                            value="#{accountsBean.filterEntityBool}"></h:selectBooleanCheckbox>
-                                            #{msgs.accountsEntity} 
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <h:selectBooleanCheckbox 
+                                                id="filterEntity"
+                                                value="#{accountsBean.filterEntityBool}"></h:selectBooleanCheckbox>
+                                                #{msgs.accountsEntity} 
+                                        </div>
                                     </div>
+                                    <h:inputText class="form-control" id="searchByEntity" value="#{accountsBean.filterEntity}" />
                                 </div>
-                                <h:inputText class="form-control" id="searchByEntity" value="#{accountsBean.filterEntity}" />
+                            </div>
+                            <div class="col-sm-2">
+                                <h:commandButton class="btn btn-primary" action="#{accountsBean.doFilterTable()}" value="#{msgs.accountsFilterButton}">
+                                <f:ajax execute="@form" render="movementsTable"></f:ajax>
+                                </h:commandButton>
                             </div>
                         </div>
-                        <div class="col-sm-2">
-                            <h:commandButton class="btn btn-primary" action="#{accountsBean.doFilterTable()}" value="Search">
-                            </h:commandButton>
-                        </div>
-                        <div class="col-sm-2">
-                            <h:commandButton class="btn btn-warning" value="Original">
-                            </h:commandButton>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </h:form>

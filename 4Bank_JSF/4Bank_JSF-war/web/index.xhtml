@@ -13,6 +13,14 @@
     <h:body>
         <f:loadBundle basename="messages" var="msgs"/>
         <div class="container">
+            <h:form>
+                <h:commandLink action="#{loginBean.setSpanish()}">
+                    <img src="resources/es_flag.png"></img>
+                </h:commandLink>
+                <h:commandLink action="#{loginBean.setEnglish()}">
+                    <img src="resources/en_flag.png"></img>
+                </h:commandLink>
+            </h:form>
             <div class="row">
                 <div class="col-md-4">
                     <h:graphicImage class="img-fluid" value="resources/4bank.png"/>

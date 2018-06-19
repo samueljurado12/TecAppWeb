@@ -32,16 +32,16 @@ public class AccountsBean {
 
     @EJB
     private AccountFacade accountFacade;
-    
+
     @Inject
     private LoginBean login;
-    
+
     String selectedAccountID;
     String filterConcept;
     String filterEntity;
     boolean filterConceptBool;
     boolean filterEntityBool;
-    
+
     User activeUser;
     List<Account> accountList;
     Account selectedAccount;
@@ -127,39 +127,48 @@ public class AccountsBean {
     public void setAccountList(List<Account> accountList) {
         this.accountList = accountList;
     }
-    
+
     /**
      * Creates a new instance of AccountsBean
      */
     public AccountsBean() {
     }
-    
-    public void doUpdateTable(){
+
+    public void doUpdateTable() {
         this.selectedAccount = accountFacade.find(this.selectedAccountID);
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
         updateReceptorsMap();
     }
-    
-    
-    public void doFilterTable(){
-        
-        this.movementList = movementFacade.AllMovementsSearchByConcept(selectedAccount, "");
+
+    public void doFilterTable() {
+        if (filterConceptBool && filterEntityBool) {
+            this.movementList = movementFacade.AllMovementsSearchByConceptAndEntity(selectedAccount,
+                    filterEntity, filterConcept);
+        } else if (filterConceptBool) {
+            this.movementList = movementFacade.AllMovementsSearchByConcept(selectedAccount, filterConcept);
+        } else if (filterEntityBool) {
+            this.movementList = movementFacade.AllMovementsSearchByEntity(selectedAccount, filterEntity);
+        }
         updateReceptorsMap();
     }
-    
-    public List<Movement> doGetMovements(){
-        this.doUpdateTable();
+
+    public List<Movement> doGetMovements() {
+        if (filterConceptBool || filterEntityBool) {
+            this.doFilterTable();
+        } else {
+            this.doUpdateTable();
+        }
         return this.movementList;
     }
-    
+
     @PostConstruct
-    private void init(){
+    private void init() {
         this.activeUser = login.getUser();
         this.accountList = accountFacade.queryAllAccountsOfUser(activeUser);
         this.selectedAccount = accountList.get(0);
         this.selectedAccountID = selectedAccount.getIdACCOUNT();
     }
-    
+
     private User getUser(Movement mov, Account selectedAccount) {
         if (mov.getIdACCOUNT().equals(selectedAccount)) {
             return mov.getIdACCOUNTreceptor().getIdUSER();
@@ -167,8 +176,8 @@ public class AccountsBean {
             return mov.getIdACCOUNT().getIdUSER();
         }
     }
-    
-    private void updateReceptorsMap(){
+
+    private void updateReceptorsMap() {
         receptors = new TreeMap<>();
         for (Movement mov : movementList) {
             User otherAccount = getUser(mov, selectedAccount);

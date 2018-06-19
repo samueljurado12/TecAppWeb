@@ -49,6 +49,8 @@
                 </div>
                 <div class="col-md-7">
                     <h2>        #{msgs.accountsCurrent}  <h:outputText value ="#{accountsEmployeeBean.selectedAccount.idACCOUNT}"> </h:outputText></h2>
+                    <h3 class="align-self-center"><h:outputText id="balance" class="form-check-label col-sm-4" value="#{accountsEmployeeBean.selectedAccount.balance} €"/>
+                    </h3>
                     <h1> #{msgs.employeeMovements} </h1>
                     <br/>
                     <div class="container">

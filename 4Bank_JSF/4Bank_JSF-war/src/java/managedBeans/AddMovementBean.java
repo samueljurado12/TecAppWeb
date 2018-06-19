@@ -141,7 +141,7 @@ public class AddMovementBean {
     private void genMovement(Account sender, Account receiver, float amount, String concept, boolean isTransfer) {
         myMovement = new Movement();
         float newBalanceSender = sender.getBalance() - amount;
-        float newBalanceReceiver = receiver.getBalance() - amount;
+        float newBalanceReceiver = receiver.getBalance() + amount;
         if (isTransfer) {
             sender.setBalance(newBalanceSender);
             accountFacade.edit(sender);
@@ -153,7 +153,7 @@ public class AddMovementBean {
                 receiver.setBalance(newBalanceReceiver);
                 accountFacade.edit(receiver);
             } else {
-                sender.setBalance(newBalanceReceiver);
+                sender.setBalance(newBalanceSender);
                 accountFacade.edit(sender);
             }
         }

@@ -59,6 +59,7 @@
                             </div>
                             <div class="col-sm-2">
                                 <h:commandButton class="btn btn-primary" action="#{accountsBean.doFilterTable()}" value="Search">
+                                <f:ajax execute="@form" render="movementsTable"></f:ajax>
                                 </h:commandButton>
                             </div>
                             <div class="col-sm-2">

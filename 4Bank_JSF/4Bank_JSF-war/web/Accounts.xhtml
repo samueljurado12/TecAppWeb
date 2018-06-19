@@ -32,8 +32,8 @@
                                       value="#{accountsBean.selectedAccount.balance} €"></h:outputText>
                     </h4>
                     <div class="col-sm-5">
-                        <div class="row">
-                            <div class="col-sm-8">
+                        <div class="align-self-center row">
+                            <div class="align-self-center col-sm-8">
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">
@@ -57,7 +57,7 @@
                                     <h:inputText class="form-control" id="searchByEntity" value="#{accountsBean.filterEntity}" />
                                 </div>
                             </div>
-                            <div class="col-sm-2">
+                            <div class="align-self-center col-sm-2">
                                 <h:commandButton class="btn btn-primary" action="#{accountsBean.doFilterTable()}" value="#{msgs.accountsFilterButton}">
                                 <f:ajax execute="@form" render="movementsTable"></f:ajax>
                                 </h:commandButton>

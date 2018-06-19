@@ -1,3 +1,4 @@
+USE `4BankDB`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: 4bankdb
@@ -16,38 +17,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Dumping data for table `account`
+-- Dumping data for table `ACCOUNT`
 --
 
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (0,'0','entidadbanco','4Bank','Entity','4Bank@4Bank.com','4Bank','0',0,1),(1,'emp','emp','Emp','Loyee','employee@4Bank.com','4Bank','43243255',999999999,1),(2,'BenitoPerez','Ben123','Benito','Perez','benito@example.com','Avenido Usted','12345678',600600600,0),(3,'Manoleishon','Man876','Manolo','Garcia','manoleishon@example.com','Calle Seusted','87654321',666666666,0);
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-LOCK TABLES `account` WRITE;
-/*!40000 ALTER TABLE `account` DISABLE KEYS */;
-INSERT INTO `account` VALUES ('0',0,0),('ES0130031337319449418831',2,3397),('ES0130031337506173885050',2,2000),('ES0130031337684662597168',3,4000);
-/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+LOCK TABLES `ACCOUNT` WRITE;
+/*!40000 ALTER TABLE `ACCOUNT` DISABLE KEYS */;
+INSERT INTO `ACCOUNT` VALUES ('0',0,0),('ES0130031337319449418831',2,1691),('ES0130031337339290142433',2,2000),('ES0130031337625780767762',2,400),('ES0130031337684662597168',3,5201);
+/*!40000 ALTER TABLE `ACCOUNT` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping data for table `movement`
+-- Dumping data for table `MOVEMENT`
 --
 
-LOCK TABLES `movement` WRITE;
-/*!40000 ALTER TABLE `movement` DISABLE KEYS */;
-INSERT INTO `movement` VALUES (11,'ES0130031337319449418831','0','Extraction',3,3397,0,'2018-05-06 23:13:16',1);
-/*!40000 ALTER TABLE `movement` ENABLE KEYS */;
+LOCK TABLES `MOVEMENT` WRITE;
+/*!40000 ALTER TABLE `MOVEMENT` DISABLE KEYS */;
+INSERT INTO `MOVEMENT` VALUES (12,'ES0130031337319449418831','ES0130031337684662597168','Transfer',50,4332,6243,'2018-05-07 23:13:16',NULL),(13,'ES0130031337319449418831','ES0130031337684662597168','Transfer',423,2974,4423,'2018-05-19 20:01:11',NULL),(17,'ES0130031337319449418831','ES0130031337684662597168','Transfer',449,2231,5176,'2018-05-24 11:54:56',1);
+/*!40000 ALTER TABLE `MOVEMENT` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `USER`
 --
 
-
+LOCK TABLES `USER` WRITE;
+/*!40000 ALTER TABLE `USER` DISABLE KEYS */;
+INSERT INTO `USER` VALUES (0,'0','entidadbanco','4Bank','Entity','4Bank@4Bank.com','4Bank','0',0,1),(1,'emp','emp','Emp','Loyee','employee@4Bank.com','4Bank','43243255',999999999,1),(2,'BenitoPerez','Ben123','Benito','Perez','benitoxx@example.com','12345678','12345678',600600600,0),(3,'Manoleishon','Man876','Manolo','Garcia','manoleishon@example.com','Calle Seusted','87654321',666666666,0);
+/*!40000 ALTER TABLE `USER` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -58,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-05-06 23:14:06ACCOUNT
+-- Dump completed on 2018-06-19 19:28:43

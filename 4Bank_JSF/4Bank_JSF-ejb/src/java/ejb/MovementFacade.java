@@ -50,10 +50,13 @@ public class MovementFacade extends AbstractFacade<Movement> {
     public List<Movement> AllMovementsSearchByConceptAndEntity(Account account, String entity, String concept) {
         Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.concept LIKE :concept AND "
                 + "(m.idACCOUNT = :idACCOUNT OR m.idACCOUNTreceptor = :idACCOUNT)"
-                + " AND m.entity LIKE :entity ORDER BY m.date DESC")
+                + " AND ((m.idACCOUNTreceptor.idUSER.name"
+                + " LIKE :pattern OR m.idACCOUNTreceptor.idUSER.surname LIKE :pattern) AND m.idACCOUNT ="
+                + " :idACCOUNT) OR (m.idACCOUNTreceptor = :idACCOUNT AND (m.idACCOUNT.idUSER.name LIKE "
+                + ":pattern OR m.idACCOUNT.idUSER.surname LIKE :pattern)) ORDER BY m.date DESC")
                 .setParameter("idACCOUNT", account)
                 .setParameter("concept", "%" + concept + "%")
-                .setParameter("entity", "%" + entity + "%");
+                .setParameter("pattern", "%" + entity + "%");
         return q.getResultList();
     }
 

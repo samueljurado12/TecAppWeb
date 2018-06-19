@@ -152,4 +152,11 @@ public class LoginBean implements Serializable {
         } else
             return null;
     }
+    
+    public String redirectIfNotLog(){
+        if (user == null){
+            return "index";
+        } else
+            return null;
+    }
 }

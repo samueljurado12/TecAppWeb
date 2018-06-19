@@ -5,7 +5,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>4Bank-#{msgs.navbarTransfer}</title>
+        <title>4Bank - #{msgs.navbarTransfer}</title>
+        <f:metadata>
+            <f:viewAction action="#{loginBean.redirectIfEmp()}" />
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:include src ="Header.xhtml"> </ui:include>

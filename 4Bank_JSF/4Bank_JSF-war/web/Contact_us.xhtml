@@ -3,9 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>4Bank- #{msgs.navbarContact}</title>
+        <f:metadata>
+            <f:viewAction action="#{loginBean.redirectIfEmp()}" />
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:include src ="Header.xhtml"> </ui:include>

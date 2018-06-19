@@ -116,14 +116,21 @@ public class AddMovementBean {
         myMovement = new Movement();
         Account receptorAccount;
         Account senderAccount;
-
+        
+        
         switch (selectedItem) {
             case 0: // Transfer
+                if (selectedAccount.getBalance() - amount < 0)
+                    break;
+                
                 senderAccount = selectedAccount;
                 receptorAccount = accountFacade.find(receptorAccountNumber);
                 genMovement(senderAccount, receptorAccount, amount, concept, true);
                 break;
             case 1: // Extraction
+                if (selectedAccount.getBalance() - amount < 0)
+                    break;
+                
                 senderAccount = selectedAccount;
                 receptorAccount = accountFacade.find("0");
                 genMovement(senderAccount, receptorAccount, amount, "Extraction", false);

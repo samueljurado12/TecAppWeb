@@ -65,7 +65,7 @@
                             <f:facet name="header">
                                 #{msgs.employeeTableID}
                             </f:facet>
-                            #{user.idUSER}
+                            #{user.nif}
                         </h:column>
                         <h:column>
                             <f:facet name="header">
@@ -91,12 +91,12 @@
                             </f:facet>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <h:form> 
                                             <h:commandLink class="btn btn-warning" value="" action ="#{employeeBean.doEdit(user.idUSER)}"> <i class="fa fa-pencil fa-lg"></i></h:commandLink>
                                         </h:form>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <h:form> 
                                             <h:commandLink class="btn btn-danger" value="" action="#{deleteUserBean.deleteUser(user)}"> <i class="fa fa-times fa-lg"></i>
                                                 <f:ajax   

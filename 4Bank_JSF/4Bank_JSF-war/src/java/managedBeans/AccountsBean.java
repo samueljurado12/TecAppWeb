@@ -37,12 +37,48 @@ public class AccountsBean {
     private LoginBean login;
     
     String selectedAccountID;
+    String filterConcept;
+    String filterEntity;
+    boolean filterConceptBool;
+    boolean filterEntityBool;
     
     User activeUser;
     List<Account> accountList;
     Account selectedAccount;
     List<Movement> movementList;
     Map<Integer, String> receptors;
+
+    public boolean isFilterConceptBool() {
+        return filterConceptBool;
+    }
+
+    public void setFilterConceptBool(boolean filterConceptBool) {
+        this.filterConceptBool = filterConceptBool;
+    }
+
+    public boolean isFilterEntityBool() {
+        return filterEntityBool;
+    }
+
+    public void setFilterEntityBool(boolean filterEntityBool) {
+        this.filterEntityBool = filterEntityBool;
+    }
+
+    public String getFilterConcept() {
+        return filterConcept;
+    }
+
+    public void setFilterConcept(String filterConcept) {
+        this.filterConcept = filterConcept;
+    }
+
+    public String getFilterEntity() {
+        return filterEntity;
+    }
+
+    public void setFilterEntity(String filterEntity) {
+        this.filterEntity = filterEntity;
+    }
 
     public String getSelectedAccountID() {
         return selectedAccountID;
@@ -101,11 +137,14 @@ public class AccountsBean {
     public void doUpdateTable(){
         this.selectedAccount = accountFacade.find(this.selectedAccountID);
         this.movementList = movementFacade.queryAllMovementsFromAndToAccount(selectedAccount);
-        receptors = new TreeMap<>();
-        for (Movement mov : movementList) {
-            User otherAccount = getUser(mov, selectedAccount);
-            receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
-        }
+        updateReceptorsMap();
+    }
+    
+    
+    public void doFilterTable(){
+        
+        this.movementList = movementFacade.AllMovementsSearchByConcept(selectedAccount, "");
+        updateReceptorsMap();
     }
     
     public List<Movement> doGetMovements(){
@@ -126,6 +165,14 @@ public class AccountsBean {
             return mov.getIdACCOUNTreceptor().getIdUSER();
         } else {
             return mov.getIdACCOUNT().getIdUSER();
+        }
+    }
+    
+    private void updateReceptorsMap(){
+        receptors = new TreeMap<>();
+        for (Movement mov : movementList) {
+            User otherAccount = getUser(mov, selectedAccount);
+            receptors.put(otherAccount.getIdUSER(), otherAccount.getName() + " " + otherAccount.getSurname());
         }
     }
 }

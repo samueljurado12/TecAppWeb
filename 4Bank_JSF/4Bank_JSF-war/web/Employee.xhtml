@@ -23,32 +23,32 @@
                         <div class="form-group row">
                             <label for="username" class="form-check-label col-md-3 col-form-label">
                                 #{msgs.employeeFormName}</label>
-                            <h:inputText class="form-control col-md-6" value="#{createUserBean.name}"></h:inputText>
+                            <h:inputText class="form-control col-md-6" value="#{createUserBean.name}" required="true"></h:inputText>
                         </div>
                         <div class="form-group row">
                             <label for="surname" class="form-check-label col-md-3 col-form-label">
                                 #{msgs.employeeFormSurname}</label>
-                            <h:inputText class="form-control col-md-6" value="#{createUserBean.surname}"></h:inputText>
+                            <h:inputText class="form-control col-md-6" value="#{createUserBean.surname}" required="true"></h:inputText>
                         </div>
                         <div class="form-group row">
                             <label for="mail" class="form-check-label col-md-3 col-form-label">
                                 #{msgs.employeeFormMail}</label>
-                            <h:inputText class="form-control col-md-6" value="#{createUserBean.mail}"></h:inputText>
+                            <h:inputText class="form-control col-md-6" value="#{createUserBean.mail}" required="true"></h:inputText>
                         </div>
                         <div class="form-group row">
                             <label for="phone" class="form-check-label col-md-3 col-form-label">
                                 #{msgs.employeeFormPhone}</label>
-                            <h:inputText class="form-control col-md-6" value="#{createUserBean.phone}"></h:inputText>
+                            <h:inputText class="form-control col-md-6" value="#{createUserBean.phone}" required="true"></h:inputText>
                         </div>
                         <div class="form-group row">
                             <label for="nif" class="form-check-label col-md-3 col-form-label">
                                 #{msgs.employeeFormNIF}</label>
-                            <h:inputText class="form-control col-md-6" value="#{createUserBean.nif}"></h:inputText>
+                            <h:inputText class="form-control col-md-6" value="#{createUserBean.nif}" required="true"></h:inputText>
                         </div>
                         <div class="form-group row">
-                            <label for="Address" class="form-check-label col-md-3 col-form-label">
+                            <label for="Address" class="form-check-label col-md-3 col-form-label" required="true">
                                 #{msgs.employeeFormAddress}</label>
-                            <h:inputText class="form-control col-md-6" value="#{createUserBean.address}"></h:inputText>
+                            <h:inputText class="form-control col-md-6" value="#{createUserBean.address}" required="true"></h:inputText>
                         </div>
                         <h:commandButton class="btn btn-primary" value="#{msgs.employeeCreateButton}" action="#{createUserBean.createUser()}"/>
 

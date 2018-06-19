@@ -31,31 +31,40 @@ public class MovementFacade extends AbstractFacade<Movement> {
     public MovementFacade() {
         super(Movement.class);
     }
-    
-    
+
     public List<Movement> queryAllMovementsFromAndToAccount(Account account) {
         Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.idACCOUNT = :idACCOUNT "
                 + "OR m.idACCOUNTreceptor = :idACCOUNT ORDER BY m.date DESC");
         q.setParameter("idACCOUNT", account);
         return q.getResultList();
     }
-    
-    public List<Movement> AllMovementsSearchByConcept(Account account, String pattern){
+
+    public List<Movement> AllMovementsSearchByConcept(Account account, String pattern) {
         Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.concept LIKE :pattern AND "
                 + "(m.idACCOUNT = :idACCOUNT OR m.idACCOUNTreceptor = :idACCOUNT) ORDER BY m.date DESC");
         q.setParameter("idACCOUNT", account);
-        q.setParameter("pattern", "%"+pattern+"%");
+        q.setParameter("pattern", "%" + pattern + "%");
         return q.getResultList();
     }
-    
-    public List<Movement> AllMovementsSearchByEntity(Account account, String pattern){
+
+    public List<Movement> AllMovementsSearchByConceptAndEntity(Account account, String entity, String concept) {
+        Query q = this.em.createQuery("SELECT m FROM Movement m WHERE m.concept LIKE :concept AND "
+                + "(m.idACCOUNT = :idACCOUNT OR m.idACCOUNTreceptor = :idACCOUNT)"
+                + " AND m.entity LIKE :entity ORDER BY m.date DESC")
+                .setParameter("idACCOUNT", account)
+                .setParameter("concept", "%" + concept + "%")
+                .setParameter("entity", "%" + entity + "%");
+        return q.getResultList();
+    }
+
+    public List<Movement> AllMovementsSearchByEntity(Account account, String pattern) {
         Query q = this.em.createQuery("SELECT m FROM Movement m WHERE ((m.idACCOUNTreceptor.idUSER.name"
                 + " LIKE :pattern OR m.idACCOUNTreceptor.idUSER.surname LIKE :pattern) AND m.idACCOUNT ="
                 + " :idACCOUNT) OR (m.idACCOUNTreceptor = :idACCOUNT AND (m.idACCOUNT.idUSER.name LIKE "
                 + ":pattern OR m.idACCOUNT.idUSER.surname LIKE :pattern)) ORDER BY m.date DESC");
         q.setParameter("idACCOUNT", account);
-        
-        q.setParameter("pattern", "%"+pattern+"%");
+
+        q.setParameter("pattern", "%" + pattern + "%");
         return q.getResultList();
     }
 }

@@ -141,19 +141,23 @@ public class AccountsBean {
     }
 
     public void doFilterTable() {
-        if(filterConceptBool && filterEntityBool){
-            this.movementList = movementFacade.AllMovementsSearchByConceptAndEntity(selectedAccount, 
+        if (filterConceptBool && filterEntityBool) {
+            this.movementList = movementFacade.AllMovementsSearchByConceptAndEntity(selectedAccount,
                     filterEntity, filterConcept);
-        }else if (filterConceptBool) {
+        } else if (filterConceptBool) {
             this.movementList = movementFacade.AllMovementsSearchByConcept(selectedAccount, filterConcept);
-        }else if (filterEntityBool) {
+        } else if (filterEntityBool) {
             this.movementList = movementFacade.AllMovementsSearchByEntity(selectedAccount, filterEntity);
         }
         updateReceptorsMap();
     }
 
     public List<Movement> doGetMovements() {
-        this.doUpdateTable();
+        if (filterConceptBool || filterEntityBool) {
+            this.doFilterTable();
+        } else {
+            this.doUpdateTable();
+        }
         return this.movementList;
     }
 

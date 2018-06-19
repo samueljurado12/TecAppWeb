@@ -6,6 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>4Bank - Employee</title>
+        <f:metadata>
+            <f:viewAction action="#{loginBean.redirectIfUser()}" />
+        </f:metadata>
     </h:head>
     <h:body>
         <ui:include src="Header.xhtml"></ui:include>

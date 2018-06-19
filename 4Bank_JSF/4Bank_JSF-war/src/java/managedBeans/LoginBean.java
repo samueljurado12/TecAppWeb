@@ -125,5 +125,31 @@ public class LoginBean implements Serializable {
                 .getViewRoot();
         view.setLocale(currentLocale);
     }
-
+    
+    public String checkLog(){
+        if (user != null){
+            return user.getIsEmployee() ? "Employee" : "Accounts";
+        } else
+            return null;
+    }
+    
+    public String redirectIfEmp(){
+        if (user == null){
+            return "index";
+        }
+        else if (user != null){
+            return user.getIsEmployee() ? "Employee" : null;
+        } else
+            return null;
+    }
+    
+    public String redirectIfUser(){
+        if (user == null){
+            return "index";
+        }
+        else if (user != null){
+            return user.getIsEmployee() ? null : "Accounts";
+        } else
+            return null;
+    }
 }

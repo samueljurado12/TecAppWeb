@@ -27,36 +27,49 @@
                         </f:selectItems>
                         <f:ajax event="change" execute="@form" render="movementsTable balance"></f:ajax>
                     </h:selectOneMenu>
-                    <h4 class="align-self-center"><h:outputText id="balance" class="form-check-label col-sm-4" value="#{accountsBean.selectedAccount.balance} €">
-                        </h:outputText>
+                    <h4 class="align-self-center">
+                        <h:outputText id="balance" class="form-check-label col-sm-2" 
+                                      value="#{accountsBean.selectedAccount.balance} €"></h:outputText>
                     </h4>
                     <div class="col-sm-5">
-                        <div class="form-inline">
-                            <h:selectManyCheckbox>
-                                <div class="form-group col-sm-3">
-                                    <label>
-                                        <f:selectItem itemValue="Concept" itemLabel="Concept" />
-                                    </label>
-                                    <label>
-                                        <f:selectItem itemValue="Entity" itemLabel="Entity" />
-                                    </label>
+                        <div class="row">
+                        <div class="col-sm-8">
+                             <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <h:selectBooleanCheckbox 
+                                            id="filterConcept"
+                                            value="#{accountsBean.filterConceptBool}"></h:selectBooleanCheckbox>
+                                            #{msgs.accountsConcept} 
+                                    </div>
                                 </div>
-                            </h:selectManyCheckbox>
-                            <div class="form-group col-sm-6">
-                                <h:inputText class="form-control" id="searchByConcept" />
-                                <h:inputText class="form-control" id="searchByEntity" />
+                                <h:inputText class="form-control" id="searchByConcept" value="#{accountsBean.filterConcept}" />
                             </div>
-                            <div class="form-group col-sm-3">
-                                <h:commandButton class="btn btn-primary" value="Search">
-                                </h:commandButton>
-                                <h:commandButton class="btn btn-primary" value="Original">
-                                </h:commandButton>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <h:selectBooleanCheckbox 
+                                            id="filterEntity"
+                                            value="#{accountsBean.filterEntityBool}"></h:selectBooleanCheckbox>
+                                            #{msgs.accountsEntity} 
+                                    </div>
+                                </div>
+                                <h:inputText class="form-control" id="searchByEntity" value="#{accountsBean.filterEntity}" />
                             </div>
                         </div>
+                        <div class="col-sm-2">
+                            <h:commandButton class="btn btn-primary" action="#{accountsBean.doFilterTable()}" value="Search">
+                            </h:commandButton>
+                        </div>
+                        <div class="col-sm-2">
+                            <h:commandButton class="btn btn-warning" value="Original">
+                            </h:commandButton>
+                        </div>
+                    </div>
                     </div>
                 </div>
-
             </h:form>
+
             <h:dataTable id="movementsTable"
                          value="#{accountsBean.doGetMovements()}"
                          var="movement"

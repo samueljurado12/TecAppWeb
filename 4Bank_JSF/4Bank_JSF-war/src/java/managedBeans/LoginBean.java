@@ -5,11 +5,13 @@ package managedBeans;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import ejb.UserFacade;
 import java.io.Serializable;
+import java.util.Locale;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.component.UIViewRoot;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 import persistence.Account;
@@ -22,16 +24,19 @@ import persistence.User;
 @Named(value = "loginBean")
 @SessionScoped
 public class LoginBean implements Serializable {
-    
+
     @EJB
     private UserFacade userFacade;
-    
+
     private User user;
     private String username;
     private String password;
     private String msg; //TODO necesario para fallo en login 
     private User useraux;
     private Account accountaux;
+    private final static Locale ENGLISH = new Locale("en");
+    private final static Locale SPANISH = new Locale("es");
+    private Locale currentLocale;
 
     public Account getAccountaux() {
         return accountaux;
@@ -51,7 +56,7 @@ public class LoginBean implements Serializable {
 
     public LoginBean() {
     }
-    
+
     public String getUsername() {
         return username;
     }
@@ -84,20 +89,41 @@ public class LoginBean implements Serializable {
         this.user = user;
     }
     
-    
-    public String doLogin(){
+    public String doLogin() {
         User usuario = userFacade.queryUserByUsername(username);
         setUser(usuario);
-        if(user != null && username != null && password.equals(user.getPassword())){
+        if (user != null && username != null && password.equals(user.getPassword())) {
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("user", user);
             session.setAttribute("selectedAccount", null);
             session.setAttribute("useraux", useraux);
             return user.getIsEmployee() ? "Employee" : "Accounts";
-        }
-        else {
+        } else {
             return "index";
         }
     }
     
+    //Language
+    public Locale getCurrentLocale() {
+        return (currentLocale);
+    }
+
+    public String setEnglish() {
+        currentLocale = ENGLISH;
+        changeLocale();
+        return null;
+    }
+
+    public String setSpanish() {
+        currentLocale = SPANISH;
+        changeLocale();
+        return null;
+    }
+
+    private void changeLocale() {
+        UIViewRoot view = FacesContext.getCurrentInstance()
+                .getViewRoot();
+        view.setLocale(currentLocale);
+    }
+
 }

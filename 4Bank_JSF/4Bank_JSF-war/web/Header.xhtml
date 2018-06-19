@@ -36,6 +36,14 @@
             </h:panelGroup>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <h:form>
+                <h:commandLink action="#{loginBean.setSpanish()}">
+                    <img src="resources/es_flag.png"></img>
+                </h:commandLink>
+                <h:commandLink action="#{loginBean.setEnglish()}">
+                    <img src="resources/en_flag.png"></img>
+                </h:commandLink>
+            </h:form>
             <li class="nav-item">
                 <h:link styleClass="nav-link" value="#{loginBean.user.name} #{loginBean.user.surname}" outcome="UserInfo"></h:link>
             </li>

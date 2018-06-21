@@ -45,7 +45,9 @@
                         </h:panelGroup>
                         <div class="form-group row">
                             <label for="amount" class="form-check-label col-md-3 col-form-label">#{msgs.employeeTransferAmount}</label>
-                            <h:inputText class="form-control col-md-7" value="#{addMovementBean.amount}"/>
+                            <h:inputText class="form-control col-md-7" value="#{addMovementBean.amount}">
+                                <f:validateDoubleRange minimum="1" ></f:validateDoubleRange>
+                            </h:inputText>
                         </div>
                         <h:commandButton class="btn btn-primary" action="#{addMovementBean.doAddMovement(loginBean.user)}" 
                                          value="#{msgs.employeeTransferButton}"/>  
@@ -58,7 +60,7 @@
                     <h1> #{msgs.employeeMovements} </h1>
                     <br/>
                     <div class="container">
-                        
+
                         <h:dataTable id="movements"
                                      value="#{accountsEmployeeBean.movementsWithSession()}"
                                      var="movement"
@@ -111,7 +113,6 @@
                                 <h:outputText value="#{accountsEmployeeBean.formatDate(movement.date)}">
                                     <f:convertDateTime pattern="EEE dd/MM/YYYY"></f:convertDateTime>
                                 </h:outputText>
-                                
                             </h:column>
                         </h:dataTable>
                     </div>

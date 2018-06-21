@@ -138,9 +138,12 @@ public class TransferBean  {
         myMovement.setConcept(concept);
        
         myMovement.setDate(new Date());
-        System.out.println("MY CUENTA " + idSelectedAccount);
         selectedAccount = accountFacade.find(idSelectedAccount);
         myMovement.setIdACCOUNT(selectedAccount);
+        if(accountFacade.find(idReceptorAccount)==null){
+        
+        return "Transfer";
+        }
         receptorAccount = accountFacade.find(idReceptorAccount);
         myMovement.setIdACCOUNTreceptor(receptorAccount);
         float aux = selectedAccount.getBalance();
